@@ -1,0 +1,721 @@
+@charset "UTF-8";
+/* =================================================================
+   CECE: cover.css
+   Layout for the FRONT COVER only (index.html).
+
+   "Mobile first": the rules at the top are for phones, where everything
+   is stacked in one column. The @media blocks at the bottom rearrange
+   it for wider screens:
+     - 600px and up:  cover stories in two columns
+     - 960px and up:  the full magazine cover (stories | photo | stories)
+
+   CONTENTS
+     1. The cover "page"
+     2. Top line (issue number + switches)
+     3. Masthead (CECE)
+     4. Centre: cover photo + main headline
+     5. Cover stories: shared style
+     6. Cover stories: each one's own look
+     7. Bottom strip: price, barcode
+     8. Doodle positions
+     9. Wider screens
+   ================================================================= */
+
+
+/* =================================================================
+   1. THE COVER "PAGE"
+   ================================================================= */
+
+/* Colours only the cover uses */
+:root {
+  --cover-top: #FFF4F9;
+  --cover-bottom: #FFDCEB;
+  --cover-edge: #FFFFFF;
+}
+
+[data-theme="dark"] {
+  --cover-top: #1E0D21;
+  --cover-bottom: #120714;
+  --cover-edge: rgba(255, 79, 184, 0.4);
+}
+
+.cover {
+  position: relative;
+  width: min(1200px, 100% - 1.5rem);  /* never wider than 1200px, and keep a small gap on phones */
+  margin: 0.75rem auto 2.5rem;
+  padding: 1rem 1rem 1.5rem;
+
+  /* CSS Grid stacks the parts of the cover; on wide screens (section 9)
+     the same grid gets three columns. */
+  display: grid;
+  gap: 1.5rem;
+
+  background: linear-gradient(165deg, var(--cover-top), var(--cover-bottom));
+  border: 2px solid var(--cover-edge);
+  box-shadow: 0 12px 40px var(--shadow);
+  overflow-x: clip;   /* trims decorations that poke out of the sides */
+}
+
+/* Each part of the cover gets its own layer (z-index).
+   Giving a part a z-index also makes its doodles (z-index: -1) sit
+   behind THAT part's text instead of disappearing behind the whole page. */
+.cover__topline,
+.masthead,
+.cover__bottom {
+  position: relative;
+  z-index: 1;
+}
+
+.cover__center {
+  position: relative;
+  z-index: 2;          /* above the masthead, so the photo can overlap the letters */
+}
+
+
+/* =================================================================
+   2. TOP LINE
+   ================================================================= */
+
+.cover__topline {
+  display: flex;
+  flex-wrap: wrap;               /* on narrow phones the switches drop to a new line */
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px dashed var(--hot-pink);
+}
+
+.issue-line {
+  margin: 0;
+  font-family: var(--font-y2k);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.issue-line strong {
+  font-weight: normal;
+  color: var(--pink-text);
+}
+
+.cover__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: auto;             /* push to the right */
+}
+
+
+/* =================================================================
+   3. MASTHEAD
+   ================================================================= */
+
+.masthead {
+  text-align: center;
+}
+
+.masthead__tagline {
+  position: relative;
+  z-index: 1;                    /* stay above the masthead's glow, which would otherwise cover it */
+  max-width: 58%;                /* phones: leave room on the right for the Midnight sticker */
+  margin: 0 0 0.5rem;
+  font-family: var(--font-hand);
+  font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem);
+  line-height: 1.1;
+  text-align: left;
+  color: var(--pink-text);
+  rotate: -2deg;
+}
+
+.masthead__title {
+  margin: 0;
+  font-family: var(--font-masthead);
+  font-weight: 900;
+  /* clamp(smallest, preferred, largest): 25vw = a quarter of the screen width,
+     so the masthead grows and shrinks with the screen. */
+  font-size: clamp(4.5rem, 25vw, 17rem);
+  line-height: 0.82;
+  letter-spacing: 0.03em;
+}
+
+/* Only appears in dark mode */
+.midnight-sticker {
+  display: none;
+  position: absolute;
+  top: 1.5rem;
+  right: 0;
+  --sticker-tilt: 10deg;
+}
+
+[data-theme="dark"] .midnight-sticker {
+  display: inline-block;
+}
+
+
+/* =================================================================
+   4. CENTRE: COVER PHOTO + MAIN HEADLINE
+   ================================================================= */
+
+.cover__center {
+  display: grid;
+  justify-items: center;
+  gap: 2rem;
+  margin-top: -0.75rem;          /* tuck slightly under the masthead */
+}
+
+.cover-photo {
+  --photo-tilt: -2.5deg;
+  width: min(100%, 26rem);
+}
+
+.cover-photo .photo__frame {
+  --photo-ratio: 4 / 5;          /* portrait, like a real cover photo */
+}
+
+.headline-wrap {
+  position: relative;
+  width: min(100%, 30rem);
+  margin-bottom: 3rem;           /* room for the starburst hanging off the bottom */
+}
+
+.main-headline {
+  margin: 0;
+  padding: 2.1rem 1.4rem 2.4rem; /* extra top/bottom space so the starbursts never cover words */
+  font-family: var(--font-masthead);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1.3rem, 1rem + 1.4vw, 1.7rem);
+  line-height: 1.25;
+  text-align: center;
+  color: var(--text);
+}
+
+/* Highlighter-pen effect: colour only the bottom part of the line. */
+.main-headline mark {
+  padding: 0 0.1em;
+  color: inherit;
+  background: linear-gradient(transparent 55%, var(--bubblegum) 55% 92%, transparent 92%);
+}
+
+/* Starbursts around the headline */
+.headline-burst {
+  position: absolute;
+  z-index: 1;
+  font-size: 0.7rem;
+}
+
+.headline-burst--top {
+  top: -3rem;
+  left: -0.8rem;
+  --burst-size: 5rem;
+  --sticker-tilt: -14deg;
+}
+
+.headline-burst--bottom {
+  bottom: -3.4rem;
+  right: -0.8rem;
+  --burst-size: 5.5rem;
+  --sticker-tilt: 12deg;
+}
+
+
+/* =================================================================
+   5. COVER STORIES: SHARED STYLE
+   -----------------------------------------------------------------
+   Each cover story is an <a> link styled as a cut-out box.
+   ================================================================= */
+
+.cover-stories {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  gap: 2.2rem;
+  /* On wide screens this nav is laid OVER the whole middle of the cover
+     (see section 9). pointer-events: none lets clicks pass through its empty
+     middle; the links themselves switch clicking back on below. */
+  pointer-events: none;
+}
+
+.cover-lines {
+  display: grid;
+  align-content: start;
+  gap: 2.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cover-lines > li {
+  position: relative;   /* doodles and margin notes are placed relative to this */
+}
+
+.cover-line {
+  position: relative;
+  display: block;
+  padding: 1rem 1.15rem 1.1rem;
+  color: var(--text);
+  text-decoration: none;
+  background: var(--paper);
+  box-shadow: 4px 5px 0 var(--hot-pink);
+  rotate: var(--tilt, 0deg);       /* each box sets its own --tilt in section 6 */
+  pointer-events: auto;
+  transition: rotate 0.2s ease, translate 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover (mouse) or focus (keyboard): straighten up and lift off the page. */
+.cover-line:hover,
+.cover-line:focus-visible {
+  rotate: 0deg;
+  translate: 0 -4px;
+  box-shadow: 7px 9px 0 var(--hot-pink);
+}
+
+.cover-line .kicker {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.cover-line__headline {
+  display: block;
+  font-family: var(--font-masthead);
+  font-weight: 800;
+  font-size: clamp(1.2rem, 1rem + 0.6vw, 1.45rem);
+  line-height: 1.15;
+}
+
+.cover-line:hover .cover-line__headline,
+.cover-line:focus-visible .cover-line__headline {
+  text-decoration: underline wavy var(--hot-pink) 2px;
+  text-underline-offset: 0.2em;
+}
+
+/* A ladybug lands on the corner when you hover or focus a story. */
+.cover-line::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  bottom: -12px;
+  width: 28px;
+  height: 28px;
+  background: url("../images/decor/ladybug.svg") center / contain no-repeat;
+  rotate: -30deg;
+  scale: 0;                         /* hidden until hover */
+  transition: scale 0.25s cubic-bezier(0.3, 1.6, 0.6, 1);   /* springy "pop" */
+}
+
+.cover-line:hover::after,
+.cover-line:focus-visible::after {
+  scale: 1;
+}
+
+/* Handwritten notes scribbled next to some boxes */
+.margin-note {
+  position: absolute;
+  bottom: -1.8rem;
+  right: 0.6rem;
+  z-index: 1;
+  white-space: nowrap;
+  rotate: -4deg;
+  pointer-events: none;
+}
+
+.margin-note--left {
+  right: auto;
+  left: 3rem;
+}
+
+
+/* =================================================================
+   6. COVER STORIES: EACH ONE'S OWN LOOK
+   ================================================================= */
+
+/* ---- The Writer's Room: taped box + EXCLUSIVE sticker ---- */
+.cover-line--writing {
+  --tilt: -2deg;
+  padding-top: 1.4rem;
+}
+
+.cover-line--writing .sticker {
+  position: absolute;
+  top: -0.9rem;
+  left: -0.5rem;
+  --sticker-tilt: -8deg;
+}
+
+/* ---- Cece's Kitchen: bubblegum box + HOT! starburst ---- */
+.cover-line--kitchen {
+  --tilt: 1.5deg;
+  padding-left: 4.4rem;            /* room for the starburst */
+  background: var(--bubblegum);
+}
+
+.cover-line--kitchen .kicker {
+  color: var(--text);              /* pink text isn't readable on bubblegum */
+}
+
+.cover-line--kitchen .sticker--burst {
+  position: absolute;
+  top: 50%;
+  left: -0.7rem;
+  translate: 0 -50%;               /* centre it vertically */
+  --burst-size: 4.6rem;
+  --sticker-tilt: -10deg;
+  font-size: 0.9rem;
+}
+
+/* ---- Movie Night: black film strip ---- */
+.cover-line--cinema {
+  --tilt: -1deg;
+  padding: 1.5rem 1.15rem;
+  color: #FFFFFF;
+  background: #111111;
+}
+
+.cover-line--cinema .kicker {
+  color: #FF7DC9;
+}
+
+/* Film-strip holes along the top and bottom edges */
+.cover-line--cinema::before {
+  content: "";
+  position: absolute;
+  inset: 6px 8px;
+  background:
+    repeating-linear-gradient(90deg, #FFFFFF 0 7px, transparent 7px 15px) top / 100% 5px no-repeat,
+    repeating-linear-gradient(90deg, #FFFFFF 0 7px, transparent 7px 15px) bottom / 100% 5px no-repeat;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* ---- Legally Blonde Labs: graph-paper lab label + NEW! sticker ---- */
+.cover-line--lab {
+  --tilt: 2deg;
+  padding-top: 1.4rem;
+  border: 2px dashed var(--hot-pink);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+.cover-line--lab .sticker {
+  position: absolute;
+  top: -0.85rem;
+  left: 0.8rem;
+  --sticker-tilt: -7deg;
+}
+
+/* ---- Study Hall: retro computer window ---- */
+.cover-line--notes {
+  --tilt: 1.5deg;
+  padding: 0;
+  border: 2px solid var(--text);
+}
+
+.pixel-window__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 0.5rem;
+  font-family: var(--font-y2k);
+  font-size: 0.7rem;
+  color: #1F0A16;
+  background: linear-gradient(90deg, #FF9ECF, #B9A8FF);
+  border-bottom: 2px solid var(--text);
+}
+
+.pixel-window__buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.pixel-window__buttons span {
+  display: grid;
+  place-items: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  line-height: 1;
+  background: #FFFFFF;
+  border: 1.5px solid #1F0A16;
+}
+
+.pixel-window__body {
+  display: block;
+  padding: 0.9rem 1.1rem 1.1rem;
+}
+
+/* ---- Cat of the Month: box with a mini polaroid ---- */
+.cover-line--cats {
+  --tilt: -1.5deg;
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;   /* photo column | text column */
+  align-items: center;
+  gap: 1rem;
+}
+
+.cover-line--cats .polaroid {
+  --photo-tilt: -7deg;
+  padding: 0.35rem 0.35rem 1rem;
+  margin: -1.4rem 0 -0.6rem -0.4rem;   /* pokes out of the box, collage-style */
+}
+
+.cover-line--cats .photo__frame {
+  --photo-ratio: 1;                    /* square */
+}
+
+.cover-line__text {
+  display: block;
+}
+
+/* ---- Hello Kitty & Ladybug Corner: ladybug-spotted border ----
+   Three background layers:
+   1. plain "paper" colour, only inside the border (padding-box)
+   2. black dots, across the whole box including the border
+   3. red, also across the whole box
+   The paper covers the middle, so the dots only show in the border. */
+.cover-line--kitty {
+  --tilt: -2deg;
+  border: 9px solid transparent;
+  background:
+    linear-gradient(var(--paper), var(--paper)) padding-box,
+    radial-gradient(circle, #111111 0 2.2px, transparent 2.7px) 0 0 / 11px 11px border-box,
+    linear-gradient(var(--red), var(--red)) border-box;
+}
+
+/* ---- Sale Alert: ransom-note letters ---- */
+.cover-line--sales {
+  --tilt: 1deg;
+  padding-top: 1.3rem;
+}
+
+.ransom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.ransom__word {
+  display: inline-flex;
+  gap: 0.12rem;
+}
+
+/* Every letter is a separate scrap. :nth-child(5n+1) means "the 1st, 6th,
+   11th..." letter, so the five styles below repeat in a cycle. */
+.ransom__word span {
+  display: inline-block;
+  padding: 0.05em 0.22em;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.25);
+}
+
+.ransom__word span:nth-child(5n+1) {
+  font-family: var(--font-masthead);
+  font-weight: 900;
+  color: #FFFFFF;
+  background: #111111;
+  rotate: -4deg;
+}
+
+.ransom__word span:nth-child(5n+2) {
+  font-family: var(--font-y2k);
+  color: var(--on-hot-pink);
+  background: var(--hot-pink);
+  rotate: 3deg;
+}
+
+.ransom__word span:nth-child(5n+3) {
+  font-family: var(--font-masthead);
+  font-style: italic;
+  color: #D7261E;
+  background: #FFFFFF;
+  outline: 1px solid #111111;
+  rotate: -2deg;
+}
+
+.ransom__word span:nth-child(5n+4) {
+  font-family: var(--font-body);
+  font-weight: 800;
+  color: #1F0A16;
+  background: #C9CDD6;
+  rotate: 5deg;
+}
+
+.ransom__word span:nth-child(5n) {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  color: #1F0A16;
+  background: #FF9ECF;
+  rotate: -3deg;
+}
+
+
+/* =================================================================
+   7. BOTTOM STRIP: PRICE + BARCODE
+   ================================================================= */
+
+.cover__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  padding-top: 1rem;
+  border-top: 2px dashed var(--hot-pink);
+}
+
+.price-tag {
+  --burst-size: 6rem;
+  --sticker-tilt: -12deg;
+  font-size: 1.05rem;
+}
+
+.cover__bottom-note {
+  flex: 1 1 12rem;
+  margin: 0;
+  text-align: center;
+}
+
+.barcode {
+  padding: 0.5rem 0.6rem 0.35rem;
+  color: #111111;
+  background: #FFFFFF;
+  box-shadow: 3px 3px 0 var(--shadow);
+  rotate: 2deg;
+}
+
+/* Three repeating stripe patterns with different spacings, laid on top of
+   each other. Because the spacings don't line up, together they look like
+   random barcode bars. */
+.barcode__bars {
+  display: block;
+  width: 9.5rem;
+  height: 3.2rem;
+  background:
+    repeating-linear-gradient(90deg, #111111 0 2px, transparent 2px 5px),
+    repeating-linear-gradient(90deg, #111111 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(90deg, #111111 0 3px, transparent 3px 11px),
+    #FFFFFF;
+}
+
+.barcode__digits {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-align: center;
+}
+
+
+/* =================================================================
+   8. DOODLE POSITIONS
+   -----------------------------------------------------------------
+   Each doodle sits inside the part of the cover it decorates, so it
+   moves with it on every screen size. --doodle-size and --doodle-tilt are
+   read by .doodle in style.css.
+   ================================================================= */
+
+/* around the masthead */
+/* (phones: bottom-left, so it doesn't sit under the tagline; moved in section 9) */
+.doodle--bow       { bottom: 0;    left: -0.4rem; --doodle-size: 2.8rem; --doodle-tilt: -18deg; }
+.doodle--sparkle-1 { top: 22%;     left: 14%;  --doodle-size: 2rem; }
+.doodle--sparkle-2 { bottom: 0;    right: 12%; --doodle-size: 1.5rem; animation-delay: 0.8s; }
+.doodle--sparkle-3 { top: 30%;     right: 3%;  --doodle-size: 2.4rem; animation-delay: 1.4s; }
+
+/* around the photo and headline */
+.doodle--heart     { top: 40%;     right: -0.5rem; --doodle-size: 2.8rem; --doodle-tilt: 14deg; }
+.doodle--sparkle-4 { top: 6%;      left: -0.5rem;  --doodle-size: 2rem; animation-delay: 0.4s; }
+
+/* peeking out from behind the story boxes */
+.doodle--cd     { top: -1.4rem;   right: -0.9rem; --doodle-size: 3.4rem; }
+.doodle--gear   { top: -1.3rem;   right: 1.6rem;  --doodle-size: 2.6rem; }
+.doodle--beaker { bottom: -1.6rem; left: -0.7rem;  --doodle-size: 3rem; --doodle-tilt: -12deg; }
+.doodle--star   { bottom: -1.3rem; right: -0.5rem; --doodle-size: 2.6rem; --doodle-tilt: 10deg; }
+.doodle--phone  { bottom: -1.3rem; right: -0.8rem; --doodle-size: 3.2rem; --doodle-tilt: -14deg; }
+
+/* circuit lines behind the bottom strip */
+.doodle--circuit { bottom: -0.2rem; left: 10%; --doodle-size: 7rem; opacity: 0.6; }
+
+
+/* =================================================================
+   9. WIDER SCREENS
+   ================================================================= */
+
+/* Tablets and up: the two lists of stories side by side. */
+@media (min-width: 600px) {
+  .cover-stories {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2.2rem;
+  }
+}
+
+/* Laptops and up: the real magazine-cover layout.
+   ┌──────────────────────────────────┐
+   │ top line                         │  row 1
+   │ C  E  C  E   (masthead)          │  row 2
+   │ stories │   photo    │ stories   │  row 3
+   │         │  headline  │           │
+   │ price · note · barcode           │  row 4
+   └──────────────────────────────────┘ */
+@media (min-width: 960px) {
+  .cover {
+    /* Saved in a variable because the stories grid below must use the
+       exact same columns to line up with the photo. */
+    --cover-cols: minmax(0, 1fr) minmax(20rem, 1.3fr) minmax(0, 1fr);
+    grid-template-columns: var(--cover-cols);
+    column-gap: 2.2rem;
+    margin-top: 1.5rem;
+    padding: 1.5rem 2.2rem 2rem;
+  }
+
+  /* These parts stretch across all three columns. */
+  .cover__topline,
+  .masthead,
+  .cover__bottom {
+    grid-column: 1 / -1;
+  }
+
+  /* Photo + headline: middle column, row 3, pulled up to overlap the masthead. */
+  .cover__center {
+    grid-column: 2;
+    grid-row: 3;
+    margin-top: -5rem;
+  }
+
+  /* The stories nav covers the whole of row 3, like a clear sheet laid over
+     the cover. Its links sit in columns 1 and 3, leaving the middle empty
+     so the photo shows through. */
+  .cover-stories {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    grid-template-columns: var(--cover-cols);
+    padding-top: 0.75rem;
+  }
+
+  .cover-lines--left  { grid-column: 1; }
+  .cover-lines--right { grid-column: 3; }
+
+  /* Plenty of width now: centre the tagline above the masthead. */
+  .masthead__tagline {
+    max-width: none;
+    text-align: center;
+  }
+
+  /* The bow goes back to the top-left corner. */
+  .doodle--bow {
+    top: 0.5rem;
+    bottom: auto;
+    left: 0;
+    --doodle-size: 3.4rem;
+  }
+
+  /* More room on wide screens, so the starbursts can hang further out. */
+  .headline-burst--top    { left: -1.6rem; }
+  .headline-burst--bottom { right: -1.6rem; }
+}

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <!-- "chrome" = light, then a sharp dark band in the middle, then light again -->
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.45" stop-color="#D5D8E0"/>
+      <stop offset="0.52" stop-color="#9EA3B0"/>
+      <stop offset="1" stop-color="#EEF0F4"/>
+    </linearGradient>
+  </defs>
+  <!-- chunky five-point chrome star -->
+  <path d="M32 4 L39.4 22.9 L59.6 24 L43.9 36.9 L49 56.5 L32 45.5 L15 56.5 L20.1 36.9 L4.4 24 L24.6 22.9 Z"
+        fill="url(#chrome)" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+  <!-- thin pink outline inside the white edge -->
+  <path d="M32 4 L39.4 22.9 L59.6 24 L43.9 36.9 L49 56.5 L32 45.5 L15 56.5 L20.1 36.9 L4.4 24 L24.6 22.9 Z"
+        fill="none" stroke="#FF2E93" stroke-width="1.2" stroke-linejoin="round"/>
+  <!-- little shine -->
+  <circle cx="27" cy="27" r="2.5" fill="#FFFFFF"/>
+</svg>

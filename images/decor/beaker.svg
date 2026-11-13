@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- lab flask full of pink potion -->
+
+  <!-- 1. thick white outline first = the "sticker" edge -->
+  <path d="M26 7 H38 V24 L54 54 Q56 58 51 58 H13 Q8 58 10 54 L26 24 Z M22 7 H42"
+        fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- 2. the glass -->
+  <path d="M26 7 H38 V24 L54 54 Q56 58 51 58 H13 Q8 58 10 54 L26 24 Z" fill="#FFF4F9"/>
+
+  <!-- 3. pink liquid (same shape as the bottom of the flask) -->
+  <path d="M17.5 40 H46.5 L54 54 Q56 58 51 58 H13 Q8 58 10 54 Z" fill="#FF9ECF"/>
+
+  <!-- 4. bubbles -->
+  <circle cx="26" cy="49" r="2.5" fill="#FFFFFF"/>
+  <circle cx="35" cy="45" r="1.8" fill="#FFFFFF"/>
+  <circle cx="41" cy="52" r="1.4" fill="#FFFFFF"/>
+  <circle cx="30" cy="32" r="2" fill="#FF9ECF"/>
+  <circle cx="34" cy="21" r="1.5" fill="#FF9ECF"/>
+
+  <!-- 5. pink outline, rim and measuring marks on top -->
+  <path d="M26 7 H38 V24 L54 54 Q56 58 51 58 H13 Q8 58 10 54 L26 24 Z"
+        fill="none" stroke="#FF2E93" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M22 7 H42" stroke="#FF2E93" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M33 29 H37 M33 34 H38" stroke="#FF2E93" stroke-width="2" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- glossy bubble heart -->
+  <path d="M32 56 C10 41 4 29 8 19 C12 8 26 6 32 18 C38 6 52 8 56 19 C60 29 54 41 32 56 Z"
+        fill="#FF2E93" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+  <!-- the "gloss": a white highlight makes it look shiny and 3-D -->
+  <ellipse cx="19" cy="21" rx="6" ry="3.5" fill="#FFFFFF" opacity="0.75" transform="rotate(-35 19 21)"/>
+  <circle cx="26" cy="15.5" r="1.8" fill="#FFFFFF" opacity="0.75"/>
+</svg>

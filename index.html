@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Makes the page fit phone screens instead of showing a tiny zoomed-out desktop page -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CECE · Issue 01 · The Stacked Life Issue</title>
+  <meta name="description" content="CECE: a messy, Y2K pink magazine about the stacked life of a writer, student and tutor.">
+  <link rel="icon" href="images/decor/ladybug.svg" type="image/svg+xml">
+
+  <!-- 1. theme.js comes FIRST and without "defer": it picks light or dark
+          mode before the page is drawn, so there's no white flash. -->
+  <script src="js/theme.js"></script>
+
+  <!-- 2. Fonts from Google Fonts: Bodoni Moda (masthead), Audiowide (Y2K),
+          Caveat (handwriting), Nunito (body text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat:wght@400..700&family=Nunito:ital,wght@0,400..800;1,400..800&display=swap">
+
+  <!-- 3. Our styles: the shared design system, then the cover's own layout.
+          Relative paths (no "/" at the start) so it works on GitHub Pages. -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/cover.css">
+
+  <!-- 4. main.js: "defer" = download now, run once the HTML has been read -->
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <!-- Hidden until you press Tab: lets keyboard users jump to the stories -->
+  <a class="skip-link" href="#cover-stories">Skip to the cover stories</a>
+
+  <main class="cover">
+
+    <!-- =========================================================
+         TOP LINE: issue details + the two switches
+         ========================================================= -->
+    <div class="cover__topline">
+      <p class="issue-line">Issue 01 · November 2026 · <strong>The Stacked Life Issue</strong></p>
+
+      <div class="cover__controls">
+        <!-- Pauses / restarts the wandering ladybug (main.js) -->
+        <button class="ladybug-toggle" type="button" aria-pressed="true"
+                title="Pause or wake up the wandering ladybug">
+          <span class="sr-only">Wandering ladybug</span>
+        </button>
+
+        <!-- Dark-mode switch (theme.js). role="switch" + aria-checked
+             make screen readers announce it as an on/off switch. -->
+        <button class="theme-switch" type="button" role="switch" aria-checked="false">
+          <span class="theme-switch__track" aria-hidden="true">
+            <span>☀</span>
+            <span>☾</span>
+            <span class="theme-switch__knob"></span>
+          </span>
+          <span class="theme-switch__text">Midnight Issue</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         MASTHEAD: the magazine's name across the top
+         ========================================================= -->
+    <header class="masthead">
+      <p class="masthead__tagline">the magazine for a stacked life</p>
+      <h1 class="masthead__title chrome-text">CECE</h1>
+      <span class="sticker midnight-sticker">Midnight Edition</span>
+
+      <!-- Decorations: alt="" tells screen readers to skip them -->
+      <img class="doodle doodle--bow" src="images/decor/bow.svg" alt="">
+      <img class="doodle doodle--sparkle-1 twinkle" src="images/decor/sparkle.svg" alt="">
+      <img class="doodle doodle--sparkle-2 twinkle" src="images/decor/sparkle.svg" alt="">
+      <img class="doodle doodle--sparkle-3 twinkle" src="images/decor/sparkle.svg" alt="">
+    </header>
+
+    <!-- =========================================================
+         CENTRE: big cover photo + main headline
+         ========================================================= -->
+    <div class="cover__center">
+      <figure class="photo polaroid taped cover-photo">
+        <div class="photo__frame">
+          <!-- TODO (Cece): once your photo is in images/, describe it here,
+               e.g. alt="Cece laughing in a pink cardigan" -->
+          <img src="images/cover-cece.jpg" alt="Cece, this issue's cover star">
+        </div>
+        <figcaption class="photo__caption">the cover star ♡</figcaption>
+      </figure>
+
+      <div class="headline-wrap drop-shadow">
+        <span class="sticker sticker--burst sticker--red headline-burst headline-burst--top" aria-hidden="true">All new!</span>
+        <h2 class="main-headline torn-paper">
+          Between the stolen moments of the stacked life of a
+          <mark>writer, student and tutor</mark>,
+          Cece needs a magazine to sort things out.
+        </h2>
+        <span class="sticker sticker--burst sticker--chrome headline-burst headline-burst--bottom" aria-hidden="true">8 stories inside</span>
+      </div>
+
+      <img class="doodle doodle--heart bob" src="images/decor/heart.svg" alt="">
+      <img class="doodle doodle--sparkle-4 twinkle" src="images/decor/sparkle.svg" alt="">
+    </div>
+
+    <!-- =========================================================
+         COVER STORIES: every cover line is a real link to its page.
+         Two lists: the left and right columns of the cover.
+         ========================================================= -->
+    <nav class="cover-stories" id="cover-stories" aria-label="Cover stories">
+
+      <ul class="cover-lines cover-lines--left">
+        <li>
+          <a class="cover-line cover-line--writing taped" href="writing.html">
+            <span class="sticker">Exclusive</span>
+            <span class="kicker">The Writer's Room</span>
+            <span class="cover-line__headline">Cece's debut book, a first look inside</span>
+          </a>
+          <span class="margin-note" aria-hidden="true">← finally!!</span>
+        </li>
+
+        <li>
+          <a class="cover-line cover-line--kitchen" href="kitchen.html">
+            <span class="sticker sticker--burst sticker--red">Hot!</span>
+            <span class="kicker">Cece's Kitchen</span>
+            <span class="cover-line__headline">The pink cupcake that saved finals week</span>
+          </a>
+          <span class="margin-note margin-note--left" aria-hidden="true">(it really did)</span>
+        </li>
+
+        <li>
+          <img class="doodle doodle--cd spin" src="images/decor/cd.svg" alt="">
+          <a class="cover-line cover-line--cinema" href="cinema.html">
+            <span class="kicker">Movie Night</span>
+            <span class="cover-line__headline">200+ films and shows, sorted by mood</span>
+          </a>
+        </li>
+
+        <li>
+          <img class="doodle doodle--gear spin" src="images/decor/gear.svg" alt="">
+          <img class="doodle doodle--beaker" src="images/decor/beaker.svg" alt="">
+          <a class="cover-line cover-line--lab" href="lab.html">
+            <span class="sticker sticker--chrome">New!</span>
+            <span class="kicker">Legally Blonde Labs</span>
+            <span class="cover-line__headline">Tiny robots, big dreams</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="cover-lines cover-lines--right">
+        <li>
+          <a class="cover-line cover-line--notes" href="notes.html">
+            <!-- Fake computer-window title bar: decoration, so hidden from screen readers -->
+            <span class="pixel-window__bar" aria-hidden="true">
+              <span>study.exe</span>
+              <span class="pixel-window__buttons"><span>_</span><span>□</span><span>×</span></span>
+            </span>
+            <span class="pixel-window__body">
+              <span class="kicker">Study Hall</span>
+              <span class="cover-line__headline">How to survive Technion finals</span>
+            </span>
+          </a>
+          <span class="margin-note" aria-hidden="true">bookmark this!!</span>
+        </li>
+
+        <li>
+          <img class="doodle doodle--star" src="images/decor/star.svg" alt="">
+          <a class="cover-line cover-line--cats" href="cats.html">
+            <div class="photo polaroid photo--mini">
+              <div class="photo__frame">
+                <!-- alt="" on purpose: the link text right next to it already
+                     says what it is, so screen readers don't read it twice -->
+                <img src="images/cats-1.jpg" alt="">
+              </div>
+            </div>
+            <span class="cover-line__text">
+              <span class="kicker">Cat of the Month</span>
+              <span class="cover-line__headline">Meet this month's cover cat</span>
+            </span>
+          </a>
+        </li>
+
+        <li>
+          <a class="cover-line cover-line--kitty" href="kitty.html">
+            <span class="kicker">Hello Kitty &amp; Ladybug Corner</span>
+            <span class="cover-line__headline">Ladybug facts that will change your life</span>
+          </a>
+        </li>
+
+        <li>
+          <img class="doodle doodle--phone" src="images/decor/flip-phone.svg" alt="">
+          <a class="cover-line cover-line--sales taped" href="sales.html">
+            <!-- Screen readers read "Sale alert:" instead of spelling out the
+                 ransom letters one by one (those are aria-hidden). -->
+            <span class="sr-only">Sale alert:</span>
+            <span class="ransom" aria-hidden="true">
+              <span class="ransom__word"><span>S</span><span>A</span><span>L</span><span>E</span></span>
+              <span class="ransom__word"><span>A</span><span>L</span><span>E</span><span>R</span><span>T</span></span>
+            </span>
+            <span class="cover-line__headline">Where Cece is shopping this week</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- =========================================================
+         BOTTOM STRIP: price tag + barcode, like a real cover
+         ========================================================= -->
+    <div class="cover__bottom">
+      <span class="sticker sticker--burst price-tag"><span class="sr-only">Price: </span>₪0.00</span>
+
+      <p class="cover__bottom-note handwritten">psst… tap any headline to open the story ♡</p>
+
+      <div class="barcode" role="img" aria-label="Barcode for Issue 01">
+        <span class="barcode__bars"></span>
+        <span class="barcode__digits">0 11 2026 0001 7</span>
+      </div>
+
+      <img class="doodle doodle--circuit" src="images/decor/circuit.svg" alt="">
+    </div>
+
+  </main>
+</body>
+</html>

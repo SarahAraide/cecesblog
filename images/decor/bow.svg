@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- original polka-dot ribbon bow -->
+  <g stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round">
+    <!-- ribbon tails -->
+    <path d="M29 36 L21 58 L27.5 55 L31 60 L33 37 Z" fill="#E0177F"/>
+    <path d="M35 36 L43 58 L36.5 55 L33 60 L31 37 Z" fill="#E0177F"/>
+    <!-- left and right loops -->
+    <path d="M31 30 C21 14 4 14 5 30 C6 46 21 45 31 34 Z" fill="#FF2E93"/>
+    <path d="M33 30 C43 14 60 14 59 30 C58 46 43 45 33 34 Z" fill="#FF2E93"/>
+    <!-- the knot in the middle -->
+    <rect x="26" y="24" width="12" height="16" rx="5" fill="#FF9ECF"/>
+  </g>
+  <!-- white polka dots -->
+  <g fill="#FFFFFF">
+    <circle cx="14" cy="26" r="2.2"/>
+    <circle cx="20" cy="35" r="2"/>
+    <circle cx="12" cy="36" r="1.6"/>
+    <circle cx="50" cy="26" r="2.2"/>
+    <circle cx="44" cy="35" r="2"/>
+    <circle cx="52" cy="36" r="1.6"/>
+  </g>
+</svg>

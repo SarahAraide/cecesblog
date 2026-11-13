@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Y2K four-point sparkle with a white sticker edge -->
+  <path d="M32 3 C34.5 21 43 29.5 61 32 C43 34.5 34.5 43 32 61 C29.5 43 21 34.5 3 32 C21 29.5 29.5 21 32 3 Z"
+        fill="#FF2E93" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+  <!-- bright centre -->
+  <circle cx="32" cy="32" r="4" fill="#FFFFFF"/>
+</svg>

@@ -1,0 +1,21 @@
+# .gitignore: files git should never add, commit or push.
+# Anything listed here stays on your computer only, so it's never
+# published on GitHub Pages. (One pattern per line; # starts a comment.)
+
+# Planning notes for building the site (not part of the website)
+SPEC.md
+courses.md
+recipes.md
+study-files.md
+
+# Zip files (photo downloads etc.)
+*.zip
+
+# Photo download folders inside images/
+images/vsco_photos/
+images/daisyicon_pins*/
+
+# Photos the site doesn't use: anything still called photo_XX.jpg.
+# (* means "anything here".) To use one, rename it to the name the page
+# expects, e.g. cats-4.jpg, and it's no longer ignored.
+images/photo_*.jpg

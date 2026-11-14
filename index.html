@@ -12,11 +12,11 @@
           mode before the page is drawn, so there's no white flash. -->
   <script src="js/theme.js"></script>
 
-  <!-- 2. Fonts from Google Fonts: Bodoni Moda (masthead), Audiowide (Y2K),
-          Caveat (handwriting), Nunito (body text) -->
+  <!-- 2. Bubbly fonts from Google Fonts: Bagel Fat One (masthead + big titles),
+          Fredoka (headlines + labels), Gochi Hand (handwriting), Nunito (body text) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat:wght@400..700&family=Nunito:ital,wght@0,400..800;1,400..800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fredoka:wght@300..700&family=Gochi+Hand&family=Nunito:ital,wght@0,400..800;1,400..800&display=swap">
 
   <!-- 3. Our styles: the shared design system, then the cover's own layout.
           Relative paths (no "/" at the start) so it works on GitHub Pages. -->
@@ -31,7 +31,27 @@
   <!-- Hidden until you press Tab: lets keyboard users jump to the stories -->
   <a class="skip-link" href="#cover-stories">Skip to the cover stories</a>
 
+  <!-- The whole cover is exactly one screen tall (see cover.css). -->
   <main class="cover">
+
+    <!-- =========================================================
+         BACKGROUND: shiny chrome with splashes of stars, behind
+         everything. The chrome is pure CSS (cover.css, section 3);
+         the stars are the doodles from images/decor/.
+         aria-hidden="true": pure decoration, screen readers skip it.
+         ========================================================= -->
+    <div class="cover__bg" aria-hidden="true">
+      <img class="bg-star bg-star--1 twinkle" src="images/decor/sparkle.svg" alt="">
+      <img class="bg-star bg-star--2" src="images/decor/star-pink.svg" alt="">
+      <img class="bg-star bg-star--3 twinkle" src="images/decor/sparkle.svg" alt="">
+      <img class="bg-star bg-star--4" src="images/decor/star-pink.svg" alt="">
+      <img class="bg-star bg-star--5 twinkle" src="images/decor/sparkle.svg" alt="">
+      <img class="bg-star bg-star--6" src="images/decor/star-pink.svg" alt="">
+      <img class="bg-star bg-star--7 twinkle" src="images/decor/sparkle.svg" alt="">
+      <img class="bg-star bg-star--8" src="images/decor/star-pink.svg" alt="">
+      <img class="bg-star bg-star--9 twinkle" src="images/decor/sparkle.svg" alt="">
+      <img class="bg-star bg-star--10" src="images/decor/star-pink.svg" alt="">
+    </div>
 
     <!-- =========================================================
          TOP LINE: issue details + the two switches
@@ -69,36 +89,23 @@
 
       <!-- Decorations: alt="" tells screen readers to skip them -->
       <img class="doodle doodle--bow" src="images/decor/bow.svg" alt="">
+      <img class="doodle doodle--heart bob" src="images/decor/heart.svg" alt="">
       <img class="doodle doodle--sparkle-1 twinkle" src="images/decor/sparkle.svg" alt="">
       <img class="doodle doodle--sparkle-2 twinkle" src="images/decor/sparkle.svg" alt="">
       <img class="doodle doodle--sparkle-3 twinkle" src="images/decor/sparkle.svg" alt="">
     </header>
 
     <!-- =========================================================
-         CENTRE: big cover photo + main headline
+         MAIN HEADLINE: torn paper laid over the photo
          ========================================================= -->
-    <div class="cover__center">
-      <figure class="photo polaroid taped cover-photo">
-        <div class="photo__frame">
-          <!-- TODO (Cece): once your photo is in images/, describe it here,
-               e.g. alt="Cece laughing in a pink cardigan" -->
-          <img src="images/cover-cece.jpg" alt="Cece, this issue's cover star">
-        </div>
-        <figcaption class="photo__caption">the cover star ♡</figcaption>
-      </figure>
-
-      <div class="headline-wrap drop-shadow">
-        <span class="sticker sticker--burst sticker--red headline-burst headline-burst--top" aria-hidden="true">All new!</span>
-        <h2 class="main-headline torn-paper">
-          Between the stolen moments of the stacked life of a
-          <mark>writer, student and tutor</mark>,
-          Cece needs a magazine to sort things out.
-        </h2>
-        <span class="sticker sticker--burst sticker--chrome headline-burst headline-burst--bottom" aria-hidden="true">8 stories inside</span>
-      </div>
-
-      <img class="doodle doodle--heart bob" src="images/decor/heart.svg" alt="">
-      <img class="doodle doodle--sparkle-4 twinkle" src="images/decor/sparkle.svg" alt="">
+    <div class="headline-wrap drop-shadow">
+      <span class="sticker sticker--burst sticker--red headline-burst headline-burst--top" aria-hidden="true">All new!</span>
+      <h2 class="main-headline torn-paper">
+        Between the stolen moments of the stacked life of a
+        <mark>writer, student and tutor</mark>,
+        Cece needs a magazine to sort things out.
+      </h2>
+      <span class="sticker sticker--burst sticker--chrome headline-burst headline-burst--bottom" aria-hidden="true">9 stories inside</span>
     </div>
 
     <!-- =========================================================
@@ -121,9 +128,9 @@
           <a class="cover-line cover-line--kitchen" href="kitchen.html">
             <span class="sticker sticker--burst sticker--red">Hot!</span>
             <span class="kicker">Cece's Kitchen</span>
-            <span class="cover-line__headline">The pink cupcake that saved finals week</span>
+            <span class="cover-line__headline">The cheesecake that saved finals week</span>
           </a>
-          <span class="margin-note margin-note--left" aria-hidden="true">(it really did)</span>
+          <span class="margin-note" aria-hidden="true">(it really did)</span>
         </li>
 
         <li>
@@ -135,7 +142,6 @@
         </li>
 
         <li>
-          <img class="doodle doodle--gear spin" src="images/decor/gear.svg" alt="">
           <img class="doodle doodle--beaker" src="images/decor/beaker.svg" alt="">
           <a class="cover-line cover-line--lab" href="lab.html">
             <span class="sticker sticker--chrome">New!</span>
@@ -162,7 +168,7 @@
         </li>
 
         <li>
-          <img class="doodle doodle--star" src="images/decor/star.svg" alt="">
+          <img class="doodle doodle--gear spin" src="images/decor/gear.svg" alt="">
           <a class="cover-line cover-line--cats" href="cats.html">
             <div class="photo polaroid photo--mini">
               <div class="photo__frame">
@@ -179,6 +185,7 @@
         </li>
 
         <li>
+          <img class="doodle doodle--star" src="images/decor/star.svg" alt="">
           <a class="cover-line cover-line--kitty" href="kitty.html">
             <span class="kicker">Hello Kitty &amp; Ladybug Corner</span>
             <span class="cover-line__headline">Ladybug facts that will change your life</span>
@@ -202,19 +209,21 @@
     </nav>
 
     <!-- =========================================================
-         BOTTOM STRIP: price tag + barcode, like a real cover
+         BOTTOM STRIP: the 9th cover story + barcode.
+         Mind Matters runs as a calm banner along the bottom, like the
+         "PLUS:" strip on a real magazine (a 9th box wouldn't fit on
+         one screen, and this story deserves a quieter look anyway).
          ========================================================= -->
     <div class="cover__bottom">
-      <span class="sticker sticker--burst price-tag"><span class="sr-only">Price: </span>₪0.00</span>
-
-      <p class="cover__bottom-note handwritten">psst… tap any headline to open the story ♡</p>
+      <a class="cover-banner" href="mind.html">
+        <span class="kicker">Mind Matters</span>
+        <span class="cover-banner__headline">Cece's campaign: it's okay to talk about it</span>
+      </a>
 
       <div class="barcode" role="img" aria-label="Barcode for Issue 01">
         <span class="barcode__bars"></span>
         <span class="barcode__digits">0 11 2026 0001 7</span>
       </div>
-
-      <img class="doodle doodle--circuit" src="images/decor/circuit.svg" alt="">
     </div>
 
   </main>

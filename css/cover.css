@@ -3,62 +3,84 @@
    CECE: cover.css
    Layout for the FRONT COVER only (index.html).
 
-   "Mobile first": the rules at the top are for phones, where everything
-   is stacked in one column. The @media blocks at the bottom rearrange
-   it for wider screens:
-     - 600px and up:  cover stories in two columns
-     - 960px and up:  the full magazine cover (stories | photo | stories)
+   THE BIG IDEA
+   - The cover is exactly ONE SCREEN tall, like holding a real magazine:
+     everything fits without scrolling, on a phone or a laptop.
+   - The BACKGROUND is shiny chrome with splashes of stars; everything
+     else is stacked on top of it like clippings.
+   - Every piece of text sits on something solid (paper box, sticker,
+     or a see-through "strip"), so it's readable on the busy background.
+
+   HOW IT FITS ON ANY SCREEN
+   Sizes use clamp(smallest, preferred, largest). The "preferred" value
+   often uses vh (1vh = 1% of the screen HEIGHT), so on a short screen
+   the masthead and text shrink and everything still fits.
+   (If a screen is REALLY tiny, the cover grows a little taller rather
+   than letting things overlap.)
+
+   Mobile first: the rules at the top are for phones. The @media blocks
+   at the bottom adjust it for tablets (600px+) and laptops (960px+).
 
    CONTENTS
-     1. The cover "page"
-     2. Top line (issue number + switches)
-     3. Masthead (CECE)
-     4. Centre: cover photo + main headline
-     5. Cover stories: shared style
-     6. Cover stories: each one's own look
-     7. Bottom strip: price, barcode
-     8. Doodle positions
-     9. Wider screens
+     1. Cover colours and spacing
+     2. The cover = one screen
+     3. Background: chrome with star splashes
+     4. Top line
+     5. Masthead
+     6. Main headline
+     7. Cover stories: shared style
+     8. Cover stories: each one's own look
+     9. Bottom strip: Mind Matters banner + barcode
+    10. Doodle positions
+    11. Tablets (600px+)
+    12. Laptops (960px+)
+    13. Very short screens
    ================================================================= */
 
 
 /* =================================================================
-   1. THE COVER "PAGE"
+   1. COVER COLOURS AND SPACING
    ================================================================= */
 
-/* Colours only the cover uses */
 :root {
-  --cover-top: #FFF4F9;
-  --cover-bottom: #FFDCEB;
-  --cover-edge: #FFFFFF;
+  /* (--strip-bg, the see-through strip behind small text, lives in
+     style.css because the section pages use it too.) */
+
+  /* Space between stacked pieces: tighter on short screens. */
+  --cover-gap: clamp(0.3rem, 0.9vh, 0.9rem);
 }
 
-[data-theme="dark"] {
-  --cover-top: #1E0D21;
-  --cover-bottom: #120714;
-  --cover-edge: rgba(255, 79, 184, 0.4);
-}
+
+/* =================================================================
+   2. THE COVER = ONE SCREEN
+   ================================================================= */
 
 .cover {
   position: relative;
-  width: min(1200px, 100% - 1.5rem);  /* never wider than 1200px, and keep a small gap on phones */
-  margin: 0.75rem auto 2.5rem;
-  padding: 1rem 1rem 1.5rem;
+  isolation: isolate;          /* keeps the background's layer inside the cover */
 
-  /* CSS Grid stacks the parts of the cover; on wide screens (section 9)
-     the same grid gets three columns. */
+  /* Exactly one screen tall. "dvh" = the height you can actually see on a
+     phone (without the browser's address bar). The vh line is a backup for
+     older browsers that don't know dvh. min-height (not height) means it
+     can still grow on a tiny screen instead of squashing things together. */
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  /* Phones: one column, five rows stacked top to bottom:
+       top line | masthead | headline | cover stories | bottom strip
+     "1fr" = the headline row takes all the space that's left over,
+     and that free space is where the chrome and stars show through. */
   display: grid;
-  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr auto auto;
+  gap: var(--cover-gap);
+  padding: clamp(0.45rem, 1.3vh, 1rem) clamp(0.6rem, 2vw, 1.25rem);
 
-  background: linear-gradient(165deg, var(--cover-top), var(--cover-bottom));
-  border: 2px solid var(--cover-edge);
-  box-shadow: 0 12px 40px var(--shadow);
-  overflow-x: clip;   /* trims decorations that poke out of the sides */
+  overflow: clip;              /* decorations that poke out get trimmed at the screen edge */
 }
 
-/* Each part of the cover gets its own layer (z-index).
-   Giving a part a z-index also makes its doodles (z-index: -1) sit
-   behind THAT part's text instead of disappearing behind the whole page. */
+/* Each part gets its own layer (z-index). That also keeps its doodles
+   (z-index: -1) tucked behind that part's own text. */
 .cover__topline,
 .masthead,
 .cover__bottom {
@@ -66,31 +88,104 @@
   z-index: 1;
 }
 
-.cover__center {
-  position: relative;
-  z-index: 2;          /* above the masthead, so the photo can overlap the letters */
+
+/* =================================================================
+   3. BACKGROUND: CHROME WITH STAR SPLASHES
+   -----------------------------------------------------------------
+   "Chrome" = metal that shines. The trick is many stripes of light and
+   dark silver side by side (the linear-gradient), plus a few soft glows
+   on top (the radial-gradients) where "light hits the metal".
+   Saved in a variable so dark mode can swap in a darker chrome.
+   ================================================================= */
+
+:root {
+  --cover-chrome:
+    radial-gradient(ellipse 60% 40% at 18% 12%, rgba(255, 255, 255, 0.95), transparent 70%),
+    radial-gradient(ellipse 50% 35% at 85% 88%, rgba(255, 255, 255, 0.8), transparent 70%),
+    radial-gradient(ellipse 45% 30% at 80% 20%, rgba(255, 158, 207, 0.5), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 15% 78%, rgba(255, 158, 207, 0.45), transparent 70%),
+    linear-gradient(135deg, #F7F8FB 0%, #D5D8E0 14%, #9EA3B0 26%, #EEF0F4 38%, #C3C7D1 50%,
+                            #FFFFFF 60%, #A9AEBB 74%, #E6E8EE 86%, #B9BDC8 100%);
 }
+
+/* Midnight Issue: dark, holographic chrome */
+[data-theme="dark"] {
+  --cover-chrome:
+    radial-gradient(ellipse 60% 40% at 18% 12%, rgba(185, 168, 255, 0.35), transparent 70%),
+    radial-gradient(ellipse 50% 35% at 85% 88%, rgba(255, 79, 184, 0.3), transparent 70%),
+    linear-gradient(135deg, #2A1230 0%, #4A3A5C 14%, #170A18 28%, #6E5C82 42%, #241028 55%,
+                            #8C7BD6 66%, #1E0D21 80%, #4A2A55 100%);
+}
+
+.cover__bg {
+  position: absolute;
+  inset: 0;                    /* = top: 0; right: 0; bottom: 0; left: 0 → fills the cover */
+  z-index: -1;                 /* behind everything else on the cover */
+  overflow: hidden;
+  background: var(--cover-chrome);
+}
+
+/* Thin diagonal light streaks, like reflections on polished metal */
+.cover__bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(115deg,
+    transparent 0 60px, rgba(255, 255, 255, 0.22) 60px 64px, transparent 64px 140px);
+}
+
+[data-theme="dark"] .cover__bg::before {
+  background: repeating-linear-gradient(115deg,
+    transparent 0 60px, rgba(255, 158, 230, 0.08) 60px 64px, transparent 64px 140px);
+}
+
+/* ---- The star splashes ----
+   Each star gets a position, a size and a tilt. Sizes use vh too,
+   so the stars shrink on short screens along with everything else. */
+.bg-star {
+  position: absolute;
+  width: var(--star-size, 3rem);
+  rotate: var(--star-tilt, 0deg);
+  filter: drop-shadow(0 3px 6px rgba(122, 20, 72, 0.3));  /* lifts the stars off the chrome */
+}
+
+[data-theme="dark"] .bg-star {
+  filter: drop-shadow(0 0 8px rgba(255, 79, 184, 0.8));   /* neon glow */
+}
+
+.bg-star--1  { top: 8%;     left: 3%;   --star-size: clamp(2.8rem, 8vh, 5rem); }
+.bg-star--2  { top: 12%;    right: 5%;  --star-size: clamp(3.2rem, 9vh, 6rem);   --star-tilt: 14deg; }
+.bg-star--3  { top: 31%;    left: 44%;  --star-size: clamp(2rem, 5.5vh, 3.4rem); animation-delay: 0.6s; }
+.bg-star--4  { top: 42%;    left: 1%;   --star-size: clamp(2.6rem, 7vh, 4.4rem); --star-tilt: -12deg; }
+.bg-star--5  { top: 50%;    right: 2%;  --star-size: clamp(2.6rem, 7vh, 4.6rem); animation-delay: 1.2s; }
+.bg-star--6  { top: 58%;    left: 37%;  --star-size: clamp(2.8rem, 8vh, 5rem);   --star-tilt: 20deg; }
+.bg-star--7  { bottom: 13%; left: 22%;  --star-size: clamp(2rem, 5vh, 3.2rem);   animation-delay: 0.3s; }
+.bg-star--8  { bottom: 8%;  right: 26%; --star-size: clamp(2.4rem, 6.5vh, 4rem); --star-tilt: -8deg; }
+.bg-star--9  { top: 3%;     left: 56%;  --star-size: clamp(1.8rem, 4.5vh, 2.8rem); animation-delay: 1.8s; }
+.bg-star--10 { top: 24%;    right: 28%; --star-size: clamp(2.2rem, 6vh, 3.6rem); --star-tilt: 30deg; }
 
 
 /* =================================================================
-   2. TOP LINE
+   4. TOP LINE
    ================================================================= */
 
 .cover__topline {
   display: flex;
-  flex-wrap: wrap;               /* on narrow phones the switches drop to a new line */
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem 1rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 2px dashed var(--hot-pink);
+  gap: 0.5rem;
+  padding: 0.3rem 0.4rem 0.3rem 0.85rem;
+  background: var(--strip-bg);
+  border: 2px dashed var(--hot-pink);
+  border-radius: 1.2rem;
 }
 
 .issue-line {
   margin: 0;
-  font-family: var(--font-y2k);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  font-family: var(--font-label);
+  font-size: clamp(0.55rem, 0.45rem + 0.45vw, 0.72rem);
+  line-height: 1.5;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -101,51 +196,68 @@
 
 .cover__controls {
   display: flex;
+  flex-shrink: 0;              /* never squash the switches */
   align-items: center;
-  gap: 0.6rem;
-  margin-left: auto;             /* push to the right */
+  gap: 0.5rem;
 }
 
 
 /* =================================================================
-   3. MASTHEAD
+   5. MASTHEAD
    ================================================================= */
 
 .masthead {
   text-align: center;
 }
 
+/* The tagline sits on its own little strip of paper. */
 .masthead__tagline {
   position: relative;
-  z-index: 1;                    /* stay above the masthead's glow, which would otherwise cover it */
-  max-width: 58%;                /* phones: leave room on the right for the Midnight sticker */
-  margin: 0 0 0.5rem;
+  z-index: 1;                  /* above the masthead's glow, which would otherwise cover it */
+  display: inline-block;
+  margin: 0 0 0.15rem;
+  padding: 0 0.6rem;
   font-family: var(--font-hand);
-  font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem);
-  line-height: 1.1;
-  text-align: left;
+  font-size: clamp(1rem, 0.75rem + 1.2vh, 1.5rem);
+  line-height: 1.35;
   color: var(--pink-text);
+  background: var(--strip-bg);
   rotate: -2deg;
 }
 
 .masthead__title {
   margin: 0;
   font-family: var(--font-masthead);
-  font-weight: 900;
-  /* clamp(smallest, preferred, largest): 25vw = a quarter of the screen width,
-     so the masthead grows and shrinks with the screen. */
-  font-size: clamp(4.5rem, 25vw, 17rem);
-  line-height: 0.82;
+  font-weight: normal;
+  /* min(24vw, 20vh) = whichever is SMALLER: a quarter of the width or a
+     fifth of the height. So it fits a tall phone AND a wide, short laptop. */
+  font-size: clamp(3.4rem, min(22vw, 20vh), 13rem);
+  line-height: 0.8;
   letter-spacing: 0.03em;
+}
+
+/* Silver letters would vanish on the silver background, so on the cover
+   the masthead is PINK chrome (same shiny stripes, in pink). Inside the
+   same @supports as .chrome-text in style.css, so old browsers that
+   can't clip a gradient to text never show a pink box instead. */
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .masthead__title.chrome-text {
+    background-image: linear-gradient(180deg, #FFFFFF 0%, #FFC2DF 30%, #FF2E93 52%, #FFB3D6 68%, #FF5FAE 100%);
+  }
+
+  [data-theme="dark"] .masthead__title.chrome-text {
+    background-image: var(--chrome);    /* glitter at midnight */
+  }
 }
 
 /* Only appears in dark mode */
 .midnight-sticker {
   display: none;
   position: absolute;
-  top: 1.5rem;
+  bottom: 4%;
   right: 0;
-  --sticker-tilt: 10deg;
+  font-size: clamp(0.55rem, 0.4rem + 0.5vh, 0.78rem);
+  --sticker-tilt: -8deg;
 }
 
 [data-theme="dark"] .midnight-sticker {
@@ -154,39 +266,25 @@
 
 
 /* =================================================================
-   4. CENTRE: COVER PHOTO + MAIN HEADLINE
+   6. MAIN HEADLINE
    ================================================================= */
-
-.cover__center {
-  display: grid;
-  justify-items: center;
-  gap: 2rem;
-  margin-top: -0.75rem;          /* tuck slightly under the masthead */
-}
-
-.cover-photo {
-  --photo-tilt: -2.5deg;
-  width: min(100%, 26rem);
-}
-
-.cover-photo .photo__frame {
-  --photo-ratio: 4 / 5;          /* portrait, like a real cover photo */
-}
 
 .headline-wrap {
   position: relative;
-  width: min(100%, 30rem);
-  margin-bottom: 3rem;           /* room for the starburst hanging off the bottom */
+  z-index: 2;
+  align-self: end;             /* sit at the BOTTOM of its row, so the photo shows above it */
+  justify-self: center;
+  width: min(100%, 34rem);
 }
 
 .main-headline {
   margin: 0;
-  padding: 2.1rem 1.4rem 2.4rem; /* extra top/bottom space so the starbursts never cover words */
-  font-family: var(--font-masthead);
-  font-style: italic;
+  padding: clamp(0.7rem, 1.8vh, 1.6rem) clamp(1rem, 3vw, 1.6rem);
+  font-family: var(--font-headline);
   font-weight: 700;
-  font-size: clamp(1.3rem, 1rem + 1.4vw, 1.7rem);
-  line-height: 1.25;
+  /* grows with the screen's height AND width */
+  font-size: clamp(0.9rem, 0.25rem + 1.4vh + 0.5vw, 1.5rem);
+  line-height: 1.22;
   text-align: center;
   color: var(--text);
 }
@@ -198,90 +296,100 @@
   background: linear-gradient(transparent 55%, var(--bubblegum) 55% 92%, transparent 92%);
 }
 
-/* Starbursts around the headline */
+/* Starbursts on the headline's top corners.
+   top = 0.8rem minus the burst's own size, so only its bottom 0.8rem
+   overlaps the paper: it can never cover the words, whatever its size. */
 .headline-burst {
   position: absolute;
   z-index: 1;
-  font-size: 0.7rem;
+  top: calc(0.8rem - var(--burst-size));
+  padding: 0.3rem;
+  font-size: clamp(0.55rem, 0.35rem + 0.6vh, 0.72rem);
 }
 
 .headline-burst--top {
-  top: -3rem;
-  left: -0.8rem;
-  --burst-size: 5rem;
+  left: -0.4rem;
+  --burst-size: clamp(3.3rem, 8vh, 4.8rem);
   --sticker-tilt: -14deg;
 }
 
 .headline-burst--bottom {
-  bottom: -3.4rem;
-  right: -0.8rem;
-  --burst-size: 5.5rem;
+  display: none;               /* phones: no room; it comes back on tablets (section 11) */
+  right: -0.6rem;
+  --burst-size: clamp(3.6rem, 8.5vh, 5rem);
   --sticker-tilt: 12deg;
 }
 
 
 /* =================================================================
-   5. COVER STORIES: SHARED STYLE
-   -----------------------------------------------------------------
-   Each cover story is an <a> link styled as a cut-out box.
+   7. COVER STORIES: SHARED STYLE
    ================================================================= */
 
+/* Phones: the two lists sit side by side as two columns. */
 .cover-stories {
   position: relative;
   z-index: 3;
   display: grid;
-  gap: 2.2rem;
-  /* On wide screens this nav is laid OVER the whole middle of the cover
-     (see section 9). pointer-events: none lets clicks pass through its empty
-     middle; the links themselves switch clicking back on below. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: clamp(0.5rem, 2vw, 1.25rem);
+  /* On laptops this nav is laid OVER the middle of the cover (section 12).
+     pointer-events: none lets clicks pass through its empty middle; the
+     links themselves switch clicking back on below. */
   pointer-events: none;
 }
 
 .cover-lines {
   display: grid;
   align-content: start;
-  gap: 2.2rem;
+  gap: var(--cover-gap);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .cover-lines > li {
-  position: relative;   /* doodles and margin notes are placed relative to this */
+  position: relative;          /* doodles and margin notes are placed relative to this */
 }
 
+/* Each cover story is an <a> link styled as a cut-out box. The boxes are
+   packed close and tilted, so their corners overlap like a stack of clippings. */
 .cover-line {
   position: relative;
   display: block;
-  padding: 1rem 1.15rem 1.1rem;
+  padding: clamp(0.35rem, 0.95vh, 0.75rem) clamp(0.55rem, 1.5vw, 1rem);
   color: var(--text);
   text-decoration: none;
   background: var(--paper);
-  box-shadow: 4px 5px 0 var(--hot-pink);
-  rotate: var(--tilt, 0deg);       /* each box sets its own --tilt in section 6 */
+  box-shadow: 3px 4px 0 var(--hot-pink);
+  rotate: var(--tilt, 0deg);       /* each box sets its own --tilt in section 8 */
   pointer-events: auto;
   transition: rotate 0.2s ease, translate 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Hover (mouse) or focus (keyboard): straighten up and lift off the page. */
+/* Hover (mouse) or focus (keyboard): straighten up, lift off the pile,
+   and come to the front (z-index). */
 .cover-line:hover,
 .cover-line:focus-visible {
+  z-index: 5;
   rotate: 0deg;
-  translate: 0 -4px;
-  box-shadow: 7px 9px 0 var(--hot-pink);
+  translate: 0 -3px;
+  box-shadow: 5px 7px 0 var(--hot-pink);
 }
 
 .cover-line .kicker {
   display: block;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.15rem;
+  font-size: clamp(0.52rem, 0.35rem + 0.5vh + 0.2vw, 0.74rem);
+  line-height: 1.3;
+  letter-spacing: 0.05em;
 }
 
 .cover-line__headline {
   display: block;
-  font-family: var(--font-masthead);
+  font-family: var(--font-headline);
   font-weight: 800;
-  font-size: clamp(1.2rem, 1rem + 0.6vw, 1.45rem);
-  line-height: 1.15;
+  font-size: clamp(0.78rem, 0.3rem + 1.1vh + 0.25vw, 1.35rem);
+  line-height: 1.12;
 }
 
 .cover-line:hover .cover-line__headline,
@@ -294,10 +402,10 @@
 .cover-line::after {
   content: "";
   position: absolute;
-  right: -10px;
-  bottom: -12px;
-  width: 28px;
-  height: 28px;
+  right: -8px;
+  bottom: -10px;
+  width: 24px;
+  height: 24px;
   background: url("../images/decor/ladybug.svg") center / contain no-repeat;
   rotate: -30deg;
   scale: 0;                         /* hidden until hover */
@@ -309,65 +417,68 @@
   scale: 1;
 }
 
-/* Handwritten notes scribbled next to some boxes */
+/* Handwritten notes: only on laptops, where there's room (section 12). */
 .margin-note {
-  position: absolute;
-  bottom: -1.8rem;
-  right: 0.6rem;
-  z-index: 1;
-  white-space: nowrap;
-  rotate: -4deg;
-  pointer-events: none;
-}
-
-.margin-note--left {
-  right: auto;
-  left: 3rem;
+  display: none;
 }
 
 
 /* =================================================================
-   6. COVER STORIES: EACH ONE'S OWN LOOK
+   8. COVER STORIES: EACH ONE'S OWN LOOK
    ================================================================= */
+
+/* Small stickers on the corner of a box */
+.cover-line > .sticker {
+  font-size: clamp(0.5rem, 0.35rem + 0.45vh, 0.72rem);
+}
+
+/* On the cover, tape is a small diagonal strip across the top-left
+   corner, so it never hides the words in these compact boxes. */
+.cover-line.taped::before {
+  top: -0.2rem;
+  left: 0;
+  width: 3.2rem;
+  height: 1rem;
+  translate: -35% 0;
+  --tape-tilt: -35deg;
+}
 
 /* ---- The Writer's Room: taped box + EXCLUSIVE sticker ---- */
 .cover-line--writing {
-  --tilt: -2deg;
-  padding-top: 1.4rem;
+  --tilt: -1.5deg;
 }
 
 .cover-line--writing .sticker {
   position: absolute;
-  top: -0.9rem;
-  left: -0.5rem;
-  --sticker-tilt: -8deg;
+  top: -0.75rem;
+  right: -0.3rem;
+  --sticker-tilt: 7deg;
 }
 
 /* ---- Cece's Kitchen: bubblegum box + HOT! starburst ---- */
 .cover-line--kitchen {
-  --tilt: 1.5deg;
-  padding-left: 4.4rem;            /* room for the starburst */
+  --tilt: 1.2deg;
   background: var(--bubblegum);
 }
 
 .cover-line--kitchen .kicker {
-  color: var(--text);              /* pink text isn't readable on bubblegum */
+  padding-left: clamp(1.4rem, 4vh, 2.6rem);   /* step aside for the starburst */
+  color: var(--text);                         /* pink text isn't readable on bubblegum */
 }
 
 .cover-line--kitchen .sticker--burst {
   position: absolute;
-  top: 50%;
-  left: -0.7rem;
-  translate: 0 -50%;               /* centre it vertically */
-  --burst-size: 4.6rem;
+  top: -1.1rem;
+  left: -0.6rem;
+  padding: 0.3rem;
+  --burst-size: clamp(2.4rem, 6vh, 3.6rem);
   --sticker-tilt: -10deg;
-  font-size: 0.9rem;
 }
 
 /* ---- Movie Night: black film strip ---- */
 .cover-line--cinema {
   --tilt: -1deg;
-  padding: 1.5rem 1.15rem;
+  padding-block: clamp(0.75rem, 1.9vh, 1.25rem);
   color: #FFFFFF;
   background: #111111;
 }
@@ -380,36 +491,35 @@
 .cover-line--cinema::before {
   content: "";
   position: absolute;
-  inset: 6px 8px;
+  inset: 4px 6px;
   background:
-    repeating-linear-gradient(90deg, #FFFFFF 0 7px, transparent 7px 15px) top / 100% 5px no-repeat,
-    repeating-linear-gradient(90deg, #FFFFFF 0 7px, transparent 7px 15px) bottom / 100% 5px no-repeat;
+    repeating-linear-gradient(90deg, #FFFFFF 0 6px, transparent 6px 13px) top / 100% 4px no-repeat,
+    repeating-linear-gradient(90deg, #FFFFFF 0 6px, transparent 6px 13px) bottom / 100% 4px no-repeat;
   opacity: 0.8;
   pointer-events: none;
 }
 
 /* ---- Legally Blonde Labs: graph-paper lab label + NEW! sticker ---- */
 .cover-line--lab {
-  --tilt: 2deg;
-  padding-top: 1.4rem;
+  --tilt: 1.5deg;
   border: 2px dashed var(--hot-pink);
   background-color: var(--paper);
   background-image:
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 14px 14px;
+  background-size: 12px 12px;
 }
 
 .cover-line--lab .sticker {
   position: absolute;
-  top: -0.85rem;
-  left: 0.8rem;
+  top: -0.75rem;
+  right: -0.3rem;
   --sticker-tilt: -7deg;
 }
 
 /* ---- Study Hall: retro computer window ---- */
 .cover-line--notes {
-  --tilt: 1.5deg;
+  --tilt: 1.2deg;
   padding: 0;
   border: 2px solid var(--text);
 }
@@ -418,9 +528,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.3rem 0.5rem;
-  font-family: var(--font-y2k);
-  font-size: 0.7rem;
+  padding: 0.12rem 0.4rem;
+  font-family: var(--font-label);
+  font-size: clamp(0.5rem, 0.35rem + 0.45vh, 0.68rem);
   color: #1F0A16;
   background: linear-gradient(90deg, #FF9ECF, #B9A8FF);
   border-bottom: 2px solid var(--text);
@@ -428,16 +538,16 @@
 
 .pixel-window__buttons {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.2rem;
 }
 
 .pixel-window__buttons span {
   display: grid;
   place-items: center;
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 0.85rem;
+  height: 0.85rem;
   font-family: var(--font-body);
-  font-size: 0.7rem;
+  font-size: 0.55rem;
   line-height: 1;
   background: #FFFFFF;
   border: 1.5px solid #1F0A16;
@@ -445,22 +555,18 @@
 
 .pixel-window__body {
   display: block;
-  padding: 0.9rem 1.1rem 1.1rem;
+  padding: clamp(0.35rem, 1vh, 0.7rem) clamp(0.55rem, 1.5vw, 1rem);
 }
 
-/* ---- Cat of the Month: box with a mini polaroid ---- */
+/* ---- Cat of the Month: mini polaroid (from tablets up; no room on phones) ---- */
 .cover-line--cats {
-  --tilt: -1.5deg;
-  display: grid;
-  grid-template-columns: 5.5rem 1fr;   /* photo column | text column */
-  align-items: center;
-  gap: 1rem;
+  --tilt: -1.2deg;
 }
 
 .cover-line--cats .polaroid {
+  display: none;
   --photo-tilt: -7deg;
-  padding: 0.35rem 0.35rem 1rem;
-  margin: -1.4rem 0 -0.6rem -0.4rem;   /* pokes out of the box, collage-style */
+  padding: 0.25rem 0.25rem 0.7rem;
 }
 
 .cover-line--cats .photo__frame {
@@ -478,60 +584,58 @@
    3. red, also across the whole box
    The paper covers the middle, so the dots only show in the border. */
 .cover-line--kitty {
-  --tilt: -2deg;
-  border: 9px solid transparent;
+  --tilt: -1.5deg;
+  border: clamp(5px, 1vh, 8px) solid transparent;
   background:
     linear-gradient(var(--paper), var(--paper)) padding-box,
-    radial-gradient(circle, #111111 0 2.2px, transparent 2.7px) 0 0 / 11px 11px border-box,
+    radial-gradient(circle, #111111 0 2px, transparent 2.5px) 0 0 / 10px 10px border-box,
     linear-gradient(var(--red), var(--red)) border-box;
 }
 
 /* ---- Sale Alert: ransom-note letters ---- */
 .cover-line--sales {
   --tilt: 1deg;
-  padding-top: 1.3rem;
 }
 
 .ransom {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-bottom: 0.6rem;
+  gap: 0.35rem;
+  margin-bottom: 0.25rem;
 }
 
 .ransom__word {
   display: inline-flex;
-  gap: 0.12rem;
+  gap: 0.08rem;
 }
 
 /* Every letter is a separate scrap. :nth-child(5n+1) means "the 1st, 6th,
    11th..." letter, so the five styles below repeat in a cycle. */
 .ransom__word span {
   display: inline-block;
-  padding: 0.05em 0.22em;
-  font-size: 1.5rem;
-  line-height: 1.1;
+  padding: 0 0.18em;
+  font-size: clamp(0.8rem, 0.45rem + 1.1vh, 1.25rem);
+  line-height: 1.15;
   box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.25);
 }
 
 .ransom__word span:nth-child(5n+1) {
   font-family: var(--font-masthead);
-  font-weight: 900;
+  font-weight: normal;
   color: #FFFFFF;
   background: #111111;
   rotate: -4deg;
 }
 
 .ransom__word span:nth-child(5n+2) {
-  font-family: var(--font-y2k);
+  font-family: var(--font-label);
   color: var(--on-hot-pink);
   background: var(--hot-pink);
   rotate: 3deg;
 }
 
 .ransom__word span:nth-child(5n+3) {
-  font-family: var(--font-masthead);
-  font-style: italic;
+  font-family: var(--font-headline);
   color: #D7261E;
   background: #FFFFFF;
   outline: 1px solid #111111;
@@ -556,36 +660,59 @@
 
 
 /* =================================================================
-   7. BOTTOM STRIP: PRICE + BARCODE
+   9. BOTTOM STRIP: MIND MATTERS BANNER + BARCODE
    ================================================================= */
 
 .cover__bottom {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem 1.5rem;
-  padding-top: 1rem;
-  border-top: 2px dashed var(--hot-pink);
+  gap: 0.75rem;
+  padding: 0.25rem 0.6rem 0.25rem 0.3rem;
+  background: var(--strip-bg);
+  border: 2px dashed var(--hot-pink);
+  border-radius: 1.2rem;
 }
 
-.price-tag {
-  --burst-size: 6rem;
-  --sticker-tilt: -12deg;
-  font-size: 1.05rem;
+/* The 9th cover story, Mind Matters: a calm lilac banner. No tilt, no
+   stickers, on purpose: this story speaks in a quieter voice. */
+.cover-banner {
+  flex: 1;                         /* take all the room the barcode leaves */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.6rem;
+  padding: 0.3rem 0.8rem;
+  color: var(--text);
+  text-decoration: none;
+  background: var(--calm-bg);
+  border: 2px solid var(--calm-edge);
+  border-radius: 0.9rem;
 }
 
-.cover__bottom-note {
-  flex: 1 1 12rem;
-  margin: 0;
-  text-align: center;
+.cover-banner .kicker {
+  font-size: clamp(0.52rem, 0.35rem + 0.45vh, 0.72rem);
+}
+
+.cover-banner__headline {
+  font-family: var(--font-headline);
+  font-size: clamp(0.82rem, 0.4rem + 1vh + 0.2vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.cover-banner:hover .cover-banner__headline,
+.cover-banner:focus-visible .cover-banner__headline {
+  text-decoration: underline;
+  text-decoration-color: var(--calm-edge);
+  text-underline-offset: 0.2em;
 }
 
 .barcode {
-  padding: 0.5rem 0.6rem 0.35rem;
+  padding: 0.25rem 0.35rem 0.15rem;
   color: #111111;
   background: #FFFFFF;
-  box-shadow: 3px 3px 0 var(--shadow);
+  box-shadow: 2px 2px 0 var(--shadow);
   rotate: 2deg;
 }
 
@@ -594,8 +721,8 @@
    random barcode bars. */
 .barcode__bars {
   display: block;
-  width: 9.5rem;
-  height: 3.2rem;
+  width: clamp(5rem, 8vw + 2.5rem, 8rem);
+  height: clamp(1.3rem, 3.6vh, 2.4rem);
   background:
     repeating-linear-gradient(90deg, #111111 0 2px, transparent 2px 5px),
     repeating-linear-gradient(90deg, #111111 0 1px, transparent 1px 7px),
@@ -605,73 +732,80 @@
 
 .barcode__digits {
   display: block;
-  margin-top: 0.2rem;
+  margin-top: 0.1rem;
   font-family: "Courier New", monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
   text-align: center;
 }
 
 
 /* =================================================================
-   8. DOODLE POSITIONS
+   10. DOODLE POSITIONS
    -----------------------------------------------------------------
-   Each doodle sits inside the part of the cover it decorates, so it
-   moves with it on every screen size. --doodle-size and --doodle-tilt are
-   read by .doodle in style.css.
+   --doodle-size and --doodle-tilt are read by .doodle in style.css.
    ================================================================= */
 
 /* around the masthead */
-/* (phones: bottom-left, so it doesn't sit under the tagline; moved in section 9) */
-.doodle--bow       { bottom: 0;    left: -0.4rem; --doodle-size: 2.8rem; --doodle-tilt: -18deg; }
-.doodle--sparkle-1 { top: 22%;     left: 14%;  --doodle-size: 2rem; }
-.doodle--sparkle-2 { bottom: 0;    right: 12%; --doodle-size: 1.5rem; animation-delay: 0.8s; }
-.doodle--sparkle-3 { top: 30%;     right: 3%;  --doodle-size: 2.4rem; animation-delay: 1.4s; }
+.doodle--bow       { top: 0;      left: 2%;  --doodle-size: clamp(2rem, 5vh, 3.2rem); --doodle-tilt: -18deg; }
+.doodle--heart     { top: 18%;    right: 4%; --doodle-size: clamp(1.6rem, 4.5vh, 2.8rem); --doodle-tilt: 14deg; }
+.doodle--sparkle-1 { top: 38%;    left: 12%; --doodle-size: clamp(1.1rem, 3vh, 2rem); }
+.doodle--sparkle-2 { bottom: 4%;  right: 20%; --doodle-size: clamp(0.9rem, 2.4vh, 1.5rem); animation-delay: 0.8s; }
+.doodle--sparkle-3 { top: 4%;     right: 24%; --doodle-size: clamp(1rem, 2.8vh, 1.8rem); animation-delay: 1.4s; }
 
-/* around the photo and headline */
-.doodle--heart     { top: 40%;     right: -0.5rem; --doodle-size: 2.8rem; --doodle-tilt: 14deg; }
-.doodle--sparkle-4 { top: 6%;      left: -0.5rem;  --doodle-size: 2rem; animation-delay: 0.4s; }
-
-/* peeking out from behind the story boxes */
-.doodle--cd     { top: -1.4rem;   right: -0.9rem; --doodle-size: 3.4rem; }
-.doodle--gear   { top: -1.3rem;   right: 1.6rem;  --doodle-size: 2.6rem; }
-.doodle--beaker { bottom: -1.6rem; left: -0.7rem;  --doodle-size: 3rem; --doodle-tilt: -12deg; }
-.doodle--star   { bottom: -1.3rem; right: -0.5rem; --doodle-size: 2.6rem; --doodle-tilt: 10deg; }
-.doodle--phone  { bottom: -1.3rem; right: -0.8rem; --doodle-size: 3.2rem; --doodle-tilt: -14deg; }
-
-/* circuit lines behind the bottom strip */
-.doodle--circuit { bottom: -0.2rem; left: 10%; --doodle-size: 7rem; opacity: 0.6; }
+/* peeking out from behind the story boxes (tablets and up) */
+.cover-lines .doodle { display: none; }
+.doodle--cd     { top: -1.1rem;    right: -0.8rem; --doodle-size: clamp(2rem, 5vh, 3.2rem); }
+.doodle--beaker { bottom: -1.2rem; left: -0.6rem;  --doodle-size: clamp(1.8rem, 4.5vh, 2.8rem); --doodle-tilt: -12deg; }
+.doodle--gear   { top: -1rem;      right: -0.6rem; --doodle-size: clamp(1.8rem, 4.5vh, 2.6rem); }
+.doodle--star   { top: -1rem;      left: -0.6rem;  --doodle-size: clamp(1.6rem, 4vh, 2.4rem); --doodle-tilt: -10deg; }
+.doodle--phone  { bottom: -1.1rem; right: -0.7rem; --doodle-size: clamp(1.8rem, 4.5vh, 3rem); --doodle-tilt: -14deg; }
 
 
 /* =================================================================
-   9. WIDER SCREENS
+   11. TABLETS (600px and wider)
    ================================================================= */
-
-/* Tablets and up: the two lists of stories side by side. */
 @media (min-width: 600px) {
-  .cover-stories {
-    grid-template-columns: 1fr 1fr;
-    column-gap: 2.2rem;
+  .headline-burst--bottom,
+  .cover-lines .doodle {
+    display: block;
+  }
+
+  /* The cat box gets its mini polaroid back: photo | text */
+  .cover-line--cats {
+    display: grid;
+    grid-template-columns: clamp(2.6rem, 6vh, 3.6rem) 1fr;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .cover-line--cats .polaroid {
+    display: block;
+    margin: -0.8rem 0 -0.5rem -0.3rem;   /* pokes out of the box, collage-style */
   }
 }
 
-/* Laptops and up: the real magazine-cover layout.
-   ┌──────────────────────────────────┐
-   │ top line                         │  row 1
-   │ C  E  C  E   (masthead)          │  row 2
-   │ stories │   photo    │ stories   │  row 3
-   │         │  headline  │           │
-   │ price · note · barcode           │  row 4
-   └──────────────────────────────────┘ */
+
+/* =================================================================
+   12. LAPTOPS (960px and wider): the classic magazine cover
+   ┌──────────────────────────────────────┐
+   │ top line                             │  row 1
+   │        C  E  C  E   (masthead)       │  row 2
+   │ stories │  photo shows  │ stories    │  row 3 (takes the free space)
+   │         │   headline    │            │
+   │ Mind Matters banner · barcode        │  row 4
+   └──────────────────────────────────────┘
+   ================================================================= */
 @media (min-width: 960px) {
   .cover {
-    /* Saved in a variable because the stories grid below must use the
-       exact same columns to line up with the photo. */
-    --cover-cols: minmax(0, 1fr) minmax(20rem, 1.3fr) minmax(0, 1fr);
+    /* Saved in variables because the stories grid below must use the
+       exact same columns and gap to line up. */
+    --cover-cols: minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 1fr);
+    --col-gap: clamp(1.25rem, 3vw, 3rem);
     grid-template-columns: var(--cover-cols);
-    column-gap: 2.2rem;
-    margin-top: 1.5rem;
-    padding: 1.5rem 2.2rem 2rem;
+    grid-template-rows: auto auto 1fr auto;
+    column-gap: var(--col-gap);
+    padding: clamp(0.6rem, 1.6vh, 1.2rem) clamp(1rem, 2.5vw, 2.5rem);
   }
 
   /* These parts stretch across all three columns. */
@@ -681,41 +815,73 @@
     grid-column: 1 / -1;
   }
 
-  /* Photo + headline: middle column, row 3, pulled up to overlap the masthead. */
-  .cover__center {
+  /* Headline: middle column, at the bottom of row 3, over the photo. */
+  .headline-wrap {
     grid-column: 2;
     grid-row: 3;
-    margin-top: -5rem;
+    margin-bottom: 0.5rem;
   }
 
-  /* The stories nav covers the whole of row 3, like a clear sheet laid over
-     the cover. Its links sit in columns 1 and 3, leaving the middle empty
-     so the photo shows through. */
+  /* The stories nav covers the whole of row 3, like a clear sheet laid
+     over the cover. Its links sit in columns 1 and 3, leaving the middle
+     empty so the photo shows through. */
   .cover-stories {
     grid-column: 1 / -1;
     grid-row: 3;
     grid-template-columns: var(--cover-cols);
-    padding-top: 0.75rem;
+    column-gap: var(--col-gap);
+  }
+
+  .cover-lines {
+    align-content: space-evenly;   /* spread the boxes over the full height */
   }
 
   .cover-lines--left  { grid-column: 1; }
   .cover-lines--right { grid-column: 3; }
 
-  /* Plenty of width now: centre the tagline above the masthead. */
+  /* Handwritten notes, on little scraps of paper hanging off a box */
+  .margin-note {
+    display: block;
+    position: absolute;
+    right: 0.8rem;
+    bottom: -0.9rem;
+    z-index: 6;
+    padding: 0 0.4rem;
+    font-size: clamp(1rem, 0.6rem + 1vh, 1.3rem);
+    white-space: nowrap;
+    background: var(--strip-bg);
+    rotate: -4deg;
+    pointer-events: none;
+  }
+}
+
+
+/* =================================================================
+   13. VERY SHORT SCREENS (small phones, or phones turned sideways)
+   Drop the tagline and shrink the masthead so the cover still fits.
+   ================================================================= */
+@media (max-height: 620px) and (max-width: 959px) {
+  .cover {
+    --cover-gap: 0.2rem;
+  }
+
   .masthead__tagline {
-    max-width: none;
-    text-align: center;
+    display: none;
   }
 
-  /* The bow goes back to the top-left corner. */
-  .doodle--bow {
-    top: 0.5rem;
-    bottom: auto;
-    left: 0;
-    --doodle-size: 3.4rem;
+  .masthead__title {
+    font-size: clamp(2.6rem, min(18vw, 13vh), 13rem);
   }
 
-  /* More room on wide screens, so the starbursts can hang further out. */
-  .headline-burst--top    { left: -1.6rem; }
-  .headline-burst--bottom { right: -1.6rem; }
+  .main-headline {
+    font-size: 0.85rem;
+  }
+
+  .cover-banner {
+    padding-block: 0.15rem;
+  }
+
+  .cover-banner__headline {
+    font-size: 0.76rem;
+  }
 }

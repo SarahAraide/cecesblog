@@ -1,0 +1,1173 @@
+@charset "UTF-8";
+/* =================================================================
+   CECE: spread.css
+   Shared by the 8 SECTION PAGES (the magazine "spreads").
+   The cover uses cover.css instead.
+
+   Every section page is built from the same parts:
+     shared header → spread header (kicker, headline, subheading,
+     "by Cece", photo) → numbered sections → shared footer.
+
+   CONTENTS
+     1. Shared header (small masthead + Contents)
+     2. Shared footer
+     3. The spread (page width)
+     4. Spread header: kicker, headline, subheading, byline, photo
+     5. Sections, panels and columns
+     6. Placeholder slots: where YOUR content goes
+     7. Pull quotes
+     8. Photo rows
+     9. Cards: grid, story, poem, recipe, info, course, store, facts
+    10. Badges, buttons and small labels
+    11. Wider screens
+    12. Calm pages (Mind Matters)
+   ================================================================= */
+
+
+/* =================================================================
+   1. SHARED HEADER
+   -----------------------------------------------------------------
+   Laptop:  CECE · issue line ................ [ladybug] [switch]
+            Contents: (pill) (pill) (pill) ...
+   Phone:   CECE  [Contents ▾]                 [ladybug] [switch]
+            (the Contents list opens under it when you tap the button)
+   ================================================================= */
+
+.site-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;                 /* lets the nav drop onto its own row */
+  align-items: center;
+  gap: 0.5rem 1rem;
+  width: min(1200px, 100% - 1.5rem);
+  margin: 0.75rem auto 0;
+  padding: 0.5rem 0.6rem 0.5rem 1rem;
+  background: var(--strip-bg);
+  border: 2px dashed var(--hot-pink);
+  border-radius: 1.2rem;
+}
+
+/* Small chrome masthead: a link back to the cover */
+.site-header__logo {
+  font-family: var(--font-masthead);
+  font-size: clamp(2rem, 1.6rem + 1.5vw, 2.7rem);
+  font-weight: normal;
+  line-height: 1;
+  text-decoration: none;
+}
+
+/* Thinner outline and smaller shadow than the giant cover masthead */
+.site-header__logo.chrome-text,
+.site-footer__logo.chrome-text {
+  -webkit-text-stroke-width: 1.5px;
+  filter: drop-shadow(3px 3px 0 var(--hot-pink));
+}
+
+[data-theme="dark"] .site-header__logo.chrome-text,
+[data-theme="dark"] .site-footer__logo.chrome-text {
+  filter: drop-shadow(0 0 8px rgba(255, 79, 184, 0.75));
+}
+
+.site-header__issue {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.site-header__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;               /* push the switches to the right */
+}
+
+/* "Contents" button: phones only, and only once main.js is running
+   (without JavaScript the list is simply always visible). */
+.contents-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.9rem;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1F0A16;
+  background:
+    radial-gradient(120% 90% at 30% 10%, rgba(255, 255, 255, 0.85) 0 18%, transparent 42%),
+    linear-gradient(180deg, #FFB8DC, #FF5FAE);
+  border: 2px solid #FFFFFF;
+  border-radius: 999px;
+  box-shadow: 0 3px 0 var(--shadow);
+  cursor: pointer;
+}
+
+.contents-toggle::after {
+  content: "▾";
+}
+
+.contents-toggle[aria-expanded="true"]::after {
+  content: "▴";
+}
+
+/* The Contents list: its own full-width row */
+.site-nav {
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--hot-pink);
+}
+
+.site-nav__label {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a {
+  display: block;
+  padding: 0.28rem 0.6rem;
+  font-family: var(--font-label);
+  font-size: 0.66rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--paper);
+  border: 2px solid var(--hot-pink);
+  border-radius: 999px;
+  transition: background-color 0.15s ease, translate 0.15s ease;
+}
+
+.site-nav a:hover {
+  background: var(--bubblegum);
+  translate: 0 -2px;
+}
+
+/* The page you're on: aria-current="page" tells screen readers too */
+.site-nav a[aria-current="page"] {
+  color: var(--on-hot-pink);
+  background: var(--hot-pink);
+  border-color: #FFFFFF;
+}
+
+/* Phones: hide the issue line, show the Contents button, fold the list,
+   and make everything a little more compact so it fits on one row. */
+@media (max-width: 759px) {
+  .site-header {
+    gap: 0.5rem 0.6rem;
+    padding-left: 0.8rem;
+  }
+
+  .site-header__logo {
+    font-size: 1.8rem;
+  }
+
+  .contents-toggle {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.62rem;
+  }
+
+  .site-header__issue {
+    display: none;
+  }
+
+  /* main.js adds .has-menu-button; .menu-open is added when you tap it */
+  .site-header.has-menu-button .contents-toggle {
+    display: inline-flex;
+  }
+
+  .site-header.has-menu-button .site-nav {
+    display: none;
+  }
+
+  .site-header.has-menu-button.menu-open .site-nav {
+    display: block;
+  }
+
+  .site-nav__label {
+    display: none;
+  }
+
+  .site-nav__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;    /* two neat columns of links */
+  }
+
+  .site-nav a {
+    text-align: center;
+  }
+}
+
+
+/* =================================================================
+   2. SHARED FOOTER
+   ================================================================= */
+
+.site-footer {
+  width: min(1200px, 100% - 1.5rem);
+  margin: 4rem auto 1.5rem;
+  padding: 1rem 1.25rem 1.4rem;
+  text-align: center;
+  background: var(--strip-bg);
+  border: 2px dashed var(--hot-pink);
+  border-radius: 1.2rem;
+}
+
+.site-footer .ladybug-divider {
+  margin: 0 0 1rem;
+}
+
+.site-footer__logo {
+  display: inline-block;
+  font-family: var(--font-masthead);
+  font-size: 2.4rem;
+  font-weight: normal;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.site-footer p {
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+  color: var(--text-soft);
+}
+
+/* Two class names = more specific than ".site-footer p" above, so this wins */
+.site-footer .site-footer__issue {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+
+/* =================================================================
+   3. THE SPREAD (page width)
+   ================================================================= */
+
+.spread {
+  width: min(1100px, 100% - 1.5rem);
+  margin: 2.5rem auto 0;
+}
+
+
+/* =================================================================
+   4. SPREAD HEADER
+   -----------------------------------------------------------------
+   Kicker (small label) → big headline → subheading ("dek") → byline,
+   with a polaroid photo beside it on wider screens.
+   ================================================================= */
+
+.spread__header {
+  position: relative;
+  z-index: 0;                      /* own layer, so doodles (z-index: -1) stay behind the text */
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1.75rem 1.25rem 2rem;
+  background: var(--paper);
+  box-shadow: 6px 7px 0 var(--hot-pink);
+}
+
+.spread__title {
+  margin: 0.35rem 0 0.7rem;
+  font-size: clamp(2.1rem, 1.3rem + 3.4vw, 4rem);
+  font-weight: normal;
+  line-height: 1.02;
+}
+
+/* The "dek": the sentence under a magazine headline */
+.spread__dek {
+  max-width: 40rem;
+  margin: 0 0 1.1rem;
+  font-family: var(--font-headline);
+  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+  line-height: 1.4;
+  color: var(--text-soft);
+}
+
+/* "by Cece" with a tiny ladybug in front */
+.byline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.byline::before {
+  content: "";
+  width: 1.4rem;
+  height: 1.4rem;
+  background: url("../images/decor/ladybug.svg") center / contain no-repeat;
+}
+
+.byline strong {
+  font-weight: normal;
+  color: var(--pink-text);
+}
+
+/* Sticker on the header's top edge ("EXCLUSIVE", "HOT!"...) */
+.spread__sticker {
+  position: absolute;
+  top: -0.9rem;
+  left: 1.25rem;
+  --sticker-tilt: -5deg;
+}
+
+.spread__hero {
+  justify-self: center;
+  width: min(100%, 21rem);
+  --photo-tilt: 2.5deg;
+}
+
+/* For a landscape (wide) photo: a wider polaroid, 4 wide × 3 high */
+.spread__hero--wide {
+  width: min(100%, 26rem);
+}
+
+.spread__hero--wide .photo__frame {
+  --photo-ratio: 4 / 3;
+}
+
+/* Doodles peeking out around the header */
+.spread__doodle--a { top: -1.3rem; right: 1rem;  --doodle-size: 2.6rem; --doodle-tilt: 12deg; }
+.spread__doodle--b { bottom: -1.4rem; left: 38%; --doodle-size: 2.4rem; --doodle-tilt: -10deg; }
+
+
+/* =================================================================
+   5. SECTIONS, PANELS AND COLUMNS
+   ================================================================= */
+
+.spread__section {
+  margin-top: 3.5rem;
+}
+
+/* Section headings with a numbered sticker: (01) The book */
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+}
+
+.section-heading__number {
+  flex-shrink: 0;
+  padding: 0.3rem 0.6rem;
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  color: var(--on-hot-pink);
+  background: var(--hot-pink);
+  border: 2px solid #FFFFFF;
+  border-radius: 999px;
+  rotate: -6deg;
+}
+
+.section-intro {
+  max-width: 42rem;
+  margin: -0.4rem 0 1.5rem;
+  color: var(--text-soft);
+}
+
+/* Panel = a cut-out piece of paper. Text inside stays straight and readable. */
+.panel {
+  position: relative;
+  padding: 1.25rem 1.4rem;
+  background: var(--paper);
+  box-shadow: 5px 6px 0 var(--hot-pink);
+}
+
+.panel > :first-child {
+  margin-top: 0;
+}
+
+.panel p {
+  max-width: 65ch;                 /* comfortable line length for reading */
+}
+
+/* Text on one side, photo on the other (side by side from 760px) */
+.two-col {
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+
+/* =================================================================
+   6. PLACEHOLDER SLOTS: where YOUR content goes
+   -----------------------------------------------------------------
+   A dashed, striped box with a ✎ label. Each one has a comment in the
+   HTML saying what goes there. Replace the whole box with your text.
+   ================================================================= */
+
+.slot {
+  position: relative;
+  padding: 1rem 1.1rem;
+  background:
+    repeating-linear-gradient(-45deg, transparent 0 10px, var(--grid-line) 10px 20px),
+    var(--paper);
+  border: 2px dashed var(--hot-pink);
+  border-radius: 0.6rem;
+}
+
+.slot + .slot {
+  margin-top: 1rem;
+}
+
+/* A panel right after a slot gets some breathing room */
+.slot + .panel {
+  margin-top: 1.75rem;
+}
+
+.slot--tall {
+  min-height: 11rem;
+}
+
+.slot__label {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+}
+
+.slot__label::before {
+  content: "✎ ";
+}
+
+.slot__hint {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  line-height: 1.3;
+  color: var(--text-soft);
+}
+
+/* A short placeholder inside a sentence or heading: ✎ Book title */
+.slot-inline {
+  font-style: italic;
+  border-bottom: 2px dashed var(--hot-pink);
+}
+
+.slot-inline::before {
+  content: "✎ ";
+  font-style: normal;
+  color: var(--pink-text);
+}
+
+
+/* =================================================================
+   7. PULL QUOTES
+   ================================================================= */
+
+.pull-quote {
+  position: relative;
+  max-width: 36rem;
+  margin: 3.5rem auto 0;
+  padding: 1.6rem 1.75rem 1.4rem;
+  text-align: center;
+  background: var(--paper);
+  border: 3px solid var(--text);
+  box-shadow: 6px 6px 0 var(--hot-pink);
+  rotate: -1deg;
+}
+
+/* Giant pink opening quote mark */
+.pull-quote::before {
+  content: "“";
+  position: absolute;
+  top: -1.6rem;
+  left: 1rem;
+  font-family: var(--font-masthead);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--hot-pink);
+}
+
+.pull-quote p {
+  margin: 0;
+  font-family: var(--font-headline);
+  font-size: clamp(1.35rem, 1rem + 1.4vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* Placeholder version: dashed border */
+.pull-quote.is-slot {
+  border-style: dashed;
+}
+
+/* Small label underneath: who said it, or "pull quote" on a placeholder */
+.pull-quote footer {
+  margin-top: 0.6rem;
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+}
+
+
+/* =================================================================
+   8. PHOTO ROWS
+   ================================================================= */
+
+.photo-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.75rem;
+}
+
+.photo-row .polaroid {
+  width: min(100%, 16rem);
+}
+
+/* Every second photo tilts the other way, for a messier pile */
+.photo-row .polaroid:nth-child(even) {
+  --photo-tilt: 3deg;
+}
+
+.side-photo {
+  justify-self: center;
+  width: min(100%, 19rem);
+  --photo-tilt: -2.5deg;
+}
+
+/* ---- The book (Writer's Room) ---- */
+.book-title {
+  margin: 0;
+  font-family: var(--font-masthead);   /* puffy letters, like the masthead */
+  font-size: clamp(1.8rem, 1.4rem + 1.5vw, 2.4rem);
+  font-weight: normal;
+}
+
+.book-subtitle {
+  margin: 0.2rem 0 1rem;
+  font-family: var(--font-hand);
+  font-size: 1.45rem;
+  color: var(--pink-text);
+}
+
+.book-blurb {
+  font-family: var(--font-headline);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+/* A review: pink line on the left, name underneath */
+.book-review {
+  margin: 1.25rem 0 1.5rem;
+  padding: 0.2rem 0 0.2rem 1rem;
+  border-left: 4px solid var(--hot-pink);
+}
+
+.book-review blockquote {
+  margin: 0;
+}
+
+.book-review blockquote p {
+  margin: 0;
+  font-style: italic;
+}
+
+.book-review figcaption {
+  margin-top: 0.35rem;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+}
+
+/* ---- A lettered book cover, made only with CSS ----
+   2 wide × 3 high like a real book, pink with a darker "spine" on the
+   left (the inset shadow) and the title in puffy letters. */
+.type-cover {
+  position: relative;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.8rem;
+  width: min(100%, 14rem);
+  aspect-ratio: 2 / 3;
+  padding: 1.5rem 1.2rem 1.5rem 1.8rem;
+  text-align: center;
+  color: #1F0A16;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.45) 0 3px, transparent 3.5px) 0 0 / 22px 22px,
+    linear-gradient(160deg, #FFC2DF, #FF9ECF 55%, #FF6FB8);
+  border-radius: 0.3rem 0.8rem 0.8rem 0.3rem;
+  box-shadow:
+    inset 12px 0 0 rgba(122, 20, 72, 0.25),   /* the spine */
+    6px 8px 0 var(--hot-pink);
+  rotate: -3deg;
+}
+
+.type-cover__title {
+  font-family: var(--font-masthead);
+  font-size: 2.3rem;
+  line-height: 1;
+}
+
+.type-cover__byline {
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+}
+
+/* A tiny ladybug in the corner of the cover */
+.type-cover::after {
+  content: "";
+  position: absolute;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: url("../images/decor/ladybug.svg") center / contain no-repeat;
+  rotate: 20deg;
+}
+
+
+/* =================================================================
+   9. CARDS
+   ================================================================= */
+
+/* A grid that fits as many 17rem-wide cards per row as there's room for.
+   No @media needed: it adapts to any screen by itself. */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  align-items: start;              /* each card keeps its own height: messier, more collage */
+  gap: 1.75rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.card h4 {
+  margin: 0.6rem 0 0;
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  font-weight: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+}
+
+.card ul,
+.card ol {
+  margin: 0;
+}
+
+/* Cards stack their contents in a column (flexbox), which would stretch
+   badges and buttons to full width. align-self keeps them their own size. */
+.card .badge,
+.card .bubble-button {
+  align-self: flex-start;
+}
+
+/* ---- Poem sheet: lined notebook paper with a margin line ---- */
+.poem-sheet {
+  padding: 1.25rem 1.4rem 1.4rem 2.2rem;
+  background:
+    linear-gradient(90deg, transparent 1.4rem, #FF9ECF 1.4rem, #FF9ECF calc(1.4rem + 2px), transparent calc(1.4rem + 2px)),
+    repeating-linear-gradient(transparent 0 1.85rem, var(--grid-line) 1.85rem calc(1.85rem + 2px)),
+    var(--paper);
+  box-shadow: 5px 6px 0 var(--hot-pink);
+}
+
+.poem-sheet + .poem-sheet {
+  margin-top: 1.75rem;
+}
+
+.poem-sheet h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.4rem;
+}
+
+/* Use <p class="poem"> for a poem: "pre-line" keeps YOUR line breaks
+   exactly as you typed them in the HTML. */
+.poem {
+  margin: 0;
+  font-family: var(--font-body);       /* the easiest font to read for longer text */
+  font-size: 1.1rem;
+  line-height: 1.75;
+  white-space: pre-line;
+}
+
+/* ---- Cece's own recipe: a big card, two columns on wider screens
+        (photo + ingredients on the left, steps + tips on the right) ---- */
+.recipe-feature {
+  display: grid;
+  gap: 1.5rem 2.5rem;
+  padding-top: 1.75rem;
+}
+
+.recipe-feature__title {
+  margin: 1rem 0 0.3rem;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+}
+
+.recipe-feature__intro {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-headline);
+  color: var(--text-soft);
+}
+
+.recipe-time {
+  margin: 0.6rem 0 0;
+  font-size: 0.95rem;
+}
+
+.recipe-feature h4 {
+  margin: 1.25rem 0 0.4rem;
+}
+
+.recipe-feature .recipe-steps li {
+  margin-bottom: 0.85rem;
+}
+
+/* ---- Credited recipe cards (other bakers' recipes: link, don't copy) ---- */
+.credit-card__credit {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-soft);
+}
+
+.credit-card__note {
+  margin: 0.2rem 0 0.4rem;
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  line-height: 1.3;
+  color: var(--pink-text);
+}
+
+/* Cece's own photo on a credited card */
+.credit-card__photo {
+  margin: 0.3rem 0;
+  --photo-tilt: 2deg;
+}
+
+.credit-card__photo .photo__frame {
+  --photo-ratio: 4 / 3;
+}
+
+/* Small tag pills */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-list li {
+  padding: 0.15rem 0.65rem;
+  font-size: 0.8rem;
+  background: var(--bubblegum);
+  border-radius: 999px;
+}
+
+.recipe-card__badge {
+  position: absolute;
+  top: -0.85rem;
+  right: 1rem;
+  z-index: 2;
+  --sticker-tilt: 5deg;
+}
+
+.recipe-card__photo {
+  --photo-tilt: -1.5deg;
+}
+
+.recipe-card__photo .photo__frame {
+  --photo-ratio: 4 / 3;
+}
+
+/* Time · difficulty · servings as little pills */
+.recipe-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.recipe-meta div {
+  padding: 0.2rem 0.7rem;
+  font-size: 0.85rem;
+  background: var(--bubblegum);
+  border-radius: 999px;
+}
+
+.recipe-meta dt {
+  display: inline;
+  font-weight: 800;
+}
+
+.recipe-meta dt::after {
+  content: ": ";
+}
+
+.recipe-meta dd {
+  display: inline;
+  margin: 0;
+}
+
+.recipe-card__group {
+  margin: 0.3rem 0 0;
+  font-weight: 800;
+}
+
+/* Numbered steps in pink circles. counter-reset / counter-increment
+   make CSS count the steps for us. */
+.recipe-steps {
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.recipe-steps li {
+  position: relative;
+  margin-bottom: 0.6rem;
+  padding-left: 2.2rem;
+  counter-increment: step;
+}
+
+.recipe-steps li::before {
+  content: counter(step);
+  position: absolute;
+  top: 0.1rem;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  color: var(--on-hot-pink);
+  background: var(--hot-pink);
+  border-radius: 50%;
+}
+
+/* ---- Info card (lab interests) with a doodle icon ---- */
+.info-card__icon {
+  position: absolute;
+  top: -1rem;
+  right: -0.6rem;
+  width: 2.8rem;
+  rotate: 10deg;
+}
+
+.info-card__dek {
+  margin: 0;
+  font-family: var(--font-headline);
+  color: var(--text-soft);
+}
+
+/* ---- Course card: an index card with a thick pink top edge ---- */
+.course-card {
+  border-top: 10px solid var(--hot-pink);
+}
+
+.course-card__number {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--pink-text);
+}
+
+/* ---- Label : value lists (book details, cat stats) ---- */
+.stat-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+}
+
+.stat-list div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px dashed var(--hot-pink);
+}
+
+.stat-list dt {
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+}
+
+.stat-list dd {
+  margin: 0;
+}
+
+/* ---- Numbered fact cards (ladybug facts) ---- */
+.fact-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1.5rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: fact;
+}
+
+.fact-list li {
+  position: relative;
+  padding: 1.9rem 1.1rem 1.1rem;
+  background: var(--paper);
+  box-shadow: 4px 5px 0 var(--hot-pink);
+  counter-increment: fact;
+}
+
+/* "01", "02"... on a red sticker */
+.fact-list li::before {
+  content: counter(fact, decimal-leading-zero);
+  position: absolute;
+  top: -0.7rem;
+  left: 0.9rem;
+  padding: 0.2rem 0.6rem;
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  color: var(--on-red);
+  background: var(--red);
+  border: 2px solid #FFFFFF;
+  border-radius: 999px;
+  rotate: -6deg;
+}
+
+.fact-list strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-family: var(--font-headline);
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+
+/* =================================================================
+   10. BADGES, BUTTONS AND SMALL LABELS
+   ================================================================= */
+
+.badge {
+  display: inline-block;
+  margin: 0;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 2px solid #FFFFFF;
+  border-radius: 999px;
+  box-shadow: 0 2px 0 var(--shadow);
+}
+
+.badge--on-sale {
+  color: var(--on-red);
+  background: var(--red);
+}
+
+.badge--not-now {
+  color: #1F0A16;
+  background: #C9CDD6;
+}
+
+.badge--status {
+  color: var(--on-hot-pink);
+  background: var(--hot-pink);
+}
+
+/* A button that isn't a real link yet (e.g. pre-order "coming soon") */
+.bubble-button.is-disabled {
+  color: var(--text-soft);
+  background: var(--paper);
+  border: 2px dashed var(--hot-pink);
+  box-shadow: none;
+  cursor: default;
+}
+
+.bubble-button.is-disabled:hover {
+  translate: none;
+}
+
+/* "Last updated" rubber stamp (Sale Alert) */
+.updated-stamp {
+  display: inline-block;
+  margin: 0 0 1.5rem;
+  padding: 0.4rem 0.9rem;
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+  background: var(--strip-bg);
+  border: 2px solid var(--pink-text);
+  rotate: -3deg;
+}
+
+
+/* =================================================================
+   11. WIDER SCREENS
+   ================================================================= */
+@media (min-width: 760px) {
+  /* Header: text on the left, photo on the right */
+  .spread__header {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    padding: 2.4rem 2.6rem;
+  }
+
+  /* A header without a photo keeps one column */
+  .spread__header--no-photo {
+    grid-template-columns: 1fr;
+  }
+
+  .two-col {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  }
+
+  /* Photo on the LEFT instead */
+  .two-col--photo-left {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  }
+
+  /* Cece's recipe: ingredients | steps */
+  .recipe-feature {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    padding: 2rem 2.2rem;
+  }
+}
+
+
+/* =================================================================
+   12. CALM PAGES (Mind Matters)
+   -----------------------------------------------------------------
+   <body class="page--calm">: the same magazine, in a softer voice.
+   Rounded corners and gentle shadows instead of hard pink offsets,
+   nothing tilted, and lilac accents. (main.js also skips the ladybug.)
+   ================================================================= */
+
+.page--calm .spread__header,
+.page--calm .panel {
+  border-radius: 1rem;
+  box-shadow: 0 8px 26px var(--shadow);
+}
+
+.page--calm .spread__header {
+  border-top: 6px solid var(--calm-edge);
+}
+
+/* Video thumbnails: straight, rounded, widescreen (16:9) */
+.project-thumb {
+  overflow: hidden;
+  border-radius: 0.7rem;
+}
+
+.project-thumb .photo__frame {
+  --photo-ratio: 16 / 9;
+}
+
+/* Cece's introduction, a little larger and softer */
+.mind-intro {
+  margin-top: 2rem;
+}
+
+.mind-intro p {
+  margin: 0;
+  font-family: var(--font-headline);
+  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.3rem);
+  line-height: 1.6;
+}
+
+.project-publisher {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+/* A small pull quote inside a card */
+.card-quote {
+  margin: 0.3rem 0 0.5rem;
+  padding: 0.2rem 0 0.2rem 1rem;
+  border-left: 4px solid var(--calm-edge);
+}
+
+.card-quote p {
+  font-family: var(--font-headline);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* The support box at the end of the page */
+.support-box {
+  padding: 1.5rem 1.6rem;
+  background: var(--calm-bg);
+  border: 2px solid var(--calm-edge);
+  border-radius: 1rem;
+}
+
+.support-box h2 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+}
+
+.support-box p {
+  max-width: 65ch;
+}
+
+.support-list {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.support-list a,
+.support-box__urgent a {
+  font-weight: 800;
+}
+
+.support-box__urgent {
+  margin-bottom: 0;
+  font-weight: 700;
+}

@@ -3,6 +3,7 @@
    Small bits of behaviour shared by every page:
      1. "Photo coming soon" placeholders
      2. The wandering ladybug (and its pause button)
+     3. The "Contents" button on section pages (phones)
 
    Loaded with "defer", so it runs after the whole HTML has been read.
    ================================================================= */
@@ -12,7 +13,7 @@
    1. PHOTO PLACEHOLDERS
    -----------------------------------------------------------------
    Every photo is already a real <img> pointing at its final file name
-   (e.g. images/cover-cece.jpg). If that file isn't in images/ yet, the
+   (e.g. images/ladybug.jpg). If that file isn't in images/ yet, the
    browser can't load it, so we mark its frame as "is-missing" and the CSS
    draws a "photo coming soon" placeholder instead.
    Add the real photo later and it simply appears: no code changes.
@@ -176,9 +177,13 @@ function resumeLadybug() {
 function setUpLadybug() {
   const button = document.querySelector('.ladybug-toggle');
 
-  // Respect "reduce motion": no wandering ladybug, and no button for it.
+  // No wandering ladybug (and no button for it) when:
+  // - the visitor asked their device to "reduce motion", or
+  // - the page is a calm one (<body class="page--calm">, Mind Matters),
+  //   where a bug crawling over the text would feel out of place.
   const prefersLessMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersLessMotion) {
+  const isCalmPage = document.body.classList.contains('page--calm');
+  if (prefersLessMotion || isCalmPage) {
     if (button) {
       button.hidden = true;
     }
@@ -214,7 +219,45 @@ function setUpLadybug() {
 
 
 /* =================================================================
+   3. THE "CONTENTS" BUTTON (section pages, phones only)
+   -----------------------------------------------------------------
+   On a phone the Contents list would take up half the screen, so it
+   folds away behind a button. Without JavaScript the button stays hidden
+   and the list is simply always visible, so nobody gets stuck.
+   (The CSS in spread.css decides it's "phones only".)
+   ================================================================= */
+
+function setUpContentsMenu() {
+  const header = document.querySelector('.site-header');
+  const button = document.querySelector('.contents-toggle');
+  if (!header || !button) {
+    return;                        // the cover has no Contents button
+  }
+
+  // Tell the CSS that JavaScript is running, so it can fold the list away.
+  header.classList.add('has-menu-button');
+
+  button.addEventListener('click', () => {
+    const isOpen = button.getAttribute('aria-expanded') === 'true';
+    // aria-expanded tells screen readers whether the list is open
+    button.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    header.classList.toggle('menu-open', !isOpen);
+  });
+
+  // Pressing Escape closes an open list and puts focus back on the button.
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && header.classList.contains('menu-open')) {
+      button.setAttribute('aria-expanded', 'false');
+      header.classList.remove('menu-open');
+      button.focus();
+    }
+  });
+}
+
+
+/* =================================================================
    START EVERYTHING
    ================================================================= */
 setUpPhotoPlaceholders();
 setUpLadybug();
+setUpContentsMenu();

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cat of the Month · CECE</title>
+  <meta name="description" content="Meet this month's cover cat: photos and stories.">
+  <link rel="icon" href="images/decor/ladybug.svg" type="image/svg+xml">
+
+  <!-- (Same <head> as every section page: see writing.html for the notes) -->
+  <script src="js/theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fredoka:wght@300..700&family=Gochi+Hand&family=Nunito:ital,wght@0,400..800;1,400..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/spread.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to the story</a>
+
+  <!-- ===== SHARED HEADER (aria-current="page" is on "Cat of the Month") ===== -->
+  <header class="site-header">
+    <a class="site-header__logo chrome-text" href="index.html">CECE<span class="sr-only">, back to the cover</span></a>
+    <p class="site-header__issue">Issue 01 · The Stacked Life Issue</p>
+    <button class="contents-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Contents</button>
+    <div class="site-header__controls">
+      <button class="ladybug-toggle" type="button" aria-pressed="true" title="Pause or wake up the wandering ladybug">
+        <span class="sr-only">Wandering ladybug</span>
+      </button>
+      <button class="theme-switch" type="button" role="switch" aria-checked="false">
+        <span class="theme-switch__track" aria-hidden="true"><span>☀</span><span>☾</span><span class="theme-switch__knob"></span></span>
+        <span class="theme-switch__text">Midnight Issue</span>
+      </button>
+    </div>
+    <nav class="site-nav" id="site-nav" aria-label="Contents">
+      <p class="site-nav__label" aria-hidden="true">Contents</p>
+      <ul class="site-nav__list">
+        <li><a href="writing.html">The Writer's Room</a></li>
+        <li><a href="kitchen.html">Cece's Kitchen</a></li>
+        <li><a href="cinema.html">Movie Night</a></li>
+        <li><a href="lab.html">Legally Blonde Labs</a></li>
+        <li><a href="notes.html">Study Hall</a></li>
+        <li><a href="cats.html" aria-current="page">Cat of the Month</a></li>
+        <li><a href="kitty.html">Kitty &amp; Ladybugs</a></li>
+        <li><a href="sales.html">Sale Alert</a></li>
+        <li><a href="mind.html">Mind Matters</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="spread">
+
+    <!-- ===== SPREAD HEADER ===== -->
+    <header class="spread__header">
+      <div>
+        <span class="sticker spread__sticker">Cover cat</span>
+        <p class="kicker">Cat of the Month</p>
+        <h1 class="spread__title">Meet this month's cover cat</h1>
+        <p class="spread__dek">Naps, zoomies and the occasional stare-down from under the bed.</p>
+        <p class="byline">by <strong>Cece</strong></p>
+      </div>
+
+      <figure class="photo polaroid taped spread__hero">
+        <div class="photo__frame">
+          <img src="images/cats-1.jpg" alt="A tabby cat fast asleep, stretched out on a grey bed">
+        </div>
+        <figcaption class="photo__caption">cover cat, mid-nap</figcaption>
+      </figure>
+
+      <img class="doodle spread__doodle--a bob" src="images/decor/heart.svg" alt="">
+      <img class="doodle spread__doodle--b" src="images/decor/bow.svg" alt="">
+    </header>
+
+    <!-- =========================================================
+         01 · THE INTERVIEW: cat stats + story
+         ========================================================= -->
+    <section class="spread__section" aria-labelledby="interview-heading">
+      <h2 class="section-heading" id="interview-heading"><span class="section-heading__number">01</span> The interview</h2>
+
+      <div class="two-col">
+        <!-- ✎ CECE: replace this box with the story, as <p> paragraphs -->
+        <div class="slot slot--tall">
+          <p class="slot__label">The cat's story</p>
+          <p class="slot__hint">how you met, their personality, the funniest thing they've ever done</p>
+        </div>
+
+        <!-- Cat stats: ✎ CECE: fill in each value -->
+        <div class="panel">
+          <h3>Cat stats</h3>
+          <dl class="stat-list">
+            <div><dt>Name</dt><dd><span class="slot-inline">Name</span></dd></div>
+            <div><dt>Age</dt><dd><span class="slot-inline">Age</span></dd></div>
+            <div><dt>Best nap spot</dt><dd><span class="slot-inline">Nap spot</span></dd></div>
+            <div><dt>Favourite toy</dt><dd><span class="slot-inline">Toy</span></dd></div>
+            <div><dt>Secret talent</dt><dd><span class="slot-inline">Talent</span></dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         02 · THE PHOTO SHOOT
+         To add a photo: copy a <figure> ... </figure> block, and name
+         the file cats-4.jpg, cats-5.jpg ... in images/.
+         ========================================================= -->
+    <section class="spread__section" aria-labelledby="gallery-heading">
+      <h2 class="section-heading" id="gallery-heading"><span class="section-heading__number">02</span> The photo shoot</h2>
+
+      <div class="photo-row">
+        <figure class="photo polaroid taped">
+          <div class="photo__frame">
+            <img src="images/cats-2.jpg" alt="A tabby cat curled up on a rug in purple light">
+          </div>
+          <figcaption class="photo__caption">purple hour</figcaption>
+        </figure>
+
+        <figure class="photo polaroid">
+          <div class="photo__frame">
+            <img src="images/cats-3.jpg" alt="Two cats peeking out from under a bed">
+          </div>
+          <figcaption class="photo__caption">the under-bed council</figcaption>
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== SHARED FOOTER ===== -->
+  <footer class="site-footer">
+    <hr class="ladybug-divider">
+    <a class="site-footer__logo chrome-text" href="index.html">CECE<span class="sr-only">, back to the cover</span></a>
+    <p class="site-footer__issue">Issue 01 · November 2026 · The Stacked Life Issue</p>
+    <p>Made by Cece with plain HTML, CSS &amp; JavaScript.</p>
+    <p><a href="index.html">← Back to the cover</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Legally Blonde Labs · CECE</title>
+  <meta name="description" content="Cece's research interests and projects: engineering, mechanical engineering, biorobotics and microbiorobotics.">
+  <link rel="icon" href="images/decor/ladybug.svg" type="image/svg+xml">
+
+  <!-- (Same <head> as every section page: see writing.html for the notes) -->
+  <script src="js/theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fredoka:wght@300..700&family=Gochi+Hand&family=Nunito:ital,wght@0,400..800;1,400..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/spread.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to the story</a>
+
+  <!-- ===== SHARED HEADER (aria-current="page" is on "Legally Blonde Labs") ===== -->
+  <header class="site-header">
+    <a class="site-header__logo chrome-text" href="index.html">CECE<span class="sr-only">, back to the cover</span></a>
+    <p class="site-header__issue">Issue 01 · The Stacked Life Issue</p>
+    <button class="contents-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Contents</button>
+    <div class="site-header__controls">
+      <button class="ladybug-toggle" type="button" aria-pressed="true" title="Pause or wake up the wandering ladybug">
+        <span class="sr-only">Wandering ladybug</span>
+      </button>
+      <button class="theme-switch" type="button" role="switch" aria-checked="false">
+        <span class="theme-switch__track" aria-hidden="true"><span>☀</span><span>☾</span><span class="theme-switch__knob"></span></span>
+        <span class="theme-switch__text">Midnight Issue</span>
+      </button>
+    </div>
+    <nav class="site-nav" id="site-nav" aria-label="Contents">
+      <p class="site-nav__label" aria-hidden="true">Contents</p>
+      <ul class="site-nav__list">
+        <li><a href="writing.html">The Writer's Room</a></li>
+        <li><a href="kitchen.html">Cece's Kitchen</a></li>
+        <li><a href="cinema.html">Movie Night</a></li>
+        <li><a href="lab.html" aria-current="page">Legally Blonde Labs</a></li>
+        <li><a href="notes.html">Study Hall</a></li>
+        <li><a href="cats.html">Cat of the Month</a></li>
+        <li><a href="kitty.html">Kitty &amp; Ladybugs</a></li>
+        <li><a href="sales.html">Sale Alert</a></li>
+        <li><a href="mind.html">Mind Matters</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="spread">
+
+    <!-- ===== SPREAD HEADER ===== -->
+    <header class="spread__header">
+      <div>
+        <span class="sticker sticker--chrome spread__sticker">New!</span>
+        <p class="kicker">Legally Blonde Labs</p>
+        <h1 class="spread__title">Tiny robots, big dreams</h1>
+        <p class="spread__dek">Engineering, mechanical engineering, biorobotics and microbiorobotics: what Cece is curious about, and what she's building.</p>
+        <p class="byline">by <strong>Cece</strong></p>
+      </div>
+
+      <figure class="photo polaroid taped spread__hero">
+        <div class="photo__frame">
+          <img src="images/lab-1.jpg" alt="A dig-it-yourself fossil kit: a little skeleton in broken grey plaster next to a small hammer">
+        </div>
+        <figcaption class="photo__caption">field work (sort of)</figcaption>
+      </figure>
+
+      <img class="doodle spread__doodle--a spin" src="images/decor/gear.svg" alt="">
+      <img class="doodle spread__doodle--b bob" src="images/decor/beaker.svg" alt="">
+    </header>
+
+    <!-- =========================================================
+         01 · RESEARCH INTERESTS
+         Each card: the field, a one-line description, and a slot for
+         YOUR words about why it pulls you in.
+         ========================================================= -->
+    <section class="spread__section" aria-labelledby="interests-heading">
+      <h2 class="section-heading" id="interests-heading"><span class="section-heading__number">01</span> Research interests</h2>
+
+      <div class="card-grid">
+        <article class="card panel">
+          <img class="info-card__icon" src="images/decor/sparkle.svg" alt="">
+          <h3>Engineering</h3>
+          <p class="info-card__dek">Using maths and science to design things that solve real problems.</p>
+          <div class="slot">
+            <p class="slot__label">Why it pulls me in</p>
+            <p class="slot__hint">a few sentences in your own words</p>
+          </div>
+        </article>
+
+        <article class="card panel">
+          <img class="info-card__icon" src="images/decor/gear.svg" alt="">
+          <h3>Mechanical engineering</h3>
+          <p class="info-card__dek">How things move, carry loads and turn energy into motion.</p>
+          <div class="slot">
+            <p class="slot__label">Why it pulls me in</p>
+            <p class="slot__hint">a few sentences in your own words</p>
+          </div>
+        </article>
+
+        <article class="card panel">
+          <img class="info-card__icon" src="images/decor/ladybug.svg" alt="">
+          <h3>Biorobotics</h3>
+          <p class="info-card__dek">Robots inspired by living things, and robots built to work with living things.</p>
+          <div class="slot">
+            <p class="slot__label">Why it pulls me in</p>
+            <p class="slot__hint">a few sentences in your own words</p>
+          </div>
+        </article>
+
+        <article class="card panel">
+          <img class="info-card__icon" src="images/decor/beaker.svg" alt="">
+          <h3>Microbiorobotics</h3>
+          <p class="info-card__dek">Robots so tiny they work at the scale of cells, sometimes powered by living cells themselves.</p>
+          <div class="slot">
+            <p class="slot__label">Why it pulls me in</p>
+            <p class="slot__hint">a few sentences in your own words</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ✎ CECE: a line about why you love this field; then delete the <footer> and "is-slot" -->
+    <blockquote class="pull-quote is-slot">
+      <p>A line about why you love building things goes here.</p>
+      <footer>pull quote</footer>
+    </blockquote>
+
+    <!-- =========================================================
+         02 · PROJECTS
+         One card per project. Change the badge text to "Done" or
+         "Planned" as you go. To add one, copy a whole <article>.
+         ========================================================= -->
+    <section class="spread__section" aria-labelledby="projects-heading">
+      <h2 class="section-heading" id="projects-heading"><span class="section-heading__number">02</span> Projects</h2>
+
+      <div class="card-grid">
+        <article class="card panel taped">
+          <p class="kicker">Project 01</p>
+          <h3><span class="slot-inline">Project name</span></h3>
+          <p class="badge badge--status">In progress</p>
+          <div class="slot">
+            <p class="slot__label">About the project</p>
+            <p class="slot__hint">what it is, what you built, and what you learned</p>
+          </div>
+        </article>
+
+        <article class="card panel">
+          <p class="kicker">Project 02</p>
+          <h3><span class="slot-inline">Project name</span></h3>
+          <p class="badge badge--status">Planned</p>
+          <div class="slot">
+            <p class="slot__label">About the project</p>
+            <p class="slot__hint">what it is, what you built, and what you learned</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== SHARED FOOTER ===== -->
+  <footer class="site-footer">
+    <hr class="ladybug-divider">
+    <a class="site-footer__logo chrome-text" href="index.html">CECE<span class="sr-only">, back to the cover</span></a>
+    <p class="site-footer__issue">Issue 01 · November 2026 · The Stacked Life Issue</p>
+    <p>Made by Cece with plain HTML, CSS &amp; JavaScript.</p>
+    <p><a href="index.html">← Back to the cover</a></p>
+  </footer>
+</body>
+</html>

@@ -33,10 +33,13 @@
 :root {
   /* ---- Fonts (loaded from Google Fonts in the HTML <head>).
          After the first name come "fallbacks", used if it fails to load. ---- */
-  --font-masthead: "Bodoni Moda", "Bodoni 72", Didot, Georgia, serif;  /* fashion-magazine serif */
-  --font-y2k: "Audiowide", "Arial Black", sans-serif;                  /* techno / Y2K display */
-  --font-hand: "Caveat", "Segoe Print", "Comic Sans MS", cursive;      /* handwritten notes */
-  --font-body: "Nunito", "Segoe UI", system-ui, sans-serif;            /* easy reading */
+  --font-masthead: "Bagel Fat One", "Arial Rounded MT Bold", "Arial Black", sans-serif; /* puffy bubble letters: masthead + big titles */
+  --font-headline: "Fredoka", "Arial Rounded MT Bold", "Segoe UI", sans-serif;          /* soft, rounded: headlines */
+  --font-label: "Fredoka", "Arial Rounded MT Bold", "Segoe UI", sans-serif;             /* small labels, stickers, buttons */
+  --font-hand: "Gochi Hand", "Comic Sans MS", cursive;                                   /* handwritten notes */
+  --font-body: "Nunito", "Segoe UI", system-ui, sans-serif;                              /* easy reading */
+  /* Note: Bagel Fat One only comes in one weight, so never make it
+     bold: browsers would fake the bold and the letters look smudged. */
 
   /* ---- LIGHT MODE ("daytime issue") ---- */
   --bg: #FFE4EF;           /* baby pink page background */
@@ -58,6 +61,9 @@
   --masthead-shadow: drop-shadow(5px 5px 0 #FF2E93);
 
   --tape: rgba(255, 158, 207, 0.7);    /* see-through pink tape */
+  --strip-bg: rgba(255, 244, 249, 0.92); /* see-through strip behind small text (header, footer, cover) */
+  --calm-bg: #F1E8FF;      /* soft lilac for the calmer Mind Matters pieces */
+  --calm-edge: #B9A8FF;
   --grid-line: rgba(255, 46, 147, 0.09);
   --shadow: rgba(122, 20, 72, 0.25);
   --focus: #1F0A16;                    /* keyboard focus outline */
@@ -86,6 +92,9 @@
   --masthead-shadow: drop-shadow(0 0 14px rgba(255, 79, 184, 0.75));
 
   --tape: rgba(255, 79, 184, 0.45);
+  --strip-bg: rgba(23, 10, 24, 0.86);
+  --calm-bg: #2B1C3D;
+  --calm-edge: #8C7BD6;
   --grid-line: rgba(255, 79, 184, 0.08);
   --shadow: rgba(0, 0, 0, 0.55);
   --focus: #FBE9F3;
@@ -144,9 +153,18 @@ img {
   height: auto;
 }
 
-h1, h2, h3 {
+/* Big headings in puffy Bagel Fat One (normal weight: it has no bold) */
+h1, h2 {
   font-family: var(--font-masthead);
+  font-weight: normal;
   line-height: 1.1;
+}
+
+/* Smaller headings in rounded Fredoka */
+h3 {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  line-height: 1.15;
 }
 
 a {
@@ -216,7 +234,7 @@ a:hover {
 
 /* Kicker = the small label above a magazine headline. */
 .kicker {
-  font-family: var(--font-y2k);
+  font-family: var(--font-label);
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -283,7 +301,7 @@ a:hover {
 .sticker {
   display: inline-block;
   padding: 0.35em 0.8em;
-  font-family: var(--font-y2k);
+  font-family: var(--font-label);
   font-size: 0.78rem;
   line-height: 1.1;
   letter-spacing: 0.06em;
@@ -502,7 +520,7 @@ a:hover {
   padding: 1rem;
   white-space: pre-line;
   text-align: center;
-  font-family: var(--font-y2k);
+  font-family: var(--font-label);
   font-size: 0.72rem;
   line-height: 1.9;
   letter-spacing: 0.04em;
@@ -529,7 +547,7 @@ a:hover {
   align-items: center;
   gap: 0.4em;
   padding: 0.6em 1.3em;
-  font-family: var(--font-y2k);
+  font-family: var(--font-label);
   font-size: 0.85rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -559,7 +577,7 @@ a:hover {
   align-items: center;
   gap: 0.5rem;
   padding: 0.25rem;
-  font-family: var(--font-y2k);
+  font-family: var(--font-label);
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -601,6 +619,19 @@ a:hover {
 /* Switched ON (dark mode): slide the knob to the right. */
 .theme-switch[aria-checked="true"] .theme-switch__knob {
   translate: 2.3rem 0;
+}
+
+/* Phones: no room for the words, so hide them visually (same trick as
+   .sr-only). Screen readers still announce "Midnight Issue". */
+@media (max-width: 599px) {
+  .theme-switch__text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
 }
 
 /* ---------- Ladybug pause button ---------- */

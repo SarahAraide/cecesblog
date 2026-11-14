@@ -46,11 +46,16 @@
         <li><a href="kitty.html">Kitty &amp; Ladybugs</a></li>
         <li><a href="sales.html" aria-current="page">Sale Alert</a></li>
         <li><a href="mind.html">Mind Matters</a></li>
+        <li><a href="sudoku.html">Sudoku</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="main" class="spread">
+
+    <!-- Running header across the top, like a printed magazine page:
+         the magazine on the left page, the section on the right. -->
+    <p class="running-head" aria-hidden="true"><span>CECE · Issue 01 · November 2026</span><span>Sale Alert</span></p>
 
     <!-- ===== SPREAD HEADER ===== -->
     <header class="spread__header">
@@ -96,20 +101,12 @@
         <article class="card panel">
           <h3>Bershka</h3>
           <p class="badge badge--not-now">Not now</p>
-          <div class="slot">
-            <p class="slot__label">What I'm eyeing</p>
-            <p class="slot__hint">what's on your wishlist there</p>
-          </div>
           <a class="bubble-button" href="https://www.bershka.com/il/" target="_blank" rel="noopener">Go to the store →<span class="sr-only"> (Bershka Israel, opens in a new tab)</span></a>
         </article>
 
         <article class="card panel">
           <h3>Mango</h3>
           <p class="badge badge--not-now">Not now</p>
-          <div class="slot">
-            <p class="slot__label">What I'm eyeing</p>
-            <p class="slot__hint">what's on your wishlist there</p>
-          </div>
           <a class="bubble-button" href="https://shop.mango.com/il/en" target="_blank" rel="noopener">Go to the store →<span class="sr-only"> (Mango Israel, opens in a new tab)</span></a>
         </article>
 
@@ -117,10 +114,6 @@
         <article class="card panel">
           <h3>ASOS</h3>
           <p class="badge badge--on-sale">On sale</p>
-          <div class="slot">
-            <p class="slot__label">What I'm eyeing</p>
-            <p class="slot__hint">what's on your wishlist there, or how big the sale is</p>
-          </div>
           <a class="bubble-button" href="https://www.asos.com/women/sale/cat/" target="_blank" rel="noopener">See the sale →<span class="sr-only"> (ASOS women's sale, opens in a new tab)</span></a>
         </article>
 
@@ -128,24 +121,19 @@
         <article class="card panel">
           <h3>H&amp;M</h3>
           <p class="badge badge--not-now">Not now</p>
-          <div class="slot">
-            <p class="slot__label">What I'm eyeing</p>
-            <p class="slot__hint">what's on your wishlist there</p>
-          </div>
           <a class="bubble-button" href="https://www.hm.com/" target="_blank" rel="noopener">Go to the store →<span class="sr-only"> (H&amp;M, opens in a new tab)</span></a>
         </article>
 
         <article class="card panel">
           <h3>Zara</h3>
           <p class="badge badge--not-now">Not now</p>
-          <div class="slot">
-            <p class="slot__label">What I'm eyeing</p>
-            <p class="slot__hint">what's on your wishlist there</p>
-          </div>
           <a class="bubble-button" href="https://www.zara.com/il/" target="_blank" rel="noopener">Go to the store →<span class="sr-only"> (Zara Israel, opens in a new tab)</span></a>
         </article>
       </div>
     </section>
+
+    <!-- Folios: the page numbers at the bottom corners of the spread -->
+    <p class="folio" aria-hidden="true"><span>p.09</span><span>CECE · The Stacked Life Issue</span></p>
 
   </main>
 
@@ -160,7 +148,7 @@
       <span class="page-flip__label"><span aria-hidden="true">←</span> Previous page</span>
       <span class="page-flip__title">Kitty &amp; Ladybugs</span>
     </a>
-    <p class="page-flip__folio">p.09 <span>of 10</span></p>
+    <p class="page-flip__folio">p.09 <span>of 11</span></p>
     <a class="page-flip__link page-flip__link--next" href="mind.html" rel="next">
       <span class="page-flip__label">Next page <span aria-hidden="true">→</span></span>
       <span class="page-flip__title">Mind Matters</span>

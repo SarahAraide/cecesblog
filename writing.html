@@ -57,11 +57,16 @@
         <li><a href="kitty.html">Kitty &amp; Ladybugs</a></li>
         <li><a href="sales.html">Sale Alert</a></li>
         <li><a href="mind.html">Mind Matters</a></li>
+        <li><a href="sudoku.html">Sudoku</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="main" class="spread">
+
+    <!-- Running header across the top, like a printed magazine page:
+         the magazine on the left page, the section on the right. -->
+    <p class="running-head" aria-hidden="true"><span>CECE · Issue 01 · November 2026</span><span>The Writer's Room</span></p>
 
     <!-- =========================================================
          SPREAD HEADER: kicker, headline, subheading, byline, photo
@@ -133,7 +138,7 @@
           </dl>
 
           <!-- About the book + dedication: copied exactly from the book's page on saraharaide.com -->
-          <p class="book-blurb"><cite>Cece Once Said</cite> is a debut collection of 83 poems, written from the other side of the darkest years of a young life. Moving through seven sections, from roots and inheritance, through confinement, love and ruin, descent, grief and loss, to grace and return, Cece writes about depression, self-harm, family, first love and grief with unflinching honesty and a stubborn search for light.</p>
+          <p class="book-blurb drop-cap"><cite>Cece Once Said</cite> is a debut collection of 83 poems, written from the other side of the darkest years of a young life. Moving through seven sections, from roots and inheritance, through confinement, love and ruin, descent, grief and loss, to grace and return, Cece writes about depression, self-harm, family, first love and grief with unflinching honesty and a stubborn search for light.</p>
           <p class="book-blurb">Written between childhood notebooks and engineering lectures, these poems hold softness and fire side by side: the tenderness of someone who sees good in people, and the ache of someone who has carried more than she should. It is a book for anyone fighting an invisible battle, and for anyone who loves someone who is.</p>
 
           <p class="book-dedication"><span class="kicker">Dedication</span> To those with an invisible battle, you are very much seen.</p>
@@ -276,8 +281,10 @@
       <h2 class="section-heading" id="about-heading"><span class="section-heading__number">04</span> About Cece</h2>
 
       <div class="panel">
-        <p>Cece is the pen name of Sarah Araide, a poet and mechanical engineering student at the Technion. She was born in Maghar and discovered writing at the age of seven, turning it into a way of understanding herself and the world around her.</p>
+        <div class="columns-2">
+        <p class="drop-cap">Cece is the pen name of Sarah Araide, a poet and mechanical engineering student at the Technion. She was born in Maghar and discovered writing at the age of seven, turning it into a way of understanding herself and the world around her.</p>
         <p>Her poetry carries both softness and fire. She writes about pain, love, grief, identity and survival, and about the complicated act of returning to oneself. Poetry is where she gives shape to what cannot be solved by logic alone. <cite>Cece Once Said</cite> is her first collection.</p>
+        </div>
         <ul class="tag-list social-links">
           <li><a href="https://www.instagram.com/cece_once_said" target="_blank" rel="noopener">Instagram<span class="sr-only"> (opens in a new tab)</span></a></li>
           <li><a href="https://www.tiktok.com/@cece_once_said" target="_blank" rel="noopener">TikTok<span class="sr-only"> (opens in a new tab)</span></a></li>
@@ -286,6 +293,9 @@
         </ul>
       </div>
     </section>
+
+    <!-- Folios: the page numbers at the bottom corners of the spread -->
+    <p class="folio" aria-hidden="true"><span>p.02</span><span>CECE · The Stacked Life Issue</span></p>
 
   </main>
 
@@ -300,7 +310,7 @@
       <span class="page-flip__label"><span aria-hidden="true">←</span> Previous page</span>
       <span class="page-flip__title">The cover</span>
     </a>
-    <p class="page-flip__folio">p.02 <span>of 10</span></p>
+    <p class="page-flip__folio">p.02 <span>of 11</span></p>
     <a class="page-flip__link page-flip__link--next" href="kitchen.html" rel="next">
       <span class="page-flip__label">Next page <span aria-hidden="true">→</span></span>
       <span class="page-flip__title">Cece's Kitchen</span>

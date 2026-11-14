@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* =================================================================
    CECE: spread.css
-   Shared by the 8 SECTION PAGES (the magazine "spreads").
+   Shared by the 10 SECTION PAGES (the magazine "spreads").
    The cover uses cover.css instead.
 
    Every section page is built from the same parts:
@@ -23,6 +23,10 @@
     12. Calm pages (Mind Matters)
     13. Flip bar: previous page · page number · next page
     14. Study Hall: the notebook shelf
+    15. Magazine page touches: running header, folios, drop caps,
+        columns, the open-magazine spread on laptops
+    16. Video previews (Mind Matters)
+    17. The puzzle page: sudoku
    ================================================================= */
 
 
@@ -1592,4 +1596,376 @@
   .notebook__page--right {
     border-left: 3px double var(--nb-dark);
   }
+}
+
+
+/* =================================================================
+   15. MAGAZINE PAGE TOUCHES
+   -----------------------------------------------------------------
+   The little things that make a page look printed:
+   running header, folios (page numbers), drop caps, text in columns,
+   and on laptops, the page laid out as an open magazine.
+   ================================================================= */
+
+/* Colours for the open-magazine look (light, then Midnight Issue) */
+:root {
+  --spread-paper: #FFF7FB;               /* the magazine's paper */
+  --page-edge: #F6D5E5;                  /* the stacked pages underneath */
+  --page-edge-2: #EBBFD5;
+  --fold: rgba(122, 20, 72, 0.17);       /* shadow in the centre fold */
+}
+
+[data-theme="dark"] {
+  --spread-paper: #200E24;
+  --page-edge: #321838;
+  --page-edge-2: #43204A;
+  --fold: rgba(0, 0, 0, 0.5);
+}
+
+/* Running header: the small line across the top of a printed page,
+   magazine name on the left page, section name on the right page.
+   (aria-hidden in the HTML: screen readers already know where they are.) */
+.running-head,
+.folio {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.2rem 1rem;
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.running-head {
+  margin-bottom: 1.75rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--hot-pink);
+}
+
+/* Folios: the page number in the bottom corner */
+.folio {
+  align-items: baseline;
+  margin-top: 3.5rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--hot-pink);
+}
+
+.folio > span:first-child {
+  font-family: var(--font-masthead);
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  color: var(--pink-text);
+}
+
+/* Drop cap: a big first letter, 3 lines tall, like the first paragraph
+   of a magazine story. ::first-letter picks the paragraph's first letter;
+   float: left lets the lines wrap around it. Big text only needs a 3:1
+   contrast, which hot pink has. */
+.drop-cap::first-letter {
+  float: left;
+  margin: 0.1em 0.1em 0 0;
+  font-family: var(--font-masthead);
+  font-size: 3.5em;
+  font-weight: normal;
+  line-height: 0.78;
+  color: var(--hot-pink);
+  text-shadow: 3px 3px 0 var(--bubblegum);
+}
+
+/* Text in columns, like a magazine story. "17rem 2" = at most 2 columns,
+   each at least 17rem wide: on a phone there's only room for one, so it
+   stays one column there, all by itself (no @media rule needed). */
+.columns-2 {
+  columns: 17rem 2;
+  column-gap: 2.2rem;
+  column-rule: 1px dashed var(--bubblegum);
+}
+
+/* no 65ch limit inside columns: each column is already a nice width */
+.panel .columns-2,
+.columns-2 p {
+  max-width: none;
+}
+
+/* the first paragraph in the second column shouldn't start with a gap */
+.columns-2 > p:first-child {
+  margin-top: 0;
+}
+
+/* LAPTOPS: each page is an open magazine lying on the graph-paper desk.
+   - The paper is a slightly different pink from the desk.
+   - The gradient in the middle is the shadow of the centre fold.
+   - The box-shadows are the edges of the pages stacked underneath
+     (to the left, right and bottom), then the shadow on the desk. */
+@media (min-width: 1000px) {
+  .spread {
+    padding: 1.4rem 3rem 1.6rem;
+    background:
+      linear-gradient(90deg,
+        transparent calc(50% - 3rem),
+        var(--fold) 50%,
+        transparent calc(50% + 3rem)),
+      var(--spread-paper);
+    border-radius: 3px;
+    box-shadow:
+      -4px 4px 0 var(--page-edge),
+      4px 4px 0 var(--page-edge),
+      -8px 8px 0 var(--page-edge-2),
+      8px 8px 0 var(--page-edge-2),
+      0 26px 50px var(--shadow);
+  }
+
+  /* left page | right page: the running header and folios split
+     across the fold, like a real spread */
+  .running-head > span,
+  .folio > span {
+    flex: 1;
+  }
+
+  .running-head > span:last-child,
+  .folio > span:last-child {
+    text-align: right;
+  }
+
+  .folio {
+    margin-top: 4rem;
+  }
+}
+
+
+/* =================================================================
+   16. VIDEO PREVIEWS (Mind Matters)
+   The official Instagram and Facebook players, inside the cards.
+   ================================================================= */
+
+.video-embed {
+  overflow: hidden;                      /* rounded corners cut the player too */
+  margin: 0 0 1rem;
+  background: var(--calm-bg);
+  border: 2px solid var(--calm-edge);
+  border-radius: 0.7rem;
+}
+
+.video-embed iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+/* Facebook: a normal wide video, 16 wide by 9 high */
+.video-embed--facebook iframe {
+  aspect-ratio: 16 / 9;
+}
+
+/* Instagram: a tall video. Its player is the account's name bar (about
+   55px) and then the video in a 4:5 box. A "container" lets the iframe
+   use cqw (1% of the box's width): 125cqw = the 4:5 video box. The
+   player's footer is cut off on purpose; the button below the card
+   goes to the post. */
+.video-embed--instagram {
+  container-type: inline-size;
+  width: 100%;                           /* a container needs a width of its own */
+  max-width: 21rem;
+  margin-inline: auto;
+}
+
+.video-embed--instagram iframe {
+  height: calc(125cqw + 55px);
+}
+
+
+/* =================================================================
+   17. THE PUZZLE PAGE: SUDOKU
+   js/sudoku.js builds the 81 boxes as <input>s inside .sudoku-board.
+   ================================================================= */
+
+:root {
+  --sudoku-thin: rgba(122, 20, 72, 0.22);  /* thin lines between boxes */
+  --sudoku-related: #FFF0F7;                /* same row / column / square */
+  --sudoku-same: #FFD0E7;                   /* same number */
+  --sudoku-wrong: #FFE1E1;
+}
+
+[data-theme="dark"] {
+  --sudoku-thin: rgba(255, 79, 184, 0.28);
+  --sudoku-related: #36183C;
+  --sudoku-same: #55204F;
+  --sudoku-wrong: #4A1521;
+}
+
+.sudoku {
+  display: grid;
+  justify-items: center;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+/* Level: Easy · Medium · Hard, as pill-shaped choices */
+.sudoku-level {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.sudoku-level legend {
+  float: left;                          /* lets the legend sit in the row */
+  margin-right: 0.3rem;
+  padding: 0;
+  font-family: var(--font-label);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+}
+
+.sudoku-level label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.85rem;
+  font-family: var(--font-label);
+  font-size: 0.95rem;
+  background: var(--paper);
+  border: 2px solid var(--hot-pink);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* :has() = "a label that has a checked radio inside": fill it pink */
+.sudoku-level label:has(input:checked) {
+  background: var(--sudoku-same);
+}
+
+.sudoku-level input {
+  margin: 0;
+  accent-color: var(--hot-pink);
+}
+
+/* Phones: "Level" on its own line, so the three choices fit in one row */
+@media (max-width: 480px) {
+  .sudoku-level legend {
+    float: none;
+    width: 100%;
+    margin: 0 0 0.4rem;
+  }
+}
+
+/* The grid: 9 equal columns, always a square */
+.sudoku-board {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  width: min(100%, 30rem);
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--paper);
+  border: 3px solid var(--text);
+  border-radius: 0.5rem;
+  box-shadow: 5px 6px 0 var(--hot-pink);
+}
+
+.sudoku-cell {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-headline);
+  font-size: clamp(1.05rem, 4.6vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  color: var(--pink-text);              /* numbers YOU type: pink */
+  caret-color: transparent;             /* no blinking line: the box lights up instead */
+  background: transparent;
+  border: 0;
+  border-right: 1px solid var(--sudoku-thin);
+  border-bottom: 1px solid var(--sudoku-thin);
+  border-radius: 0;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Thick lines around each 3 x 3 square.
+   :nth-child(9n+3) = the 3rd box of every row, (9n+6) = the 6th;
+   boxes 19-27 and 46-54 are the 3rd and 6th rows. */
+.sudoku-cell:nth-child(9n+3),
+.sudoku-cell:nth-child(9n+6) {
+  border-right: 3px solid var(--text);
+}
+
+.sudoku-cell:nth-child(9n) {
+  border-right: 0;
+}
+
+.sudoku-cell:nth-child(n+19):nth-child(-n+27),
+.sudoku-cell:nth-child(n+46):nth-child(-n+54) {
+  border-bottom: 3px solid var(--text);
+}
+
+.sudoku-cell:nth-child(n+73) {
+  border-bottom: 0;
+}
+
+/* The starting numbers: dark and bold, and they can't be changed */
+.sudoku-cell.is-given {
+  font-weight: 700;
+  color: var(--text);
+  cursor: default;
+}
+
+.sudoku-cell.is-related {
+  background: var(--sudoku-related);
+}
+
+.sudoku-cell.is-same {
+  background: var(--sudoku-same);
+}
+
+.sudoku-cell:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
+  background: var(--sudoku-same);
+}
+
+/* "Check my answers": a wrong number is red AND crossed out, so it
+   doesn't depend on seeing colour */
+.sudoku-cell.is-wrong {
+  color: var(--red);
+  text-decoration: line-through 2px;
+  background: var(--sudoku-wrong);
+}
+
+/* "Show the answer": filled-in numbers in grey italics */
+.sudoku-cell.is-revealed {
+  font-style: italic;
+  color: var(--text-soft);
+}
+
+.sudoku-buttons {
+  justify-content: center;
+}
+
+/* A quieter button (white instead of candy pink) for the less-used actions */
+.bubble-button--quiet {
+  color: var(--text);
+  background: var(--paper);
+  border-color: var(--hot-pink);
+  box-shadow: 0 3px 0 var(--shadow);
+}
+
+.sudoku-status {
+  min-height: 1.6em;                    /* keeps space so the page doesn't jump */
+  margin: 0;
+  font-family: var(--font-headline);
+  font-weight: 600;
+  color: var(--pink-text);
 }

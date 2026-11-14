@@ -46,11 +46,16 @@
         <li><a href="kitty.html">Kitty &amp; Ladybugs</a></li>
         <li><a href="sales.html">Sale Alert</a></li>
         <li><a href="mind.html">Mind Matters</a></li>
+        <li><a href="sudoku.html">Sudoku</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="main" class="spread">
+
+    <!-- Running header across the top, like a printed magazine page:
+         the magazine on the left page, the section on the right. -->
+    <p class="running-head" aria-hidden="true"><span>CECE · Issue 01 · November 2026</span><span>Cat of the Month</span></p>
 
     <!-- ===== SPREAD HEADER ===== -->
     <header class="spread__header">
@@ -83,10 +88,12 @@
         <!-- The cat's story, in Cece's own words (only spelling fixed) -->
         <div class="panel">
           <h3>TayTay's story</h3>
-          <p>She was born on 17 April 2023. Her mother was a cat we adopted back in 2022 named Fiona, RIP. Her father went to buy milk and never came back, as I've been told.</p>
+          <div class="columns-2">
+          <p class="drop-cap">She was born on 17 April 2023. Her mother was a cat we adopted back in 2022 named Fiona, RIP. Her father went to buy milk and never came back, as I've been told.</p>
           <p>The resemblance to her mother can be seen in her eyes, but not in her energy: Tay is known as a spirited, energetic cat, and some would say she may have Bengal genes in her. She's a great hunter, as she hunts for fun and brings us her trophies (my own mother doesn't appreciate this gesture, as she cleans up the aftermath).</p>
           <p>She gave birth to Shadow, Rory, Oscar, Jack and Finn. Tay is named after the well-known singer Taylor Swift.</p>
           <p>May she live a fulfilling life, as she fills mine with inspiration to such simplicity.</p>
+          </div>
         </div>
 
         <!-- Cat stats -->
@@ -136,6 +143,9 @@
       </div>
     </section>
 
+    <!-- Folios: the page numbers at the bottom corners of the spread -->
+    <p class="folio" aria-hidden="true"><span>p.07</span><span>CECE · The Stacked Life Issue</span></p>
+
   </main>
 
   <!-- =========================================================
@@ -149,7 +159,7 @@
       <span class="page-flip__label"><span aria-hidden="true">←</span> Previous page</span>
       <span class="page-flip__title">Study Hall</span>
     </a>
-    <p class="page-flip__folio">p.07 <span>of 10</span></p>
+    <p class="page-flip__folio">p.07 <span>of 11</span></p>
     <a class="page-flip__link page-flip__link--next" href="kitty.html" rel="next">
       <span class="page-flip__label">Next page <span aria-hidden="true">→</span></span>
       <span class="page-flip__title">Kitty &amp; Ladybugs</span>

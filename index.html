@@ -99,13 +99,20 @@
          MAIN HEADLINE: torn paper laid over the photo
          ========================================================= -->
     <div class="headline-wrap drop-shadow">
-      <span class="sticker sticker--burst sticker--red headline-burst headline-burst--top" aria-hidden="true">All new!</span>
+      <!-- The red starburst is the cover line for the puzzle page (p.11).
+           The <a> places it; the <span> inside has the star shape. -->
+      <a class="headline-burst headline-burst--top" href="sudoku.html">
+        <span class="sticker sticker--burst sticker--red">
+          <span>Sudoku</span>
+          <span><span class="sr-only">, page </span><span aria-hidden="true">p.</span>11</span>
+        </span>
+      </a>
       <h2 class="main-headline torn-paper">
         Between the stolen moments of the stacked life of a
         <mark>writer, student and tutor</mark>,
         Cece needs a magazine to sort things out.
       </h2>
-      <span class="sticker sticker--burst sticker--chrome headline-burst headline-burst--bottom" aria-hidden="true">9 stories inside</span>
+      <span class="sticker sticker--burst sticker--chrome headline-burst headline-burst--bottom" aria-hidden="true"><span class="burst-big">10</span><span>stories</span><span>inside</span></span>
     </div>
 
     <!-- =========================================================

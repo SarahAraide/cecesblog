@@ -49,11 +49,16 @@
         <li><a href="kitty.html">Kitty &amp; Ladybugs</a></li>
         <li><a href="sales.html">Sale Alert</a></li>
         <li><a href="mind.html" aria-current="page">Mind Matters</a></li>
+        <li><a href="sudoku.html">Sudoku</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="main" class="spread">
+
+    <!-- Running header across the top, like a printed magazine page:
+         the magazine on the left page, the section on the right. -->
+    <p class="running-head" aria-hidden="true"><span>CECE · Issue 01 · November 2026</span><span>Mind Matters</span></p>
 
     <!-- ===== SPREAD HEADER: no joke stickers on this page ===== -->
     <header class="spread__header spread__header--no-photo">
@@ -68,27 +73,26 @@
     <!-- ===== INTRODUCTION: Cece's own words, exactly as written in SPEC.md.
          lang="he" tells screen readers to read those words in Hebrew. ===== -->
     <div class="panel mind-intro">
-      <p>During my national service (<span lang="he">שירות לאומי</span>), I volunteered at the Maghar Youth Center, which is itself a community project. There I completed the Local Leadership Program (<span lang="he">תוכנית מנהיגות מקומית</span>) and created projects I believe my town needs. Mental health is the cause closest to my heart.</p>
+      <p class="drop-cap">During my national service (<span lang="he">שירות לאומי</span>), I volunteered at the Maghar Youth Center, which is itself a community project. There I completed the Local Leadership Program (<span lang="he">תוכנית מנהיגות מקומית</span>) and created projects I believe my town needs. Mental health is the cause closest to my heart.</p>
     </div>
 
     <!-- =========================================================
          01 · THE PROJECTS
-         Link cards (not videos playing inside the page): Instagram's and
-         Facebook's video players load their own code and break easily.
-         ✎ CECE: add a screenshot from each video as
-         images/mind-project-1.jpg and images/mind-project-2.jpg.
+         Each card shows the video's own preview, using the official
+         Instagram and Facebook embeds (an <iframe> = a little window that
+         shows another website's player inside this page). Pressing play
+         plays the video right there. The "Watch on ..." buttons stay
+         as a backup in case a player doesn't load.
          ========================================================= -->
     <section class="spread__section" aria-labelledby="projects-heading">
       <h2 class="section-heading" id="projects-heading">The projects</h2>
 
       <div class="card-grid">
         <article class="card panel">
-          <figure class="photo project-thumb">
-            <div class="photo__frame">
-              <!-- TODO (Cece): add images/mind-project-1.jpg and describe it here -->
-              <img src="images/mind-project-1.jpg" alt="A still from the video Seeing the signs">
-            </div>
-          </figure>
+          <!-- Instagram's embed: the post's address + /embed/ -->
+          <div class="video-embed video-embed--instagram">
+            <iframe src="https://www.instagram.com/p/CVkyubkIB-t/embed/" title="Instagram video: Seeing the signs" loading="lazy" allowfullscreen></iframe>
+          </div>
           <p class="kicker">Instagram video · 2021</p>
           <h3>Seeing the signs</h3>
           <p>A video we made at the Maghar Youth Center to raise awareness about suicide: how to notice someone who may be struggling, how to approach them with care, and how to help them reach professional support. It also explains more about the topic, so people feel less afraid to talk about it.</p>
@@ -99,12 +103,11 @@
         </article>
 
         <article class="card panel">
-          <figure class="photo project-thumb">
-            <div class="photo__frame">
-              <!-- TODO (Cece): add images/mind-project-2.jpg and describe it here -->
-              <img src="images/mind-project-2.jpg" alt="A still from the Ministry's video about the Maghar Youth Center projects">
-            </div>
-          </figure>
+          <!-- Facebook's video player: href= is the video's address, written
+               in "URL encoding" (: becomes %3A and / becomes %2F) -->
+          <div class="video-embed video-embed--facebook">
+            <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Ffb.watch%2Fc4jh4nalEX%2F&amp;show_text=false" title="Facebook video: Building Maghar's future, starting with a student house" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
           <p class="kicker">Facebook video · 2021</p>
           <h3>Building Maghar's future, starting with a student house</h3>
           <p class="project-publisher">Published by the Ministry for the Development of the Periphery, the Negev and the Galilee (<span lang="he">המשרד לפיתוח הפריפריה, הנגב והגליל</span>)</p>
@@ -141,6 +144,9 @@
       </div>
     </section>
 
+    <!-- Folios: the page numbers at the bottom corners of the spread -->
+    <p class="folio" aria-hidden="true"><span>p.10</span><span>CECE · The Stacked Life Issue</span></p>
+
   </main>
 
   <!-- =========================================================
@@ -154,14 +160,14 @@
       <span class="page-flip__label"><span aria-hidden="true">←</span> Previous page</span>
       <span class="page-flip__title">Sale Alert</span>
     </a>
-    <p class="page-flip__folio">p.10 <span>of 10</span></p>
-    <a class="page-flip__link page-flip__link--next" href="index.html" rel="next">
+    <p class="page-flip__folio">p.10 <span>of 11</span></p>
+    <a class="page-flip__link page-flip__link--next" href="sudoku.html" rel="next">
       <span class="page-flip__label">Next page <span aria-hidden="true">→</span></span>
-      <span class="page-flip__title">Back to the cover</span>
+      <span class="page-flip__title">Sudoku</span>
     </a>
   </nav>
   <a class="page-corner page-corner--prev" href="sales.html" title="Previous page" aria-hidden="true" tabindex="-1"></a>
-  <a class="page-corner page-corner--next" href="index.html" title="Next page" aria-hidden="true" tabindex="-1"></a>
+  <a class="page-corner page-corner--next" href="sudoku.html" title="Next page" aria-hidden="true" tabindex="-1"></a>
 
   <!-- ===== SHARED FOOTER ===== -->
   <footer class="site-footer">

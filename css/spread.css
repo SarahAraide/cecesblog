@@ -22,6 +22,7 @@
     11. Wider screens
     12. Calm pages (Mind Matters)
     13. Flip bar: previous page · page number · next page
+    14. Study Hall: the notebook shelf
    ================================================================= */
 
 
@@ -1368,5 +1369,227 @@
 
   .page-flip__title {
     font-size: 0.95rem;
+  }
+}
+
+
+/* =================================================================
+   14. STUDY HALL: THE NOTEBOOK SHELF
+   -----------------------------------------------------------------
+   Each course is a <details> element:
+     <summary>  = the notebook's cover (click / tap / Enter opens it)
+     the rest   = what's inside, shown only when it's open
+   Open, a notebook takes the whole width of the shelf and turns into a
+   two-page spread: course details on the left, notes on the right.
+   ================================================================= */
+
+.notebook-shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.5rem), 1fr));
+  grid-auto-flow: row dense;          /* closed notebooks fill the gaps an open one leaves */
+  align-items: start;
+  gap: 1.75rem 1.25rem;
+}
+
+/* Five pastel covers, repeating along the shelf (dark text on all) */
+.notebook--c1 { --nb: #FF9ECF; --nb-dark: #D6247F; }   /* pink */
+.notebook--c2 { --nb: #C9B8FF; --nb-dark: #7B61D9; }   /* lilac */
+.notebook--c3 { --nb: #A8E6CF; --nb-dark: #3FA37C; }   /* mint */
+.notebook--c4 { --nb: #FFE08A; --nb-dark: #D9A520; }   /* butter */
+.notebook--c5 { --nb: #A8D8FF; --nb-dark: #3F8FD9; }   /* baby blue */
+
+/* A slightly messy shelf: every notebook leans a little differently */
+.notebook:nth-child(3n+1) { --nb-tilt: -1.5deg; }
+.notebook:nth-child(3n+2) { --nb-tilt: 1deg; }
+.notebook:nth-child(3n)   { --nb-tilt: -0.5deg; }
+
+/* ---- The cover (closed notebook) ---- */
+.notebook__cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  aspect-ratio: 3 / 4;                /* notebook-shaped */
+  padding: 1rem 0.8rem 0.8rem 1.7rem; /* extra room on the left for the spiral */
+  list-style: none;                   /* hides the default triangle marker */
+  color: #1F0A16;
+  cursor: pointer;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.1) 0 1.3rem, transparent 1.3rem), /* the binding strip */
+    linear-gradient(120deg, transparent 55%, rgba(255, 255, 255, 0.35) 56% 62%, transparent 63%), /* shine */
+    var(--nb);
+  border-radius: 0.3rem 0.9rem 0.9rem 0.3rem;
+  box-shadow: 4px 5px 0 var(--nb-dark);
+  rotate: var(--nb-tilt, 0deg);
+  transition: translate 0.2s ease, rotate 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Safari shows its own triangle marker: hide that one too */
+.notebook__cover::-webkit-details-marker {
+  display: none;
+}
+
+/* Spiral rings down the left edge: one chrome ring, repeated */
+.notebook__cover::before {
+  content: "";
+  position: absolute;
+  top: 0.7rem;
+  bottom: 0.7rem;
+  left: 0.3rem;
+  width: 0.75rem;
+  background: radial-gradient(circle, #FFFFFF 0 0.15rem, #9EA3B0 0.16rem 0.27rem, transparent 0.28rem) center top / 0.75rem 0.9rem repeat-y;
+}
+
+.notebook__cover:hover {
+  rotate: 0deg;
+  translate: 0 -4px;
+  box-shadow: 6px 8px 0 var(--nb-dark);
+}
+
+/* The white label stuck on the cover */
+.notebook__label {
+  display: block;
+  padding: 0.5rem 0.6rem;
+  background: #FFFFFF;
+  border-radius: 0.4rem;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
+}
+
+.notebook__number {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: #C2006B;
+}
+
+.notebook__name {
+  display: block;
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.notebook__count {
+  font-family: var(--font-label);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* "AI summary" sticker on the corner of the cover */
+.notebook__badge {
+  position: absolute;
+  top: -0.6rem;
+  right: -0.4rem;
+  padding: 0.15rem 0.5rem;
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #1F0A16;
+  background: #F1E8FF;
+  border: 2px solid #B9A8FF;
+  border-radius: 999px;
+  rotate: 6deg;
+}
+
+/* "open" while closed, "close" while open */
+.notebook__hint {
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+}
+
+.notebook__hint-close,
+.notebook[open] .notebook__hint-open {
+  display: none;
+}
+
+.notebook[open] .notebook__hint-close {
+  display: inline;
+}
+
+/* ---- Open notebook ---- */
+.notebook[open] {
+  grid-column: 1 / -1;                /* take the whole width of the shelf */
+}
+
+/* the cover becomes a slim strip across the top */
+.notebook[open] > .notebook__cover {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  aspect-ratio: auto;
+  padding: 0.6rem 1rem 0.6rem 1.7rem;
+  rotate: 0deg;
+}
+
+.notebook[open] .notebook__label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.6rem;
+}
+
+.notebook[open] .notebook__badge {
+  position: static;
+  rotate: 0deg;
+}
+
+.notebook[open] .notebook__hint {
+  margin-left: auto;
+}
+
+/* The two pages inside. They open with a little flip
+   (switched off for reduced motion, like every animation here). */
+.notebook__pages {
+  display: grid;
+  margin-top: 0.8rem;
+  background: var(--paper);
+  border-radius: 0.4rem;
+  box-shadow: 5px 6px 0 var(--nb-dark);
+  animation: notebook-open 0.35s ease-out;
+}
+
+@keyframes notebook-open {
+  from {
+    opacity: 0;
+    transform: perspective(1200px) rotateX(-10deg) translateY(-8px);
+  }
+}
+
+.notebook__page {
+  padding: 1.25rem 1.4rem;
+}
+
+.notebook__page h3 {
+  margin: 0.2rem 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.notebook__about {
+  color: var(--text-soft);
+}
+
+/* The right page is lined, like notebook paper */
+.notebook__page--right {
+  background: repeating-linear-gradient(transparent 0 1.85rem, var(--grid-line) 1.85rem calc(1.85rem + 2px));
+}
+
+.notebook__page--right .kicker {
+  margin: 0 0 0.6rem;
+}
+
+/* Wider screens: the pages sit side by side, with a fold in the middle */
+@media (min-width: 760px) {
+  .notebook__pages {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  }
+
+  .notebook__page--right {
+    border-left: 3px double var(--nb-dark);
   }
 }

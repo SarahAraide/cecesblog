@@ -778,27 +778,44 @@
 }
 
 /* ---- Sale Alert: the box IS a shopping bag ----
-   Layers: .bag__handles (two arcs above the top edge), .bag__body (the
-   bag: slightly wider at the bottom, pink, with a folded-over top band
-   and a streak of shine), and .bag__text on top. The whole link gets a
-   drop-shadow FILTER instead of a box-shadow, because a filter shadow
-   follows the bag's real shape, handles included. */
+   Layers: .bag__handles (two thick arcs above the top edge), .bag__body
+   (the bag: narrower at the top, with a folded-over top band, holes for
+   the handles, darker side folds, a shine streak and a shadow along the
+   bottom), and .bag__text on top, centred like a print on a bag.
+   The whole link gets a drop-shadow FILTER instead of a box-shadow,
+   because a filter shadow follows the bag's real shape, handles included.
+   It stays bright pink with dark text in BOTH modes: a pink shopping bag
+   is a pink shopping bag, even at midnight (dark text on it: 9.9:1). */
 .cover-line--sales {
   --tilt: 1deg;
-  --bag-colour: var(--bubblegum);   /* readable: dark text 9.9:1, midnight 6.7:1 */
+  --bag-colour: #FF9ECF;
   --bag-band: #FFD1E6;
+  --bag-fold: rgba(160, 0, 80, 0.22);    /* the darker side folds */
   --bag-handle: #C2006B;
   --handle-height: clamp(0.8rem, 2vh, 1.15rem);
+  --handle-width: 3px;
   margin-top: calc(var(--handle-height) - 0.45rem);  /* room for the handles (they may overlap the gap a little) */
   padding-top: clamp(0.65rem, 1.5vh, 1rem);          /* clear the folded band */
+  color: #1F0A16;
+  text-align: center;
   background: transparent;
   box-shadow: none;
   filter: drop-shadow(3px 4px 0 var(--hot-pink));
 }
 
 [data-theme="dark"] .cover-line--sales {
-  --bag-band: #A8408A;
-  --bag-handle: #FF7DC9;
+  --bag-colour: #FF8CC6;
+  --bag-band: #FFC2DF;
+  --bag-handle: #FF4FB8;
+}
+
+/* the words printed on the bag are always dark (the bag is always pink) */
+.cover-line--sales .cover-line__headline {
+  color: #1F0A16;
+}
+
+.cover-line--sales .ransom {
+  justify-content: center;
 }
 
 .cover-line--sales:hover,
@@ -816,10 +833,21 @@
 .bag__body {
   inset: 0;
   z-index: 0;
-  clip-path: polygon(3% 0, 97% 0, 100% 100%, 0 100%);   /* wider at the bottom */
+  clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%);   /* narrower at the top, like a real bag */
   background:
-    linear-gradient(var(--bag-band) 0 0.45rem, transparent 0.45rem),               /* folded top */
-    linear-gradient(100deg, transparent 6%, rgba(255, 255, 255, 0.35) 7% 10%, transparent 11%), /* shine */
+    /* four holes in the folded band, where the handles go in */
+    radial-gradient(circle at 21% 0.28rem, var(--bag-handle) 0 2.5px, transparent 3px),
+    radial-gradient(circle at 41% 0.28rem, var(--bag-handle) 0 2.5px, transparent 3px),
+    radial-gradient(circle at 59% 0.28rem, var(--bag-handle) 0 2.5px, transparent 3px),
+    radial-gradient(circle at 79% 0.28rem, var(--bag-handle) 0 2.5px, transparent 3px),
+    /* folded-over top band */
+    linear-gradient(var(--bag-band) 0 0.55rem, transparent 0.55rem),
+    /* shadow along the bottom edge */
+    linear-gradient(transparent calc(100% - 5px), rgba(160, 0, 80, 0.3) calc(100% - 5px)),
+    /* darker side folds (the "gussets" that let a bag open) */
+    linear-gradient(90deg, var(--bag-fold) 0 9%, transparent 9% 91%, var(--bag-fold) 91%),
+    /* shine streak */
+    linear-gradient(100deg, transparent 12%, rgba(255, 255, 255, 0.4) 13% 16%, transparent 17%),
     var(--bag-colour);
 }
 
@@ -840,7 +868,7 @@
   top: 0;
   bottom: 0;
   width: 20%;
-  border: 3px solid var(--bag-handle);
+  border: var(--handle-width) solid var(--bag-handle);
   border-bottom: 0;
   border-radius: 999px 999px 0 0;
 }
@@ -1037,6 +1065,16 @@
     position: static;
     align-self: center;
     margin-left: auto;
+  }
+
+  /* The shopping bag: narrower than the column, with taller, thicker
+     handles, so it has real bag proportions (phones keep the full width
+     so the cover still fits on one screen) */
+  .cover-line--sales {
+    width: 82%;
+    margin-inline: auto;
+    --handle-height: clamp(1.1rem, 2.8vh, 1.6rem);
+    --handle-width: 4px;
   }
 
   .barcode {

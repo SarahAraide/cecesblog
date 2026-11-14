@@ -975,6 +975,12 @@
   rotate: -6deg;
 }
 
+/* The featured fact: as wide as the whole list, on bubblegum pink */
+.fact-list .fact--featured {
+  grid-column: 1 / -1;
+  background: var(--bubblegum);
+}
+
 .fact-list strong {
   display: block;
   margin-bottom: 0.3rem;
@@ -1014,6 +1020,24 @@
 .badge--status {
   color: var(--on-hot-pink);
   background: var(--hot-pink);
+}
+
+/* Study Hall: marks summaries written with AI help (honest labelling) */
+.badge--ai {
+  color: var(--text);
+  background: var(--calm-bg);
+  border-color: var(--calm-edge);
+}
+
+/* Study Hall: notes lists, with the file type/size after each link */
+.notes-list a {
+  font-weight: 800;
+}
+
+.file-info {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  white-space: nowrap;             /* keep "PDF coming soon" together on one line */
 }
 
 /* A button that isn't a real link yet (e.g. pre-order "coming soon") */

@@ -116,10 +116,19 @@
 
       <ul class="cover-lines cover-lines--left">
         <li>
-          <a class="cover-line cover-line--writing taped" href="writing.html">
+          <!-- The Writer's Room is an ENVELOPE: hover (or keyboard focus) opens
+               the flap and a letter slides out (cover.css, "envelope").
+               The three envelope parts are decoration (aria-hidden); the
+               link text is still "Exclusive · The Writer's Room · ..." -->
+          <a class="cover-line cover-line--writing envelope" href="writing.html">
+            <span class="envelope__letter" aria-hidden="true">a first look inside ♡</span>
+            <span class="envelope__pocket" aria-hidden="true"></span>
+            <span class="envelope__flap" aria-hidden="true"></span>
             <span class="sticker">Exclusive</span>
-            <span class="kicker">The Writer's Room</span>
-            <span class="cover-line__headline">Cece's debut book, a first look inside</span>
+            <span class="envelope__text">
+              <span class="kicker">The Writer's Room</span>
+              <span class="cover-line__headline">Cece's debut book, a first look inside</span>
+            </span>
           </a>
           <span class="margin-note" aria-hidden="true">← finally!!</span>
         </li>
@@ -193,8 +202,9 @@
         </li>
 
         <li>
-          <img class="doodle doodle--phone" src="images/decor/flip-phone.svg" alt="">
           <a class="cover-line cover-line--sales taped" href="sales.html">
+            <!-- Shopping bag icon on the box's corner (alt="": decoration) -->
+            <img class="cover-line__icon" src="images/decor/shopping-bag.svg" alt="">
             <!-- Screen readers read "Sale alert:" instead of spelling out the
                  ransom letters one by one (those are aria-hidden). -->
             <span class="sr-only">Sale alert:</span>

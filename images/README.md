@@ -41,5 +41,6 @@ like `cats-4.jpg`) and add it to a page.
 
 ## decor/
 
-Small original SVG doodles (ladybug, sparkle, star, bow, heart, beaker, gear,
-CD, flip phone, circuit lines) used as decoration. You don't need to touch these.
+Small original SVG doodles (ladybug, sparkle, star, pink star, bow, heart,
+beaker, gear, CD, flip phone, shopping bag, circuit lines) used as decoration.
+You don't need to touch these.

@@ -443,16 +443,164 @@
   --tape-tilt: -35deg;
 }
 
-/* ---- The Writer's Room: taped box + EXCLUSIVE sticker ---- */
+/* ---- The Writer's Room: an ENVELOPE that opens ----
+   Layers, from the back to the front:
+     1. the <a> itself    = the inside of the envelope (darker pink)
+     2. .envelope__letter = a white letter, hidden inside
+     3. .envelope__pocket = the front of the envelope, covers the letter
+     4. .envelope__flap   = the triangle flap on top
+     5. .envelope__text   = the kicker and headline, always readable
+   Hover or keyboard focus: the flap flips up and the letter slides out
+   of the top. Phones can't hover, so it also opens once by itself a
+   moment after the cover loads (switched off for reduced motion). */
 .cover-line--writing {
   --tilt: -1.5deg;
+  /* envelope colours: pale enough that the pink kicker stays readable on
+     the flap (4.8:1); darker plum versions at midnight */
+  --envelope-inside: #FFB3D6;
+  --flap-top: #FFF0F6;
+  --flap-bottom: #FFDCEB;
+  background: var(--envelope-inside);
+}
+
+[data-theme="dark"] .cover-line--writing {
+  --envelope-inside: #12060F;
+  --flap-top: #3A1A42;
+  --flap-bottom: #4A2050;
+}
+
+.envelope__letter,
+.envelope__pocket,
+.envelope__flap {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* 2. The letter: lined white paper with a handwritten line */
+.envelope__letter {
+  left: 12%;
+  right: 12%;
+  top: 0.3rem;
+  z-index: 1;
+  height: 2.6rem;
+  padding: 0.25rem 0.6rem;
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: center;
+  color: #C2006B;
+  background:
+    repeating-linear-gradient(transparent 0 0.95rem, rgba(194, 0, 107, 0.15) 0.95rem calc(0.95rem + 1px)),
+    #FFFFFF;
+  box-shadow: 0 2px 6px rgba(122, 20, 72, 0.25);
+  transition: translate 0.45s cubic-bezier(0.3, 1.3, 0.6, 1) 0.15s;
+}
+
+/* 3. The front of the envelope (covers the letter while it's closed) */
+.envelope__pocket {
+  inset: 0;
+  z-index: 2;
+  /* the paper, plus the two diagonal "V" folds of an envelope's front:
+     each gradient draws one thin line from a bottom corner to the middle */
+  background:
+    linear-gradient(to top right, transparent calc(50% - 1px), rgba(255, 46, 147, 0.35) 50%, transparent calc(50% + 1px)) left bottom / 50% 100% no-repeat,
+    linear-gradient(to top left, transparent calc(50% - 1px), rgba(255, 46, 147, 0.35) 50%, transparent calc(50% + 1px)) right bottom / 50% 100% no-repeat,
+    var(--paper);
+}
+
+/* 4. The flap: a triangle along the top edge. It flips up from its top
+      edge (transform-origin: top). */
+.envelope__flap {
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  height: 55%;
+  /* two pink lines along the flap's slanted edges (one per half), on top
+     of the flap colour. A "to bottom left" gradient's middle runs exactly
+     corner to corner, which here is the flap's edge. */
+  background:
+    linear-gradient(to bottom left, transparent calc(50% - 2px), rgba(255, 46, 147, 0.7) 50%, transparent calc(50% + 2px)) left top / 50.5% 100% no-repeat,
+    linear-gradient(to bottom right, transparent calc(50% - 2px), rgba(255, 46, 147, 0.7) 50%, transparent calc(50% + 2px)) right top / 50.5% 100% no-repeat,
+    linear-gradient(180deg, var(--flap-top), var(--flap-bottom));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform 0.35s ease, z-index 0s 0s;
+}
+
+/* A ladybug "stamp" in the corner of the envelope */
+.envelope__pocket::after {
+  content: "";
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.4rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: url("../images/decor/ladybug.svg") center / 70% no-repeat, #FFFFFF;
+  border: 2px dashed #FF2E93;
+  border-radius: 3px;
+  rotate: 8deg;
+}
+
+/* 5. The words sit above every layer */
+.envelope__text {
+  position: relative;
+  z-index: 4;
+  display: block;
+  padding-right: 1.6rem;             /* room for the stamp */
 }
 
 .cover-line--writing .sticker {
   position: absolute;
   top: -0.75rem;
   right: -0.3rem;
+  z-index: 5;                        /* above the flap and the letter */
   --sticker-tilt: 7deg;
+}
+
+/* OPEN: flap flips up (and drops behind the letter once it's up),
+   then the letter slides up out of the envelope. */
+.envelope:hover .envelope__flap,
+.envelope:focus-visible .envelope__flap {
+  transform: scaleY(-1);
+  z-index: 0;
+  transition: transform 0.35s ease, z-index 0s 0.2s;
+}
+
+.envelope:hover .envelope__letter,
+.envelope:focus-visible .envelope__letter {
+  translate: 0 -2.4rem;
+}
+
+/* Phones (no hover): open once by itself, then close again */
+@media (hover: none) {
+  .envelope__flap {
+    animation: envelope-flap 2.8s ease 1.4s 1;
+  }
+
+  .envelope__letter {
+    animation: envelope-letter 2.8s ease 1.4s 1;
+  }
+}
+
+@keyframes envelope-flap {
+  0%, 100% { transform: none; z-index: 3; }
+  15%, 85% { transform: scaleY(-1); z-index: 0; }
+}
+
+@keyframes envelope-letter {
+  0%, 15%, 100% { translate: 0 0; }
+  30%, 75%      { translate: 0 -2.4rem; }
+}
+
+/* Shopping bag icon on the Sale Alert box's corner */
+.cover-line__icon {
+  position: absolute;
+  top: -1rem;
+  right: 0.5rem;
+  z-index: 2;
+  width: clamp(1.8rem, 5vh, 2.8rem);
+  rotate: 10deg;
 }
 
 /* ---- Cece's Kitchen: bubblegum box + HOT! starburst ---- */
@@ -759,7 +907,6 @@
 .doodle--beaker { bottom: -1.2rem; left: -0.6rem;  --doodle-size: clamp(1.8rem, 4.5vh, 2.8rem); --doodle-tilt: -12deg; }
 .doodle--gear   { top: -1rem;      right: -0.6rem; --doodle-size: clamp(1.8rem, 4.5vh, 2.6rem); }
 .doodle--star   { top: -1rem;      left: -0.6rem;  --doodle-size: clamp(1.6rem, 4vh, 2.4rem); --doodle-tilt: -10deg; }
-.doodle--phone  { bottom: -1.1rem; right: -0.7rem; --doodle-size: clamp(1.8rem, 4.5vh, 3rem); --doodle-tilt: -14deg; }
 
 
 /* =================================================================

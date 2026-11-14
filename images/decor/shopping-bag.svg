@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- glossy pink shopping bag with a heart (Sale Alert) -->
+  <defs>
+    <!-- lighter pink at the top, hot pink at the bottom -->
+    <linearGradient id="bag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FF8CC6"/>
+      <stop offset="1" stop-color="#FF2E93"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 1. handles: a thick white line first (the "sticker" edge), then pink on top -->
+  <path d="M23 24 V18 C23 8 41 8 41 18 V24" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+  <path d="M23 24 V18 C23 8 41 8 41 18 V24" fill="none" stroke="#C2006B" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 2. the bag, a little wider at the bottom (it covers the ends of the handles) -->
+  <path d="M13 20 H51 L55 58 H9 Z" fill="url(#bag)" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- 3. folded-over top band, with the holes the handles go through -->
+  <path d="M13 20 H51 L51.6 26 H12.4 Z" fill="#FFB8DC"/>
+  <circle cx="23" cy="23.5" r="1.8" fill="#C2006B"/>
+  <circle cx="41" cy="23.5" r="1.8" fill="#C2006B"/>
+
+  <!-- 4. white heart on the front -->
+  <path d="M32 50 C24 44 22 40 24 37 C26 34 30 34.5 32 37.5 C34 34.5 38 34 40 37 C42 40 40 44 32 50 Z" fill="#FFFFFF"/>
+
+  <!-- 5. a streak of shine down the left side -->
+  <path d="M16.5 30 L15.5 51" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+</svg>

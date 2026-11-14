@@ -74,16 +74,15 @@
     </header>
 
     <!-- =========================================================
-         01 · COURSES: one index card per course (list from courses.md).
-         ✎ CECE: fill in each course's topics and your notes links.
-         To add a course, copy a whole
-         <article class="card panel course-card"> ... </article> block.
-
-         For a notes link, replace a ✎ line with e.g.
-           <li><a href="notes/solid-mechanics-summary.pdf">Summary (PDF)</a></li>
-         and put the PDF in a "notes" folder next to this page.
+         01 · COURSES: one index card per course (courses.md + study-files.md).
+         - Courses with an "AI-assisted summary" badge link to a study summary
+           written with Claude; the PDFs are in notes/<course>/.
+         - Your own notes say "PDF coming soon" until you export them: put each
+           PDF at the path in the comment above it, then swap the line as shown.
+         - "download" on a link makes the browser download the file.
+         ✎ CECE: fill in each course's topics.
          ⚠ The site is public: link ONLY notes you wrote yourself, never
-         lecturers' slides, course books, homework sheets or exams.
+         lecturers' slides, tutorials, course books, homework sheets or exams.
          ========================================================= -->
     <section class="spread__section" aria-labelledby="courses-heading">
       <h2 class="section-heading" id="courses-heading"><span class="section-heading__number">01</span> Courses</h2>
@@ -99,9 +98,16 @@
             <li><span class="slot-inline">Topic</span></li>
           </ul>
           <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <ul class="ladybug-list notes-list">
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/algebra-1m1/algebra-definitions.pdf" download>All the definitions</a> <span class="file-info">PDF</span></li> -->
+            <li>All the definitions <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/algebra-1m1/algebra-methods-summary.pdf" download>Summary of calculation methods</a> <span class="file-info">PDF</span></li> -->
+            <li>Summary of calculation methods <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/algebra-1m1/algebra-theorems.pdf" download>All the theorems</a> <span class="file-info">PDF</span></li> -->
+            <li>All the theorems <span class="file-info">PDF coming soon</span></li>
           </ul>
         </article>
 
@@ -115,9 +121,13 @@
             <li><span class="slot-inline">Topic</span></li>
           </ul>
           <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <ul class="ladybug-list notes-list">
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/biology-1/biology-detailed-notes.pdf" download>Detailed notes</a> <span class="file-info">PDF</span></li> -->
+            <li>Detailed notes <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/biology-1/biology-summary.pdf" download>Short summary</a> <span class="file-info">PDF</span></li> -->
+            <li>Short summary <span class="file-info">PDF coming soon</span></li>
           </ul>
         </article>
 
@@ -131,25 +141,50 @@
             <li><span class="slot-inline">Topic</span></li>
           </ul>
           <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <ul class="ladybug-list notes-list">
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/calculus-1m2/calculus-algorithm-guide.pdf" download>Step-by-step problem-solving guide</a> <span class="file-info">PDF</span></li> -->
+            <li>Step-by-step problem-solving guide <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/calculus-1m2/calculus-cheat-sheet.pdf" download>Cheat sheet (Hebrew)</a> <span class="file-info">PDF</span></li> -->
+            <li>Cheat sheet (Hebrew) <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/calculus-1m2/comparison-tests.pdf" download>Comparison tests for series</a> <span class="file-info">PDF</span></li> -->
+            <li>Comparison tests for series <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/calculus-1m2/important-functions.pdf" download>Important functions</a> <span class="file-info">PDF</span></li> -->
+            <li>Important functions <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/calculus-1m2/midterm-prep.pdf" download>Midterm preparation</a> <span class="file-info">PDF</span></li> -->
+            <li>Midterm preparation <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/calculus-1m2/series-notes.pdf" download>Series: notes</a> <span class="file-info">PDF</span></li> -->
+            <li>Series: notes <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/calculus-1m2/series-summary.pdf" download>Series: full summary</a> <span class="file-info">PDF</span></li> -->
+            <li>Series: full summary <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/calculus-1m2/theorems-and-proofs.pdf" download>Theorems and proofs</a> <span class="file-info">PDF</span></li> -->
+            <li>Theorems and proofs <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/calculus-1m2/trig-review.pdf" download>Trigonometry review</a> <span class="file-info">PDF</span></li> -->
+            <li>Trigonometry review <span class="file-info">PDF coming soon</span></li>
           </ul>
         </article>
 
         <article class="card panel course-card">
           <p class="course-card__number">01040043</p>
           <h3>Calculus 2M1 (Hedva 2m1)</h3>
+          <p class="badge badge--ai">AI-assisted summary</p>
           <h4>Topics</h4>
           <ul class="ladybug-list">
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
           </ul>
-          <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <h4>Study summary</h4>
+          <ul class="ladybug-list notes-list">
+            <li><a href="notes/calculus-2m1/calculus-2m1-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 56 KB</span></li>
           </ul>
         </article>
 
@@ -163,9 +198,22 @@
             <li><span class="slot-inline">Topic</span></li>
           </ul>
           <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <ul class="ladybug-list notes-list">
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/general-chemistry/chemistry-cheat-sheet-english.pdf" download>Cheat sheet (English)</a> <span class="file-info">PDF</span></li> -->
+            <li>Cheat sheet (English) <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/general-chemistry/chemistry-cheat-sheet-hebrew.pdf" download>Cheat sheet (Hebrew)</a> <span class="file-info">PDF</span></li> -->
+            <li>Cheat sheet (Hebrew) <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/general-chemistry/chemistry-final-summary.pdf" download>Final summary (English)</a> <span class="file-info">PDF</span></li> -->
+            <li>Final summary (English) <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/general-chemistry/chemistry-formula-sheet.pdf" download>Formula sheet</a> <span class="file-info">PDF</span></li> -->
+            <li>Formula sheet <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/general-chemistry/ph-cheat-sheet.pdf" download>pH cheat sheet</a> <span class="file-info">PDF</span></li> -->
+            <li>pH cheat sheet <span class="file-info">PDF coming soon</span></li>
           </ul>
         </article>
 
@@ -179,9 +227,9 @@
             <li><span class="slot-inline">Topic</span></li>
           </ul>
           <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <ul class="ladybug-list notes-list">
+            <!-- Too big for GitHub, so it lives on Google Drive (sharing: anyone with the link can view) -->
+            <li><a href="https://drive.google.com/file/d/1-5K6Bc5upHf3h2hQ6PfS8jOVmSpEVkGM/view" target="_blank" rel="noopener">My full course summary</a> <span class="file-info">Google Drive<span class="sr-only">, opens in a new tab</span></span></li>
           </ul>
         </article>
 
@@ -195,105 +243,109 @@
             <li><span class="slot-inline">Topic</span></li>
           </ul>
           <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <ul class="ladybug-list notes-list">
+            <!-- Held back: these labs are graded work. Check the course rules first;
+                 if sharing is allowed, add them like this:
+                 <li><a href="notes/graphic-engineering-design/design-lab-1.pdf" download>Lab 1</a> <span class="file-info">PDF</span></li>
+                 <li><a href="notes/graphic-engineering-design/design-lab-2.pdf" download>Lab 2</a> <span class="file-info">PDF</span></li>
+            -->
+            <li>Notes coming soon</li>
           </ul>
         </article>
 
         <article class="card panel course-card">
           <p class="course-card__number">01040131</p>
           <h3>Ordinary Differential Equations H</h3>
+          <p class="badge badge--ai">AI-assisted summary</p>
           <h4>Topics</h4>
           <ul class="ladybug-list">
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
           </ul>
-          <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <h4>Study summary</h4>
+          <ul class="ladybug-list notes-list">
+            <li><a href="notes/ordinary-differential-equations/ode-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 57 KB</span></li>
           </ul>
         </article>
 
         <article class="card panel course-card">
           <p class="course-card__number">01040228</p>
           <h3>Partial Differential Equations M</h3>
+          <p class="badge badge--ai">AI-assisted summary</p>
           <h4>Topics</h4>
           <ul class="ladybug-list">
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
           </ul>
-          <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <h4>Study summary</h4>
+          <ul class="ladybug-list notes-list">
+            <li><a href="notes/partial-differential-equations/pde-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 55 KB</span></li>
           </ul>
         </article>
 
         <article class="card panel course-card">
           <p class="course-card__number"><span class="slot-inline">Course number</span></p>
           <h3>Philosophical Tales</h3>
+          <p class="badge badge--ai">AI-assisted summary</p>
           <h4>Topics</h4>
           <ul class="ladybug-list">
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
           </ul>
-          <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <h4>Study summary</h4>
+          <ul class="ladybug-list notes-list">
+            <li><a href="notes/philosophical-tales/philosophical-tales-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 43 KB</span></li>
           </ul>
         </article>
 
         <article class="card panel course-card">
           <p class="course-card__number">01140071</p>
           <h3>Physics 1M</h3>
+          <p class="badge badge--ai">AI-assisted summary</p>
           <h4>Topics</h4>
           <ul class="ladybug-list">
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
           </ul>
-          <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <h4>Study summary</h4>
+          <ul class="ladybug-list notes-list">
+            <li><a href="notes/physics-1m/physics-1m-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 56 KB</span></li>
           </ul>
         </article>
 
         <article class="card panel course-card">
           <p class="course-card__number">01140052</p>
           <h3>Physics 2</h3>
+          <p class="badge badge--ai">AI-assisted summary</p>
           <h4>Topics</h4>
           <ul class="ladybug-list">
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
           </ul>
-          <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <h4>Study summary</h4>
+          <ul class="ladybug-list notes-list">
+            <li><a href="notes/physics-2/physics-2-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 60 KB</span></li>
           </ul>
         </article>
 
         <article class="card panel course-card">
           <p class="course-card__number">00340058</p>
           <h3>Probability and Statistics for Mechanical Engineers</h3>
+          <p class="badge badge--ai">AI-assisted summary</p>
           <h4>Topics</h4>
           <ul class="ladybug-list">
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
           </ul>
-          <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <h4>Study summary</h4>
+          <ul class="ladybug-list notes-list">
+            <li><a href="notes/probability-statistics/probability-statistics-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 68 KB</span></li>
           </ul>
         </article>
 
@@ -307,25 +359,35 @@
             <li><span class="slot-inline">Topic</span></li>
           </ul>
           <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <ul class="ladybug-list notes-list">
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/python/python-algorithms.pdf" download>Algorithms in Python</a> <span class="file-info">PDF</span></li> -->
+            <li>Algorithms in Python <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/python/python-exam-reference.pdf" download>Exam reference sheet</a> <span class="file-info">PDF</span></li> -->
+            <li>Exam reference sheet <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/python/python-final-summary.pdf" download>Final summary</a> <span class="file-info">PDF</span></li> -->
+            <li>Final summary <span class="file-info">PDF coming soon</span></li>
+            <!-- when the PDF is in notes/, swap the next line for:
+                 <li><a href="notes/python/python-notes.pdf" download>Course notes</a> <span class="file-info">PDF</span></li> -->
+            <li>Course notes <span class="file-info">PDF coming soon</span></li>
           </ul>
         </article>
 
         <article class="card panel course-card">
           <p class="course-card__number">00340028</p>
           <h3>Solid Mechanics 1</h3>
+          <p class="badge badge--ai">AI-assisted summary</p>
           <h4>Topics</h4>
           <ul class="ladybug-list">
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
             <li><span class="slot-inline">Topic</span></li>
           </ul>
-          <h4>My notes</h4>
-          <ul class="ladybug-list">
-            <li><span class="slot-inline">Link to my notes</span></li>
-            <li><span class="slot-inline">Link to my summary</span></li>
+          <h4>Study summary</h4>
+          <ul class="ladybug-list notes-list">
+            <li><a href="notes/solid-mechanics-1/solid-mechanics-1-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 59 KB</span></li>
           </ul>
         </article>
       </div>

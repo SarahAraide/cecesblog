@@ -4,6 +4,7 @@
      1. "Photo coming soon" placeholders
      2. The wandering ladybug (and its pause button)
      3. The "Contents" button on section pages (phones)
+     4. Flipping pages with the ← → arrow keys
 
    Loaded with "defer", so it runs after the whole HTML has been read.
    ================================================================= */
@@ -256,8 +257,45 @@ function setUpContentsMenu() {
 
 
 /* =================================================================
+   4. FLIP PAGES WITH THE ARROW KEYS
+   -----------------------------------------------------------------
+   → goes to the next page, ← to the previous one, like turning the
+   pages of a magazine. It uses the links marked rel="next" and
+   rel="prev" on the page (the flip bar and the folded corner), so the
+   page order lives in the HTML, not here.
+   ================================================================= */
+
+function setUpPageFlipKeys() {
+  document.addEventListener('keydown', (event) => {
+    // Leave the arrows alone while someone is typing in a box (like the
+    // movie search), or when a modifier key is held (browser shortcuts).
+    // (instanceof Element: only elements have .closest(); this check
+    //  stops the code from crashing if the key press comes from elsewhere)
+    const typing = event.target instanceof Element &&
+      event.target.closest('input, textarea, select, [contenteditable="true"]');
+    if (typing || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+      return;
+    }
+
+    let rel = null;
+    if (event.key === 'ArrowRight') rel = 'next';
+    if (event.key === 'ArrowLeft') rel = 'prev';
+    if (!rel) {
+      return;
+    }
+
+    const link = document.querySelector(`a[rel="${rel}"]`);
+    if (link) {
+      window.location.href = link.href;   // turn the page
+    }
+  });
+}
+
+
+/* =================================================================
    START EVERYTHING
    ================================================================= */
 setUpPhotoPlaceholders();
 setUpLadybug();
 setUpContentsMenu();
+setUpPageFlipKeys();

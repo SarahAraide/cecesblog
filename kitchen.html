@@ -215,12 +215,39 @@
 
   </main>
 
+  <!-- =========================================================
+       FLIP THROUGH THE MAGAZINE: previous page · page number · next page.
+       The ← and → arrow keys flip pages too (main.js). The two folded
+       corners at the bottom of the screen do the same for mouse users,
+       so they're hidden from screen readers (the bar already says it).
+       ========================================================= -->
+  <nav class="page-flip" aria-label="Flip through the magazine">
+    <a class="page-flip__link page-flip__link--prev" href="writing.html" rel="prev">
+      <span class="page-flip__label"><span aria-hidden="true">←</span> Previous page</span>
+      <span class="page-flip__title">The Writer's Room</span>
+    </a>
+    <p class="page-flip__folio">p.03 <span>of 10</span></p>
+    <a class="page-flip__link page-flip__link--next" href="cinema.html" rel="next">
+      <span class="page-flip__label">Next page <span aria-hidden="true">→</span></span>
+      <span class="page-flip__title">Movie Night</span>
+    </a>
+  </nav>
+  <a class="page-corner page-corner--prev" href="writing.html" title="Previous page" aria-hidden="true" tabindex="-1"></a>
+  <a class="page-corner page-corner--next" href="cinema.html" title="Next page" aria-hidden="true" tabindex="-1"></a>
+
   <!-- ===== SHARED FOOTER ===== -->
   <footer class="site-footer">
     <hr class="ladybug-divider">
     <a class="site-footer__logo chrome-text" href="index.html">CECE<span class="sr-only">, back to the cover</span></a>
     <p class="site-footer__issue">Issue 01 · November 2026 · The Stacked Life Issue</p>
     <p>Made by Cece with plain HTML, CSS &amp; JavaScript.</p>
+    <!-- Cece's accounts (from saraharaide.com) -->
+    <ul class="site-footer__social">
+      <li><a href="https://www.instagram.com/cece_once_said" target="_blank" rel="noopener">Instagram<span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li><a href="https://www.tiktok.com/@cece_once_said" target="_blank" rel="noopener">TikTok<span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li><a href="https://x.com/cece_once_said" target="_blank" rel="noopener">X<span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li><a href="https://vsco.co/cecesdigitlphotos" target="_blank" rel="noopener">VSCO<span class="sr-only"> (opens in a new tab)</span></a></li>
+    </ul>
     <p><a href="index.html">← Back to the cover</a></p>
   </footer>
 </body>

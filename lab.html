@@ -75,93 +75,154 @@
 
     <!-- =========================================================
          01 · RESEARCH INTERESTS
-         Each card: the field, a one-line description, and a slot for
-         YOUR words about why it pulls you in.
+         The panel is Cece's own statement from the Engineering page on
+         saraharaide.com (copied exactly). Each card: a field and a
+         one-line description.
          ========================================================= -->
     <section class="spread__section" aria-labelledby="interests-heading">
       <h2 class="section-heading" id="interests-heading"><span class="section-heading__number">01</span> Research interests</h2>
+
+      <div class="panel lab-intro">
+        <p class="kicker">Mechanical Engineering · Technion · B.Sc. 2024 – present</p>
+        <p>I’m a mechanical engineering student at the Technion, drawn to the intersection of engineering and living systems at the smallest scales. My goal is to research micro-biorobotics: microscale robots informed by biological principles. I enjoy taking a design from sketch to a working part, and I work best in teams where analytical and creative problem-solving meet.</p>
+      </div>
 
       <div class="card-grid">
         <article class="card panel">
           <img class="info-card__icon" src="images/decor/sparkle.svg" alt="">
           <h3>Engineering</h3>
           <p class="info-card__dek">Using maths and science to design things that solve real problems.</p>
-          <div class="slot">
-            <p class="slot__label">Why it pulls me in</p>
-            <p class="slot__hint">a few sentences in your own words</p>
-          </div>
         </article>
 
         <article class="card panel">
           <img class="info-card__icon" src="images/decor/gear.svg" alt="">
           <h3>Mechanical engineering</h3>
           <p class="info-card__dek">How things move, carry loads and turn energy into motion.</p>
-          <div class="slot">
-            <p class="slot__label">Why it pulls me in</p>
-            <p class="slot__hint">a few sentences in your own words</p>
-          </div>
         </article>
 
         <article class="card panel">
           <img class="info-card__icon" src="images/decor/ladybug.svg" alt="">
           <h3>Biorobotics</h3>
           <p class="info-card__dek">Robots inspired by living things, and robots built to work with living things.</p>
-          <div class="slot">
-            <p class="slot__label">Why it pulls me in</p>
-            <p class="slot__hint">a few sentences in your own words</p>
-          </div>
         </article>
 
         <article class="card panel">
           <img class="info-card__icon" src="images/decor/beaker.svg" alt="">
           <h3>Microbiorobotics</h3>
           <p class="info-card__dek">Robots so tiny they work at the scale of cells, sometimes powered by living cells themselves.</p>
-          <div class="slot">
-            <p class="slot__label">Why it pulls me in</p>
-            <p class="slot__hint">a few sentences in your own words</p>
-          </div>
         </article>
       </div>
     </section>
 
-    <!-- ✎ CECE: a line about why you love this field; then delete the <footer> and "is-slot" -->
-    <blockquote class="pull-quote is-slot">
-      <p>A line about why you love building things goes here.</p>
-      <footer>pull quote</footer>
+    <!-- A line from Cece's own statement above -->
+    <blockquote class="pull-quote">
+      <p>I enjoy taking a design from sketch to a working part.</p>
+      <footer>Cece</footer>
     </blockquote>
 
     <!-- =========================================================
          02 · PROJECTS
-         One card per project. Change the badge text to "Done" or
-         "Planned" as you go. To add one, copy a whole <article>.
+         Copied exactly from the project page on saraharaide.com, with
+         Cece's own SolidWorks render. To add a project, copy the whole
+         <article> ... </article> block.
          ========================================================= -->
     <section class="spread__section" aria-labelledby="projects-heading">
       <h2 class="section-heading" id="projects-heading"><span class="section-heading__number">02</span> Projects</h2>
 
-      <div class="card-grid">
-        <article class="card panel taped">
-          <p class="kicker">Project 01</p>
-          <h3><span class="slot-inline">Project name</span></h3>
-          <p class="badge badge--status">In progress</p>
-          <div class="slot">
-            <p class="slot__label">About the project</p>
-            <p class="slot__hint">what it is, what you built, and what you learned</p>
+      <article class="panel two-col two-col--photo-left project-feature">
+        <figure class="photo polaroid taped side-photo">
+          <div class="photo__frame">
+            <img src="images/lab-rocket.webp" alt="SolidWorks render of the launcher assembly in an exploded view">
           </div>
-        </article>
+          <figcaption class="photo__caption">full assembly, exploded view</figcaption>
+        </figure>
 
-        <article class="card panel">
-          <p class="kicker">Project 02</p>
-          <h3><span class="slot-inline">Project name</span></h3>
-          <p class="badge badge--status">Planned</p>
-          <div class="slot">
-            <p class="slot__label">About the project</p>
-            <p class="slot__hint">what it is, what you built, and what you learned</p>
-          </div>
-        </article>
+        <div>
+          <p class="kicker">Project 01 · Introduction to Graphics &amp; Engineering Design, Technion</p>
+          <h3>Mechanical Water-Rocket Launcher — “Magen HaCarmel”</h3>
+          <p class="project-meta">Two-axis mechanical launcher · SolidWorks · 3-person team</p>
+
+          <h4 class="kicker">The problem</h4>
+          <p>Design a two-axis mechanical launcher for a pressurized water-bottle rocket, providing 360° horizontal rotation and 45° vertical elevation.</p>
+
+          <h4 class="kicker">My role</h4>
+          <p>My focus was integrating three independently-designed subsystems into one coherent model and documenting it.</p>
+          <ul class="ladybug-list">
+            <li>System integration across all subsystems</li>
+            <li>Designed the rocket-interface parts (bottle support, quick-connect adapter, hose lock, release components)</li>
+            <li>Produced the engineering drawings</li>
+            <li>Prepared the team presentation</li>
+          </ul>
+
+          <h4 class="kicker">Result</h4>
+          <p>Designed entirely in SolidWorks and built as an assembly of 3D-printable parts, with a worm-and-sector gear drive for the rotation and elevation.</p>
+
+          <ul class="tag-list" aria-label="Tools">
+            <li>SolidWorks</li><li>CAD</li><li>Mechanical Design</li><li>System Integration</li>
+            <li>Design for Additive Manufacturing</li><li>GD&amp;T</li><li>Technical Drawings</li>
+          </ul>
+
+          <p class="button-row">
+            <a class="bubble-button" href="https://saraharaide.com/engineering/projects/water-rocket-launcher" target="_blank" rel="noopener">More renders on saraharaide.com<span class="sr-only"> (opens in a new tab)</span></a>
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <!-- =========================================================
+         03 · TOOLBOX: skills, coursework and links, from the
+         Engineering page and CV on saraharaide.com
+         ========================================================= -->
+    <section class="spread__section" aria-labelledby="toolbox-heading">
+      <h2 class="section-heading" id="toolbox-heading"><span class="section-heading__number">03</span> Toolbox</h2>
+
+      <div class="card-grid">
+        <div class="card panel">
+          <h3>Technical skills</h3>
+          <ul class="tag-list">
+            <li>SolidWorks</li><li>GD&amp;T</li><li>System integration</li><li>Python</li><li>Technical documentation</li>
+          </ul>
+        </div>
+
+        <div class="card panel">
+          <h3>Key coursework</h3>
+          <p>Calculus 1–2, ODEs &amp; PDEs, Physics 1–2, Statics &amp; Mechanics of Solids 1–2, Thermodynamics, Materials Engineering, Python</p>
+        </div>
+
+        <div class="card panel">
+          <h3>Let's work together</h3>
+          <p>I’m happy to hear about internships, research opportunities and collaborations, especially in micro-robotics and bio-inspired design.</p>
+          <ul class="tag-list social-links">
+            <li><a href="https://saraharaide.com/engineering/cv" target="_blank" rel="noopener">CV<span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a href="https://www.linkedin.com/in/sarah-araide-7a44aa423" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a href="https://github.com/SarahAraide/" target="_blank" rel="noopener">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a href="https://saraharaide.com/contact" target="_blank" rel="noopener">Contact<span class="sr-only"> (opens in a new tab)</span></a></li>
+          </ul>
+        </div>
       </div>
     </section>
 
   </main>
+
+  <!-- =========================================================
+       FLIP THROUGH THE MAGAZINE: previous page · page number · next page.
+       The ← and → arrow keys flip pages too (main.js). The two folded
+       corners at the bottom of the screen do the same for mouse users,
+       so they're hidden from screen readers (the bar already says it).
+       ========================================================= -->
+  <nav class="page-flip" aria-label="Flip through the magazine">
+    <a class="page-flip__link page-flip__link--prev" href="cinema.html" rel="prev">
+      <span class="page-flip__label"><span aria-hidden="true">←</span> Previous page</span>
+      <span class="page-flip__title">Movie Night</span>
+    </a>
+    <p class="page-flip__folio">p.05 <span>of 10</span></p>
+    <a class="page-flip__link page-flip__link--next" href="notes.html" rel="next">
+      <span class="page-flip__label">Next page <span aria-hidden="true">→</span></span>
+      <span class="page-flip__title">Study Hall</span>
+    </a>
+  </nav>
+  <a class="page-corner page-corner--prev" href="cinema.html" title="Previous page" aria-hidden="true" tabindex="-1"></a>
+  <a class="page-corner page-corner--next" href="notes.html" title="Next page" aria-hidden="true" tabindex="-1"></a>
 
   <!-- ===== SHARED FOOTER ===== -->
   <footer class="site-footer">
@@ -169,6 +230,13 @@
     <a class="site-footer__logo chrome-text" href="index.html">CECE<span class="sr-only">, back to the cover</span></a>
     <p class="site-footer__issue">Issue 01 · November 2026 · The Stacked Life Issue</p>
     <p>Made by Cece with plain HTML, CSS &amp; JavaScript.</p>
+    <!-- Cece's accounts (from saraharaide.com) -->
+    <ul class="site-footer__social">
+      <li><a href="https://www.instagram.com/cece_once_said" target="_blank" rel="noopener">Instagram<span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li><a href="https://www.tiktok.com/@cece_once_said" target="_blank" rel="noopener">TikTok<span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li><a href="https://x.com/cece_once_said" target="_blank" rel="noopener">X<span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li><a href="https://vsco.co/cecesdigitlphotos" target="_blank" rel="noopener">VSCO<span class="sr-only"> (opens in a new tab)</span></a></li>
+    </ul>
     <p><a href="index.html">← Back to the cover</a></p>
   </footer>
 </body>

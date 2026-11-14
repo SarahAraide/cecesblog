@@ -422,6 +422,37 @@
   display: none;
 }
 
+/* Page number tag ("p.02") hanging off the bottom-left of each box,
+   like the page numbers on a real magazine cover */
+.page-num {
+  position: absolute;
+  left: 0.7rem;
+  bottom: -0.6rem;
+  z-index: 6;
+  padding: 0.05rem 0.45rem;
+  font-family: var(--font-label);
+  font-size: clamp(0.55rem, 0.4rem + 0.4vh, 0.72rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--paper);
+  background: var(--text);
+  border-radius: 999px;
+}
+
+/* In the Mind Matters banner: on phones it hangs off the corner like the
+   others (so it never needs a line of its own); from tablets up it sits
+   at the end of the line (section 11). */
+.cover-banner {
+  position: relative;
+}
+
+/* The cover's folded corner (the "open the magazine" corner) only shows
+   from tablets up: phones have no arrow keys, and people tap the cover
+   lines anyway. */
+.cover > .page-corner {
+  display: none;
+}
+
 
 /* =================================================================
    8. COVER STORIES: EACH ONE'S OWN LOOK
@@ -550,6 +581,21 @@
   padding-right: 1.6rem;             /* room for the stamp */
 }
 
+/* Phones: a smaller stamp and less room for it, so the headline keeps
+   to two lines and the cover still fits on one screen */
+@media (max-width: 599px) {
+  .envelope__text {
+    padding-right: 0.9rem;
+  }
+
+  .envelope__pocket::after {
+    right: 0.3rem;
+    bottom: 0.3rem;
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+}
+
 .cover-line--writing .sticker {
   position: absolute;
   top: -0.75rem;
@@ -593,15 +639,6 @@
   30%, 75%      { translate: 0 -2.4rem; }
 }
 
-/* Shopping bag icon on the Sale Alert box's corner */
-.cover-line__icon {
-  position: absolute;
-  top: -1rem;
-  right: 0.5rem;
-  z-index: 2;
-  width: clamp(1.8rem, 5vh, 2.8rem);
-  rotate: 10deg;
-}
 
 /* ---- Cece's Kitchen: bubblegum box + HOT! starburst ---- */
 .cover-line--kitchen {
@@ -740,9 +777,81 @@
     linear-gradient(var(--red), var(--red)) border-box;
 }
 
-/* ---- Sale Alert: ransom-note letters ---- */
+/* ---- Sale Alert: the box IS a shopping bag ----
+   Layers: .bag__handles (two arcs above the top edge), .bag__body (the
+   bag: slightly wider at the bottom, pink, with a folded-over top band
+   and a streak of shine), and .bag__text on top. The whole link gets a
+   drop-shadow FILTER instead of a box-shadow, because a filter shadow
+   follows the bag's real shape, handles included. */
 .cover-line--sales {
   --tilt: 1deg;
+  --bag-colour: var(--bubblegum);   /* readable: dark text 9.9:1, midnight 6.7:1 */
+  --bag-band: #FFD1E6;
+  --bag-handle: #C2006B;
+  --handle-height: clamp(0.8rem, 2vh, 1.15rem);
+  margin-top: calc(var(--handle-height) - 0.45rem);  /* room for the handles (they may overlap the gap a little) */
+  padding-top: clamp(0.65rem, 1.5vh, 1rem);          /* clear the folded band */
+  background: transparent;
+  box-shadow: none;
+  filter: drop-shadow(3px 4px 0 var(--hot-pink));
+}
+
+[data-theme="dark"] .cover-line--sales {
+  --bag-band: #A8408A;
+  --bag-handle: #FF7DC9;
+}
+
+.cover-line--sales:hover,
+.cover-line--sales:focus-visible {
+  box-shadow: none;
+  filter: drop-shadow(5px 7px 0 var(--hot-pink));
+}
+
+.bag__body,
+.bag__handles {
+  position: absolute;
+  pointer-events: none;
+}
+
+.bag__body {
+  inset: 0;
+  z-index: 0;
+  clip-path: polygon(3% 0, 97% 0, 100% 100%, 0 100%);   /* wider at the bottom */
+  background:
+    linear-gradient(var(--bag-band) 0 0.45rem, transparent 0.45rem),               /* folded top */
+    linear-gradient(100deg, transparent 6%, rgba(255, 255, 255, 0.35) 7% 10%, transparent 11%), /* shine */
+    var(--bag-colour);
+}
+
+/* Two handles: each is a box with only its top and sides drawn, and
+   very round top corners, which makes an arch. */
+.bag__handles {
+  top: calc(-1 * var(--handle-height));
+  left: 0;
+  right: 0;
+  z-index: 0;
+  height: calc(var(--handle-height) + 0.3rem);
+}
+
+.bag__handles::before,
+.bag__handles::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20%;
+  border: 3px solid var(--bag-handle);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+}
+
+.bag__handles::before { left: 20%; }
+.bag__handles::after  { right: 20%; }
+
+.bag__text {
+  position: relative;
+  z-index: 1;
+  display: block;
 }
 
 .ransom {
@@ -918,6 +1027,22 @@
     display: block;
   }
 
+  /* the folded corner, and room for it next to the barcode */
+  .cover > .page-corner {
+    display: block;
+  }
+
+  /* Mind Matters page number: at the end of the banner's line */
+  .page-num--inline {
+    position: static;
+    align-self: center;
+    margin-left: auto;
+  }
+
+  .barcode {
+    margin-right: 2rem;
+  }
+
   /* The cat box gets its mini polaroid back: photo | text */
   .cover-line--cats {
     display: grid;
@@ -1007,7 +1132,7 @@
    13. VERY SHORT SCREENS (small phones, or phones turned sideways)
    Drop the tagline and shrink the masthead so the cover still fits.
    ================================================================= */
-@media (max-height: 620px) and (max-width: 959px) {
+@media (max-height: 660px) and (max-width: 959px) {
   .cover {
     --cover-gap: 0.2rem;
   }

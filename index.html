@@ -128,7 +128,7 @@
             <span class="envelope__text">
               <span class="kicker">The Writer's Room</span>
               <span class="cover-line__headline">Cece's debut book, a first look inside</span>
-            </span>
+            </span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>02</span>
           </a>
           <span class="margin-note" aria-hidden="true">← finally!!</span>
         </li>
@@ -137,7 +137,7 @@
           <a class="cover-line cover-line--kitchen" href="kitchen.html">
             <span class="sticker sticker--burst sticker--red">Hot!</span>
             <span class="kicker">Cece's Kitchen</span>
-            <span class="cover-line__headline">The cheesecake that saved finals week</span>
+            <span class="cover-line__headline">The cheesecake that saved finals week</span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>03</span>
           </a>
           <span class="margin-note" aria-hidden="true">(it really did)</span>
         </li>
@@ -146,7 +146,7 @@
           <img class="doodle doodle--cd spin" src="images/decor/cd.svg" alt="">
           <a class="cover-line cover-line--cinema" href="cinema.html">
             <span class="kicker">Movie Night</span>
-            <span class="cover-line__headline">200+ films and shows, sorted by mood</span>
+            <span class="cover-line__headline">200+ films and shows, sorted by mood</span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>04</span>
           </a>
         </li>
 
@@ -155,7 +155,7 @@
           <a class="cover-line cover-line--lab" href="lab.html">
             <span class="sticker sticker--chrome">New!</span>
             <span class="kicker">Legally Blonde Labs</span>
-            <span class="cover-line__headline">Tiny robots, big dreams</span>
+            <span class="cover-line__headline">Tiny robots, big dreams</span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>05</span>
           </a>
         </li>
       </ul>
@@ -171,7 +171,7 @@
             <span class="pixel-window__body">
               <span class="kicker">Study Hall</span>
               <span class="cover-line__headline">How to survive Technion finals</span>
-            </span>
+            </span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>06</span>
           </a>
           <span class="margin-note" aria-hidden="true">bookmark this!!</span>
         </li>
@@ -189,7 +189,7 @@
             <span class="cover-line__text">
               <span class="kicker">Cat of the Month</span>
               <span class="cover-line__headline">Meet this month's cover cat</span>
-            </span>
+            </span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>07</span>
           </a>
         </li>
 
@@ -197,22 +197,26 @@
           <img class="doodle doodle--star" src="images/decor/star.svg" alt="">
           <a class="cover-line cover-line--kitty" href="kitty.html">
             <span class="kicker">Hello Kitty &amp; Ladybug Corner</span>
-            <span class="cover-line__headline">Ladybug facts that will change your life</span>
+            <span class="cover-line__headline">Ladybug facts that will change your life</span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>08</span>
           </a>
         </li>
 
         <li>
-          <a class="cover-line cover-line--sales taped" href="sales.html">
-            <!-- Shopping bag icon on the box's corner (alt="": decoration) -->
-            <img class="cover-line__icon" src="images/decor/shopping-bag.svg" alt="">
-            <!-- Screen readers read "Sale alert:" instead of spelling out the
-                 ransom letters one by one (those are aria-hidden). -->
-            <span class="sr-only">Sale alert:</span>
-            <span class="ransom" aria-hidden="true">
-              <span class="ransom__word"><span>S</span><span>A</span><span>L</span><span>E</span></span>
-              <span class="ransom__word"><span>A</span><span>L</span><span>E</span><span>R</span><span>T</span></span>
-            </span>
-            <span class="cover-line__headline">Where Cece is shopping this week</span>
+          <!-- Sale Alert IS a shopping bag: the bag shape and its handles are
+               decoration (aria-hidden); the words are printed on the bag. -->
+          <a class="cover-line cover-line--sales bag" href="sales.html">
+            <span class="bag__handles" aria-hidden="true"></span>
+            <span class="bag__body" aria-hidden="true"></span>
+            <span class="bag__text">
+              <!-- Screen readers read "Sale alert:" instead of spelling out the
+                   ransom letters one by one (those are aria-hidden). -->
+              <span class="sr-only">Sale alert:</span>
+              <span class="ransom" aria-hidden="true">
+                <span class="ransom__word"><span>S</span><span>A</span><span>L</span><span>E</span></span>
+                <span class="ransom__word"><span>A</span><span>L</span><span>E</span><span>R</span><span>T</span></span>
+              </span>
+              <span class="cover-line__headline">Where Cece is shopping this week</span>
+            </span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>09</span>
           </a>
         </li>
       </ul>
@@ -227,14 +231,19 @@
     <div class="cover__bottom">
       <a class="cover-banner" href="mind.html">
         <span class="kicker">Mind Matters</span>
-        <span class="cover-banner__headline">Cece's campaign: it's okay to talk about it</span>
-      </a>
+        <span class="cover-banner__headline">Cece's campaign: it's okay to talk about it</span>  <span class="page-num page-num--inline"><span class="sr-only">page </span><span aria-hidden="true">p.</span>10</span>
+          </a>
 
       <div class="barcode" role="img" aria-label="Barcode for Issue 01">
         <span class="barcode__bars"></span>
         <span class="barcode__digits">0 11 2026 0001 7</span>
       </div>
     </div>
+
+    <!-- Folded page corner: click it (or press the → arrow key) to open
+         the magazine at page 2. The cover lines do the same for screen
+         readers and keyboards, so this one is hidden from them. -->
+    <a class="page-corner page-corner--next" href="writing.html" rel="next" title="Turn the page" aria-hidden="true" tabindex="-1"></a>
 
   </main>
 </body>

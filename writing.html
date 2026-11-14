@@ -115,7 +115,8 @@
             <div><dt>Illustrations</dt><dd>Adam Yassin</dd></div>
             <div><dt>Published</dt><dd>Coming soon</dd></div>
             <div><dt>Poems</dt><dd>83</dd></div>
-            <div><dt>Format</dt><dd>Paperback (full colour, A5, 126 pages) and ebook</dd></div>
+            <div><dt>Format</dt><dd>Paperback, full colour, A5 (14.8 × 21 cm), 126 pages; ebook</dd></div>
+            <div><dt>Language</dt><dd>English</dd></div>
             <div><dt>Publisher</dt><dd>Cece's Publishing House</dd></div>
             <div><dt>ISBN (paperback)</dt><dd>978-965-596-443-1</dd></div>
             <div><dt>ISBN (ebook)</dt><dd>978-965-596-444-8</dd></div>
@@ -131,11 +132,11 @@
             <div><dt>Ebook</dt><dd>$4.99</dd></div>
           </dl>
 
-          <!-- The blurb: two sentences copied exactly from saraharaide.com.
-               ✎ CECE: if you want the full "About the book" text here too, paste its
-               three paragraphs from your book page as more <p class="book-blurb"> lines. -->
-          <p class="book-blurb">An illustrated poetry collection about grief, love, survival and the long road back to yourself.</p>
-          <p class="book-blurb">It is a book for anyone fighting an invisible battle, and for anyone who loves someone who is.</p>
+          <!-- About the book + dedication: copied exactly from the book's page on saraharaide.com -->
+          <p class="book-blurb"><cite>Cece Once Said</cite> is a debut collection of 83 poems, written from the other side of the darkest years of a young life. Moving through seven sections, from roots and inheritance, through confinement, love and ruin, descent, grief and loss, to grace and return, Cece writes about depression, self-harm, family, first love and grief with unflinching honesty and a stubborn search for light.</p>
+          <p class="book-blurb">Written between childhood notebooks and engineering lectures, these poems hold softness and fire side by side: the tenderness of someone who sees good in people, and the ache of someone who has carried more than she should. It is a book for anyone fighting an invisible battle, and for anyone who loves someone who is.</p>
+
+          <p class="book-dedication"><span class="kicker">Dedication</span> To those with an invisible battle, you are very much seen.</p>
 
           <!-- A review, from the book page. <figure> groups the quote with who said it. -->
           <figure class="book-review">
@@ -149,7 +150,11 @@
                target="_blank" opens it in a new tab; rel="noopener" is a safety habit
                for that. The hidden words tell screen-reader users about the new tab.
                When pre-orders open, change the button text to "Pre-order now ♡". -->
-          <a class="bubble-button" href="https://saraharaide.com/publishing/books/cece-once-said/preorder" target="_blank" rel="noopener">Get notified when pre-orders open ♡<span class="sr-only"> (opens in a new tab)</span></a>
+          <p class="button-row">
+            <a class="bubble-button" href="https://saraharaide.com/publishing/books/cece-once-said/preorder" target="_blank" rel="noopener">Get notified when pre-orders open ♡<span class="sr-only"> (opens in a new tab)</span></a>
+            <!-- Cece's newsletter on saraharaide.com: news, events and a poem by email -->
+            <a class="bubble-button" href="https://saraharaide.com/publishing/letters" target="_blank" rel="noopener">Get Letters from Cece ✉<span class="sr-only"> (newsletter, opens in a new tab)</span></a>
+          </p>
         </div>
       </div>
     </section>
@@ -212,31 +217,45 @@
 
     <!-- =========================================================
          03 · POEMS: lined notebook sheets.
-         Write a poem inside <p class="poem"> ... </p>, one line per line:
-         the CSS keeps your line breaks exactly as you type them.
+         Write a poem inside <p class="poem"> ... </p>, one line per line
+         (start the first line right after the > ): the CSS keeps your line
+         breaks exactly as you type them, and an empty line starts a new stanza.
+         To add a poem, copy a whole <article class="poem-sheet"> block.
+         "Soil" and "Resist" are copied exactly from the excerpts on
+         saraharaide.com, with the same content note.
          ========================================================= -->
     <section class="spread__section" aria-labelledby="poems-heading">
       <h2 class="section-heading" id="poems-heading"><span class="section-heading__number">03</span> Poems</h2>
       <!-- The poets' names link to their pages on the Poetry Foundation site -->
       <p class="section-intro">Poems in the spirit of <a href="https://www.poetryfoundation.org/poets/emily-dickinson" target="_blank" rel="noopener">Emily Dickinson<span class="sr-only"> (opens in a new tab)</span></a> and <a href="https://www.poetryfoundation.org/poets/charles-bukowski" target="_blank" rel="noopener">Charles Bukowski<span class="sr-only"> (opens in a new tab)</span></a>.</p>
 
+      <!-- Content note, the same as on saraharaide.com -->
+      <p class="content-note"><strong>Content note</strong> This collection deals with suicidal thoughts, self-harm, abuse and grief. Please read gently. If you are struggling, you are not alone: ERAN emotional first aid is available 24/7 at <a href="tel:1201">1201</a>.</p>
+
       <div class="two-col">
         <div>
           <article class="poem-sheet">
-            <h3><span class="slot-inline">Poem title</span></h3>
-            <!-- ✎ CECE: replace the slot below with <p class="poem">your lines</p> -->
-            <div class="slot slot--tall">
-              <p class="slot__label">Poem</p>
-              <p class="slot__hint">your poem, line by line</p>
-            </div>
+            <h3>Soil</h3>
+            <p class="poem">We rose from the same soil, you and I.
+              I despise all that you are.
+              Vicariously, through me, you climbed closer to the sun.
+              You watched while I reached — thinner and thinner —
+              burned at the edges as I leaned toward light.
+              You became an observer; I became ash.
+
+              We tried to nurture the same ground and failed.
+              Maybe it’s impossible to grow away from what you taught me,
+              while they feed me with the very soil you once tried to bury me under.</p>
+            <p class="poem-source">from <cite>Cece Once Said</cite></p>
           </article>
 
           <article class="poem-sheet">
-            <h3><span class="slot-inline">Poem title</span></h3>
-            <div class="slot slot--tall">
-              <p class="slot__label">Poem</p>
-              <p class="slot__hint">your poem, line by line</p>
-            </div>
+            <h3>Resist</h3>
+            <p class="poem">If you are tired,
+              rest.
+              That, too,
+              is a kind of resistance.</p>
+            <p class="poem-source">from <cite>Cece Once Said</cite></p>
           </article>
         </div>
 
@@ -249,7 +268,46 @@
       </div>
     </section>
 
+    <!-- =========================================================
+         04 · ABOUT CECE: the author bio from the About page on
+         saraharaide.com (copied exactly), plus Cece's accounts.
+         ========================================================= -->
+    <section class="spread__section" aria-labelledby="about-heading">
+      <h2 class="section-heading" id="about-heading"><span class="section-heading__number">04</span> About Cece</h2>
+
+      <div class="panel">
+        <p>Cece is the pen name of Sarah Araide, a poet and mechanical engineering student at the Technion. She was born in Maghar and discovered writing at the age of seven, turning it into a way of understanding herself and the world around her.</p>
+        <p>Her poetry carries both softness and fire. She writes about pain, love, grief, identity and survival, and about the complicated act of returning to oneself. Poetry is where she gives shape to what cannot be solved by logic alone. <cite>Cece Once Said</cite> is her first collection.</p>
+        <ul class="tag-list social-links">
+          <li><a href="https://www.instagram.com/cece_once_said" target="_blank" rel="noopener">Instagram<span class="sr-only"> (opens in a new tab)</span></a></li>
+          <li><a href="https://www.tiktok.com/@cece_once_said" target="_blank" rel="noopener">TikTok<span class="sr-only"> (opens in a new tab)</span></a></li>
+          <li><a href="https://x.com/cece_once_said" target="_blank" rel="noopener">X<span class="sr-only"> (opens in a new tab)</span></a></li>
+          <li><a href="https://saraharaide.com/publishing" target="_blank" rel="noopener">Cece's Publishing House<span class="sr-only"> (opens in a new tab)</span></a></li>
+        </ul>
+      </div>
+    </section>
+
   </main>
+
+  <!-- =========================================================
+       FLIP THROUGH THE MAGAZINE: previous page · page number · next page.
+       The ← and → arrow keys flip pages too (main.js). The two folded
+       corners at the bottom of the screen do the same for mouse users,
+       so they're hidden from screen readers (the bar already says it).
+       ========================================================= -->
+  <nav class="page-flip" aria-label="Flip through the magazine">
+    <a class="page-flip__link page-flip__link--prev" href="index.html" rel="prev">
+      <span class="page-flip__label"><span aria-hidden="true">←</span> Previous page</span>
+      <span class="page-flip__title">The cover</span>
+    </a>
+    <p class="page-flip__folio">p.02 <span>of 10</span></p>
+    <a class="page-flip__link page-flip__link--next" href="kitchen.html" rel="next">
+      <span class="page-flip__label">Next page <span aria-hidden="true">→</span></span>
+      <span class="page-flip__title">Cece's Kitchen</span>
+    </a>
+  </nav>
+  <a class="page-corner page-corner--prev" href="index.html" title="Previous page" aria-hidden="true" tabindex="-1"></a>
+  <a class="page-corner page-corner--next" href="kitchen.html" title="Next page" aria-hidden="true" tabindex="-1"></a>
 
   <!-- =========================================================
        SHARED FOOTER: the same on every section page
@@ -259,6 +317,13 @@
     <a class="site-footer__logo chrome-text" href="index.html">CECE<span class="sr-only">, back to the cover</span></a>
     <p class="site-footer__issue">Issue 01 · November 2026 · The Stacked Life Issue</p>
     <p>Made by Cece with plain HTML, CSS &amp; JavaScript.</p>
+    <!-- Cece's accounts (from saraharaide.com) -->
+    <ul class="site-footer__social">
+      <li><a href="https://www.instagram.com/cece_once_said" target="_blank" rel="noopener">Instagram<span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li><a href="https://www.tiktok.com/@cece_once_said" target="_blank" rel="noopener">TikTok<span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li><a href="https://x.com/cece_once_said" target="_blank" rel="noopener">X<span class="sr-only"> (opens in a new tab)</span></a></li>
+      <li><a href="https://vsco.co/cecesdigitlphotos" target="_blank" rel="noopener">VSCO<span class="sr-only"> (opens in a new tab)</span></a></li>
+    </ul>
     <p><a href="index.html">← Back to the cover</a></p>
   </footer>
 </body>

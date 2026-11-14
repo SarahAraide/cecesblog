@@ -18,6 +18,7 @@
      7. Buttons: bubble button, dark-mode switch, ladybug button
      8. The wandering ladybug
      9. Reduced motion
+    10. Flipping pages: folded page corners + page-turn animation
    ================================================================= */
 
 
@@ -713,4 +714,94 @@ a:hover {
   .ladybug-toggle {
     display: none !important;
   }
+}
+
+
+/* =================================================================
+   10. FLIPPING PAGES
+   ================================================================= */
+
+/* ---- Folded page corner ----
+   A square in the bottom corner of the screen, cut to a triangle
+   (clip-path). The gradient makes it look like the corner of the page is
+   folded up: a white crease along the diagonal, pink towards the tip.
+   Hovering lifts it a little more, like peeling the page. */
+.page-corner {
+  position: fixed;
+  bottom: 0;
+  z-index: 40;
+  width: 3.4rem;
+  height: 3.4rem;
+  filter: drop-shadow(-2px -2px 3px rgba(122, 20, 72, 0.35));
+  transition: width 0.25s ease, height 0.25s ease;
+}
+
+.page-corner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.page-corner--next {
+  right: 0;
+}
+
+.page-corner--next::before {
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  background: linear-gradient(to bottom right, transparent 49%, #FFFFFF 50%, #FFE0EE 70%, #FF9ECF 100%);
+}
+
+.page-corner--prev {
+  left: 0;
+}
+
+.page-corner--prev::before {
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  background: linear-gradient(to bottom left, transparent 49%, #FFFFFF 50%, #FFE0EE 70%, #FF9ECF 100%);
+}
+
+/* a tiny arrow in the tip of each corner */
+.page-corner::after {
+  position: absolute;
+  bottom: 0.35rem;
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #C2006B;
+}
+
+.page-corner--next::after { content: "→"; right: 0.45rem; }
+.page-corner--prev::after { content: "←"; left: 0.45rem; }
+
+.page-corner:hover {
+  width: 4.4rem;
+  height: 4.4rem;
+}
+
+/* ---- Page-turn animation between pages ----
+   "View transitions" let the browser animate from one page to the next:
+   the old page turns away like a magazine page, the new one settles in.
+   Browsers that don't know this simply open the next page as usual, and
+   it's skipped entirely for people who prefer reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root) {
+    transform-origin: left center;
+    animation: page-turn-out 0.5s ease-in both;
+  }
+
+  ::view-transition-new(root) {
+    animation: page-turn-in 0.5s ease-out both;
+  }
+}
+
+@keyframes page-turn-out {
+  to { transform: perspective(2000px) rotateY(-80deg); opacity: 0; }
+}
+
+@keyframes page-turn-in {
+  from { transform: perspective(2000px) rotateY(12deg) translateX(3%); opacity: 0; }
 }

@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/spread.css">
   <script src="js/main.js" defer></script>
+  <!-- The movie list: first the data, then the code that shows it -->
+  <script src="js/movies.js" defer></script>
+  <script src="js/cinema.js" defer></script>
 </head>
 
 <body>
@@ -73,18 +76,48 @@
 
     <!-- =========================================================
          01 · THE LIST
-         Phase 3 fills this in: js/movies.js holds every title from
-         movies.md, and js/cinema.js turns them into cards with
-         category buttons and a search box, inside #movie-app below.
+         js/movies.js holds every title (the data); js/cinema.js turns
+         them into cards and makes the buttons and the search box work.
+         To add a film: open js/movies.js and copy one { ... } line.
          ========================================================= -->
     <section class="spread__section" aria-labelledby="list-heading">
       <h2 class="section-heading" id="list-heading"><span class="section-heading__number">01</span> The list</h2>
 
-      <div id="movie-app">
-        <div class="slot slot--tall">
-          <p class="slot__label">Coming in the next update</p>
-          <p class="slot__hint">every title from the movie list as a card (year, film or series, main cast) with mood buttons and a search box</p>
+      <div id="movie-app" class="movie-app">
+        <!-- The controls. Each button has aria-pressed="true/false" so
+             screen readers say which mood is switched on. -->
+        <div class="panel movie-controls">
+          <label class="movie-search">
+            <span class="kicker">Search a title or an actor</span>
+            <input type="search" id="movie-search" placeholder="e.g. Timothée, Shrek, 2019…" autocomplete="off">
+          </label>
+
+          <div class="movie-filter" role="group" aria-label="Mood">
+            <p class="kicker" aria-hidden="true">Mood</p>
+            <div class="movie-buttons" id="mood-buttons">
+              <!-- js/cinema.js adds one button per mood here, with its count -->
+            </div>
+          </div>
+
+          <div class="movie-filter" role="group" aria-label="Film or series">
+            <p class="kicker" aria-hidden="true">Film or series</p>
+            <div class="movie-buttons" id="type-buttons">
+              <button class="mood-button" type="button" data-type="all" aria-pressed="true">Both</button>
+              <button class="mood-button" type="button" data-type="film" aria-pressed="false">Films</button>
+              <button class="mood-button" type="button" data-type="series" aria-pressed="false">Series</button>
+            </div>
+          </div>
         </div>
+
+        <!-- "Showing 210 titles": role="status" reads it out when it changes -->
+        <p class="movie-count" id="movie-count" role="status"></p>
+
+        <!-- The cards go here -->
+        <ul class="movie-grid" id="movie-grid"></ul>
+
+        <p class="movie-empty" id="movie-empty" hidden>Nothing matches that. Try another word, or press “All moods”.</p>
+
+        <noscript><p class="movie-empty">The list needs JavaScript switched on.</p></noscript>
       </div>
     </section>
 

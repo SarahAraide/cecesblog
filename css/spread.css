@@ -27,6 +27,7 @@
         columns, the open-magazine spread on laptops
     16. Video previews (Mind Matters)
     17. The puzzle page: sudoku
+    18. Movie Night: mood buttons, search and ticket cards
    ================================================================= */
 
 
@@ -1968,4 +1969,226 @@
   font-family: var(--font-headline);
   font-weight: 600;
   color: var(--pink-text);
+}
+
+
+/* =================================================================
+   18. MOVIE NIGHT: MOOD BUTTONS, SEARCH AND TICKET CARDS
+   js/cinema.js makes the cards from js/movies.js.
+   No posters (they're copyrighted): each card is a typographic
+   cinema ticket instead, coloured by its first mood.
+   ================================================================= */
+
+/* One colour per mood (light, then Midnight Issue). Text on these
+   colours is always the dark --text colour, which passes contrast. */
+:root {
+  --mood-anime: #E3D7FF;
+  --mood-animated: #CDEBFF;
+  --mood-romcom: #FFD3E9;
+  --mood-heartbreak: #FFD6D6;
+  --mood-teens: #FFF0B8;
+  --mood-thriller: #D9D4F0;
+  --mood-sitcom: #CFF5E3;
+  --mood-docs: #F3E4CF;
+}
+
+[data-theme="dark"] {
+  --mood-anime: #3B2A66;
+  --mood-animated: #1F3D57;
+  --mood-romcom: #5A2148;
+  --mood-heartbreak: #5A2026;
+  --mood-teens: #4F4318;
+  --mood-thriller: #2E2950;
+  --mood-sitcom: #1D4A3A;
+  --mood-docs: #4A3A26;
+}
+
+.movie-controls {
+  display: grid;
+  gap: 1.1rem;
+  margin-bottom: 1.25rem;
+}
+
+.movie-search {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.movie-search .kicker,
+.movie-filter .kicker {
+  margin: 0;
+}
+
+.movie-search input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 2px solid var(--hot-pink);
+  border-radius: 999px;
+}
+
+.movie-search input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.movie-filter {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.movie-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+/* The mood / type buttons: white pills that turn candy pink when on */
+.mood-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-label);
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--paper);
+  border: 2px solid var(--hot-pink);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.mood-button:hover {
+  background: var(--mood-romcom);
+}
+
+.mood-button[aria-pressed="true"] {
+  font-weight: 600;
+  background: var(--bubblegum);
+  box-shadow: 2px 2px 0 var(--hot-pink);
+}
+
+.mood-button__count {
+  min-width: 1.6em;
+  padding: 0 0.35em;
+  font-size: 0.75rem;
+  text-align: center;
+  background: var(--bg);
+  border-radius: 999px;
+}
+
+.movie-count {
+  margin: 0 0 1rem;
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.movie-empty {
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--paper);
+  border: 2px dashed var(--hot-pink);
+}
+
+/* The cards: as many columns as fit, each at least 14rem wide */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A cinema ticket: coloured strip on top, a dashed tear line, the
+   details underneath. The two round notches at the tear line are
+   radial gradients the colour of the page. */
+.movie-card {
+  --ticket: var(--mood-romcom);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0 1rem 0.9rem;
+  background: var(--paper);
+  border: 2px solid var(--text);
+  border-radius: 0.6rem;
+  box-shadow: 3px 4px 0 var(--ticket);
+}
+
+.movie-card[hidden] {
+  display: none;
+}
+
+.movie-card--anime      { --ticket: var(--mood-anime); }
+.movie-card--animated   { --ticket: var(--mood-animated); }
+.movie-card--romcom     { --ticket: var(--mood-romcom); }
+.movie-card--heartbreak { --ticket: var(--mood-heartbreak); }
+.movie-card--teens      { --ticket: var(--mood-teens); }
+.movie-card--thriller   { --ticket: var(--mood-thriller); }
+.movie-card--sitcom     { --ticket: var(--mood-sitcom); }
+.movie-card--docs       { --ticket: var(--mood-docs); }
+
+.movie-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0 -1rem 0.4rem;
+  padding: 0.45rem 1rem;
+  background: var(--ticket);
+  border-bottom: 2px dashed var(--text);       /* the tear line */
+  border-radius: 0.45rem 0.45rem 0 0;
+}
+
+.movie-card__tag {
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.movie-card__tag + .movie-card__tag::before {
+  content: "· ";
+}
+
+.movie-card__title {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.movie-card__meta {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.movie-card__cast {
+  margin: 0.2rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.movie-card__cast-label {
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+}
+
+/* No confirmed cast yet */
+.movie-card__todo {
+  padding: 0 0.35em;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  background: var(--sudoku-wrong);
+  border: 1px dashed var(--red);
+  border-radius: 0.3rem;
 }

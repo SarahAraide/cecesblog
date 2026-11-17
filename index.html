@@ -29,21 +29,24 @@
 
   <!-- 1. theme.js comes FIRST and without "defer": it picks light or dark
           mode before the page is drawn, so there's no white flash. -->
-  <script src="js/theme.js?v=2026-11-17"></script>
+  <script src="js/theme.js?v=2026-11-17b"></script>
 
   <!-- 2. Bubbly fonts from Google Fonts: Bagel Fat One (masthead + big titles),
           Fredoka (headlines + labels), Gochi Hand (handwriting), Nunito (body text) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fredoka:wght@300..700&family=Gochi+Hand&family=Nunito:ital,wght@0,400..800;1,400..800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fredoka:wght@300..700&family=Gochi+Hand&family=Nunito:ital,wght@0,400..800;1,400..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap">
 
   <!-- 3. Our styles: the shared design system, then the cover's own layout.
           Relative paths (no "/" at the start) so it works on GitHub Pages. -->
-  <link rel="stylesheet" href="css/style.css?v=2026-11-17">
-  <link rel="stylesheet" href="css/cover.css?v=2026-11-17">
+  <link rel="stylesheet" href="css/style.css?v=2026-11-17b">
+  <link rel="stylesheet" href="css/cover.css?v=2026-11-17b">
+  <!-- The editorial "real magazine" look: loaded last, so it wins.
+       Delete this line to go back to the collage look. -->
+  <link rel="stylesheet" href="css/editorial.css?v=2026-11-17b">
 
   <!-- 4. main.js: "defer" = download now, run once the HTML has been read -->
-  <script src="js/main.js?v=2026-11-17" defer></script>
+  <script src="js/main.js?v=2026-11-17b" defer></script>
 </head>
 
 <body>

@@ -1,0 +1,889 @@
+@charset "UTF-8";
+/* =================================================================
+   CECE: editorial.css (the "real magazine" look)
+   -----------------------------------------------------------------
+   Loaded LAST on every page, so it wins over style.css, spread.css
+   and cover.css wherever they disagree. It turns the playful collage
+   into an editorial magazine, like Vogue or ELLE:
+     - elegant serif headlines (Playfair Display); the bubbly CECE
+       logo, the small labels and the handwriting stay
+     - clean white paper instead of pink graph paper
+     - pink only as an accent colour
+     - thin rules instead of dashed borders and pink offset shadows
+     - straight photos and boxes (no tilts, no tape)
+     - almost no stickers or doodles
+   To go back to the collage look, delete the editorial.css line in
+   the <head> of each page.
+
+   CONTENTS
+     1. Colours and fonts
+     2. Headings and text
+     3. Photos, buttons, labels and lists
+     4. Shared header and footer
+     5. Story pages
+     6. Page by page details
+     7. The cover
+     8. The Contents page
+   ================================================================= */
+
+
+/* =================================================================
+   1. COLOURS AND FONTS
+   ================================================================= */
+:root {
+  --font-serif: "Playfair Display", "Didot", "Bodoni MT", Georgia, serif;
+  --font-headline: var(--font-serif);     /* every headline becomes serif */
+
+  --bg: #FAF7F8;                          /* soft white "desk" */
+  --paper: #FFFFFF;
+  --grid-line: transparent;               /* no graph paper */
+  --rule: #1F0A16;                        /* thin black lines */
+  --rule-soft: rgba(31, 10, 22, 0.14);
+  --tape: transparent;
+
+  --spread-paper: #FFFFFF;
+  --page-edge: #ECE5E8;
+  --page-edge-2: #E0D7DB;
+  --fold: rgba(31, 10, 22, 0.06);
+}
+
+[data-theme="dark"] {
+  --bg: #120D12;
+  --paper: #1B141B;
+  --grid-line: transparent;
+  --rule: #FBE9F3;
+  --rule-soft: rgba(251, 233, 243, 0.16);
+
+  --spread-paper: #1B141B;
+  --page-edge: #2A212A;
+  --page-edge-2: #352A35;
+  --fold: rgba(0, 0, 0, 0.45);
+}
+
+
+/* =================================================================
+   2. HEADINGS AND TEXT
+   ================================================================= */
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* the CECE logo keeps its bubbly chrome letters everywhere */
+.chrome-text,
+.masthead__title,
+.site-header__logo,
+.site-footer__logo {
+  font-family: var(--font-masthead);
+  font-weight: normal;
+  letter-spacing: 0;
+}
+
+/* Drop caps: a tall serif letter in deep pink */
+.drop-cap::first-letter {
+  margin: 0.06em 0.12em 0 0;
+  font-family: var(--font-serif);
+  font-size: 4.2em;
+  font-weight: 700;
+  line-height: 0.78;
+  color: var(--pink-text);
+  text-shadow: none;
+}
+
+.columns-2 {
+  column-rule: 1px solid var(--rule-soft);
+}
+
+
+/* =================================================================
+   3. PHOTOS, BUTTONS, LABELS AND LISTS
+   ================================================================= */
+
+/* Photos: straight, no white polaroid frame, no tape; the caption is
+   a small italic line underneath, like a photo credit */
+.polaroid,
+[data-theme="dark"] .polaroid {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  rotate: 0deg;
+}
+
+.taped::before {
+  display: none;
+}
+
+.polaroid .photo__caption,
+.photo__caption {
+  padding: 0.45rem 0 0;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: left;
+  color: var(--text-soft);
+}
+
+/* Stickers become small square labels (no tilt, no pill, no shadow) */
+.sticker {
+  padding: 0.25em 0.6em;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: var(--paper);
+  background: var(--text);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  rotate: 0deg;
+}
+
+/* Buttons: black rectangles that turn deep pink on hover */
+.bubble-button {
+  padding: 0.85em 1.5em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--paper);
+  background: var(--text);
+  border: 1px solid var(--text);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.bubble-button:hover,
+.bubble-button:focus-visible {
+  translate: none;
+  color: #FFFFFF;
+  background: var(--pink-text);
+  border-color: var(--pink-text);
+}
+
+.bubble-button--quiet {
+  color: var(--text);
+  background: transparent;
+}
+
+.badge {
+  padding: 0.2rem 0.55rem;
+  border-width: 1px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.badge--ai {
+  color: var(--text);
+  background: transparent;
+  border-color: var(--rule);
+}
+
+/* List bullets: a small deep-pink dash instead of a ladybug */
+.ladybug-list li {
+  padding-left: 1.3rem;
+}
+
+.ladybug-list li::before {
+  top: 0.78em;
+  width: 0.6rem;
+  height: 2px;
+  background: var(--pink-text);
+  border-radius: 0;
+}
+
+/* the row of ladybug dots becomes a thin rule */
+.ladybug-divider {
+  height: 0;
+  background: none;
+  border-top: 1px solid var(--rule);
+}
+
+/* "by Cece": no ladybug icon */
+.byline::before {
+  display: none;
+}
+
+
+/* =================================================================
+   4. SHARED HEADER AND FOOTER
+   ================================================================= */
+
+/* The header: a clean bar with a thin rule underneath */
+.site-header {
+  margin-top: 0;
+  padding: 0.8rem 0 0.6rem;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+}
+
+.site-header__logo.chrome-text,
+.site-footer__logo.chrome-text {
+  filter: none;
+}
+
+/* the menu: small uppercase words, the current page underlined in pink */
+.site-nav__list {
+  gap: 0.2rem 1.1rem;
+}
+
+.site-nav a,
+.site-nav a:hover {
+  padding: 0.3rem 0;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  translate: none;
+}
+
+.site-nav a:hover {
+  color: var(--pink-text);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--pink-text);
+  background: none;
+  border-bottom-color: var(--pink-text);
+}
+
+.contents-toggle {
+  color: var(--text);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* The footer: no box, just thin rules */
+.site-footer {
+  padding: 1.5rem 0 1rem;
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  border-radius: 0;
+}
+
+.site-footer .ladybug-divider {
+  display: none;
+}
+
+
+/* =================================================================
+   5. STORY PAGES
+   ================================================================= */
+
+/* The open magazine on laptops: plain white pages, softer edges */
+@media (min-width: 1000px) {
+  .spread {
+    box-shadow:
+      -3px 3px 0 var(--page-edge),
+      3px 3px 0 var(--page-edge),
+      0 18px 40px rgba(31, 10, 22, 0.12);
+  }
+}
+
+.running-head,
+.folio {
+  border-color: var(--rule);
+}
+
+.folio > span:first-child {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 700;
+}
+
+/* The page header: no card, just big type and a rule underneath */
+.spread__header,
+.page--calm .spread__header {
+  padding: 2rem 0 2.2rem;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.spread__title {
+  font-size: clamp(2.4rem, 1.4rem + 4vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.spread__dek {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* the header's label ("EXCLUSIVE"...) sits on the text's first line */
+.spread__sticker {
+  position: static;
+  display: inline-block;
+  margin-bottom: 0.9rem;
+}
+
+/* no doodles on the story pages */
+.spread .doodle {
+  display: none;
+}
+
+/* Section headings: "01" in italic pink serif, a thin rule underneath */
+.section-heading {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.section-heading__number {
+  padding: 0;
+  font-family: var(--font-serif);
+  font-size: 0.6em;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--pink-text);
+  background: none;
+  border: 0;
+  border-radius: 0;
+  rotate: 0deg;
+}
+
+/* Boxes: white with a hairline border, no pink offset shadow */
+.panel {
+  border: 1px solid var(--rule-soft);
+  box-shadow: none;
+}
+
+/* Placeholders for content to come: a quiet dashed outline */
+.slot {
+  background: none;
+  border: 1px dashed var(--rule-soft);
+  border-radius: 0;
+}
+
+/* Pull quotes: big italic serif between two rules, no box */
+.pull-quote {
+  padding: 1.6rem 1rem;
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  box-shadow: none;
+  rotate: 0deg;
+}
+
+.pull-quote::before {
+  position: static;
+  display: block;
+  height: 2.2rem;
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--pink-text);
+}
+
+.pull-quote p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* "Turn the page" at the bottom of every story */
+.page-flip__link {
+  border: 1px solid var(--rule-soft);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.page-flip__link:hover {
+  translate: none;
+  box-shadow: none;
+  border-color: var(--rule);
+}
+
+.page-flip__heading::before,
+.page-flip__heading::after {
+  border-top: 1px solid var(--rule);
+}
+
+.page-flip__folio {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.page-flip__cover {
+  border: 1px solid var(--rule);
+  border-radius: 0;
+}
+
+
+/* =================================================================
+   6. PAGE BY PAGE DETAILS
+   ================================================================= */
+
+/* Facts (Cat of the Month, Kitchen...): numbered in pink serif, no stickers */
+.fact-list li {
+  border-top: 1px solid var(--rule);
+  box-shadow: none;
+}
+
+.fact-list li::before {
+  padding: 0;
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--pink-text);
+  background: var(--paper);
+  border: 0;
+  border-radius: 0;
+  rotate: 0deg;
+}
+
+.fact-list .fact--featured {
+  background: var(--paper);
+  border-top: 3px solid var(--pink-text);
+}
+
+/* "Last updated" stamp on Sale Alert: straight and quiet */
+.updated-stamp {
+  border-width: 1px;
+  rotate: 0deg;
+}
+
+/* Movie Night: mood buttons as square outlines, tickets with hairlines */
+.mood-button {
+  border: 1px solid var(--rule-soft);
+  border-radius: 0;
+}
+
+.mood-button[aria-pressed="true"] {
+  color: var(--paper);
+  background: var(--text);
+  border-color: var(--text);
+  box-shadow: none;
+}
+
+.mood-button__count {
+  border-radius: 0;
+}
+
+.mood-button[aria-pressed="true"] .mood-button__count {
+  color: var(--text);
+}
+
+.movie-search input {
+  border: 1px solid var(--rule);
+  border-radius: 0;
+}
+
+.movie-card {
+  border: 1px solid var(--rule-soft);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.movie-card__tags {
+  border-bottom: 1px solid var(--rule-soft);
+  border-radius: 0;
+}
+
+/* Sudoku: a crisp printed grid */
+.sudoku-board {
+  border-width: 2px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.sudoku-level label {
+  border: 1px solid var(--rule-soft);
+  border-radius: 0;
+}
+
+/* Mind Matters support box and video previews: hairlines */
+.video-embed {
+  border-radius: 0;
+}
+
+
+/* =================================================================
+   7. THE COVER
+   ================================================================= */
+
+/* A softer, brighter silver behind the cover lines (still metallic),
+   so the black serif type reads clearly */
+:root {
+  --cover-chrome:
+    radial-gradient(ellipse 70% 45% at 20% 10%, rgba(255, 255, 255, 0.95), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 85% 90%, rgba(255, 255, 255, 0.85), transparent 70%),
+    radial-gradient(ellipse 45% 30% at 85% 18%, rgba(255, 158, 207, 0.28), transparent 70%),
+    linear-gradient(135deg, #FBFBFD 0%, #E9EAEF 25%, #F7F7FA 45%, #DCDEE5 65%, #F4F4F7 85%, #E6E7EC 100%);
+}
+
+[data-theme="dark"] {
+  --cover-chrome:
+    radial-gradient(ellipse 60% 40% at 18% 12%, rgba(185, 168, 255, 0.18), transparent 70%),
+    radial-gradient(ellipse 50% 35% at 85% 88%, rgba(255, 79, 184, 0.14), transparent 70%),
+    linear-gradient(135deg, #1E1420 0%, #2B2133 30%, #19111B 55%, #2F2438 80%, #1C141E 100%);
+}
+
+/* no star splashes, doodles, margin notes or the tiny cat photo */
+.cover__bg .bg-star,
+.cover .doodle,
+.cover .margin-note,
+.cover .photo--mini,
+.cover .headline-burst--bottom,
+.cover .midnight-sticker,
+[data-theme="dark"] .cover .midnight-sticker {
+  display: none;
+}
+
+/* Top line: just text with a thin rule under it */
+.cover__topline {
+  padding: 0.2rem 0 0.45rem;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+}
+
+/* Masthead: the tagline in small italic serif, straight */
+.masthead__tagline {
+  padding: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(0.85rem, 0.6rem + 0.9vh, 1.2rem);
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  background: none;
+  rotate: 0deg;
+}
+
+[data-theme="dark"] .cover .masthead {
+  padding-bottom: 0;
+}
+
+/* The main headline: big serif words straight on the cover, no paper */
+.headline-wrap.drop-shadow {
+  filter: none;
+}
+
+.main-headline.torn-paper {
+  padding: 0.4rem 0;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 0.3rem + 1.8vh + 0.6cqw, 1.85rem);
+  line-height: 1.18;
+  background: none;
+  clip-path: none;
+}
+
+.main-headline mark {
+  padding: 0;
+  font-style: italic;
+  color: inherit;
+  background: none;
+  text-decoration: underline 2px var(--hot-pink);
+  text-underline-offset: 0.15em;
+}
+
+/* The Sudoku flash: one round black label instead of a starburst */
+.headline-burst--top .sticker--burst {
+  color: var(--paper);
+  background: var(--text);
+  clip-path: circle(50%);
+  box-shadow: none;
+}
+
+/* Cover lines: plain type, a thin rule above each one. Every special
+   shape (envelope, film strip, window, shopping bag, stickers) is
+   switched off; the words stay. */
+.cover .cover-line,
+.cover .cover-line:hover,
+.cover .cover-line:focus-visible,
+[data-theme="dark"] .cover .cover-line--sales {
+  display: block;
+  width: auto;
+  margin: 0;
+  padding: 0.4rem 0 0.15rem;
+  color: var(--text);
+  text-align: left;
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  box-shadow: none;
+  filter: none;
+  rotate: 0deg;
+  translate: none;
+}
+
+.cover .cover-line::before,
+.cover .cover-line::after,
+.cover .envelope__letter,
+.cover .envelope__pocket,
+.cover .envelope__flap,
+.cover .bag__handles,
+.cover .bag__body,
+.cover .pixel-window__bar,
+.cover .cover-line .sticker {
+  display: none;
+}
+
+.cover .envelope__text,
+.cover .pixel-window__body,
+.cover .bag__text,
+.cover .cover-line__text,
+.cover .cover-line .kicker {
+  padding: 0;
+}
+
+.cover .cover-line .kicker {
+  color: var(--pink-text);
+}
+
+.cover .cover-line__headline {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.cover .cover-line:hover .cover-line__headline,
+.cover .cover-line:focus-visible .cover-line__headline {
+  text-decoration: underline 1px;
+  text-underline-offset: 0.18em;
+}
+
+.cover .cover-line:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* the shopping bag line keeps no special width on any screen */
+.cover .cover-lines--right > li:last-child {
+  width: auto;
+  margin: 0;
+}
+
+/* "SALE ALERT": the ransom letters become an ordinary pink label */
+.cover .ransom {
+  display: block;
+  margin: 0 0 0.15rem;
+  font-family: var(--font-label);
+  font-size: clamp(0.52rem, 0.35rem + 0.5vh + 0.2cqw, 0.74rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+}
+
+.cover .ransom__word {
+  display: inline;
+}
+
+.cover .ransom__word + .ransom__word {
+  margin-left: 0.35em;
+}
+
+.cover .ransom__word span,
+.cover .ransom__word span:nth-child(n) {
+  display: inline;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  rotate: 0deg;
+  translate: none;
+}
+
+/* Page numbers: a small line under each cover line, not a black pill */
+.cover .page-num,
+.cover .cover-lines--left > li:first-child > .page-num {
+  position: static;
+  display: block;
+  margin: 0.1rem 0 0;
+  padding: 0;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--text-soft);
+  background: none;
+  border-radius: 0;
+}
+
+.cover .cover-banner .page-num--inline {
+  display: inline;
+  margin: 0 0 0 auto;
+}
+
+/* The fun fact: a clean sidebar note (thin frame, italic serif) */
+.cover .cover-postit {
+  z-index: 0;
+  margin-top: 0.2rem;
+  padding: 0.5rem 0.7rem;
+  font-family: var(--font-serif);
+  font-size: clamp(0.8rem, 0.4rem + 0.9vh + 0.15cqw, 1.05rem);
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--text);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  box-shadow: none;
+  rotate: 0deg;
+}
+
+.cover .cover-postit::before {
+  display: none;
+}
+
+.cover .cover-postit__title {
+  margin-bottom: 0.15rem;
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-style: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+}
+
+/* Bottom strip: Mind Matters as one more cover line, then the barcode */
+.cover__bottom {
+  padding: 0.35rem 0 0;
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  border-radius: 0;
+}
+
+.cover .cover-banner {
+  padding: 0.1rem 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+}
+
+.cover .cover-banner__headline {
+  font-family: var(--font-serif);
+}
+
+.barcode {
+  rotate: 0deg;
+  box-shadow: none;
+}
+
+
+/* =================================================================
+   8. THE CONTENTS PAGE
+   ================================================================= */
+.contents-page {
+  border: 1px solid var(--rule-soft);
+  border-radius: 0;
+  box-shadow: 0 10px 30px rgba(31, 10, 22, 0.08);
+}
+
+@media (min-width: 960px) and (min-aspect-ratio: 8/5) {
+  .contents-page {
+    border: 0;
+    border-radius: 3px 0 0 3px;
+  }
+}
+
+.contents-page__title {
+  font-family: var(--font-serif);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-shadow: none;
+}
+
+.contents-page__dek {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--text-soft);
+  border-bottom: 1px solid var(--rule);
+}
+
+.contents-list li + li {
+  border-top: 1px solid var(--rule-soft);
+}
+
+.contents-list__num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--pink-text);
+  text-shadow: none;
+}
+
+.contents-list__title {
+  font-family: var(--font-serif);
+}
+
+.contents-page__foot {
+  border-top-color: var(--rule);
+}
+
+.contents-page__doodle {
+  display: none;
+}
+
+
+/* =================================================================
+   9. LAST DETAILS
+   ================================================================= */
+
+/* every remaining dashed pink line becomes a thin solid rule */
+.site-nav {
+  border-top: 1px solid var(--rule-soft);
+}
+
+.stat-list div {
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.slot-inline {
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.bubble-button.is-disabled {
+  color: var(--text-soft);
+  background: transparent;
+  border: 1px solid var(--rule-soft);
+}
+
+.movie-empty {
+  border: 1px solid var(--rule-soft);
+}
+
+/* The book title in The Writer's Room: serif, like a real book review */
+.book-title {
+  font-family: var(--font-serif);
+  font-weight: 800;
+}
+
+/* Big page titles: bold, not extra-bold (calmer on the eye) */
+.spread__title {
+  font-weight: 700;
+}
+
+/* The Sudoku flash sits ABOVE the headline (on the masthead's left),
+   so it never covers the headline's first words */
+.headline-burst--top {
+  top: calc(-1 * var(--burst-size) - 0.3rem);
+  left: 0;
+}
+
+/* "SALE ALERT": no outlines left on the old ransom letters */
+.cover .ransom__word span,
+.cover .ransom__word span:nth-child(n) {
+  outline: 0;
+}
+
+/* The Sale Alert words were dark on purpose (they sat on a pink bag);
+   with the bag gone they follow the page colour, so they show at midnight */
+.cover .cover-line--sales,
+.cover .cover-line--sales .bag__text,
+.cover .cover-line--sales .cover-line__headline,
+[data-theme="dark"] .cover .cover-line--sales .cover-line__headline {
+  color: var(--text);
+}

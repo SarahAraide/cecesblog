@@ -16,14 +16,13 @@ You don't need to change any code.
 | `cats-1.jpg` | Front cover (mini polaroid) + Cat of the Month top photo | ✓ |
 | `cats-2.jpg` | Cat of the Month: photo shoot | ✓ |
 | `cats-3.jpg` | Cat of the Month: photo shoot | ✓ |
-| `kitty-collection.jpg` | Hello Kitty & Ladybug Corner: top photo | ✓ |
-| `kitty-2.jpg` | Hello Kitty & Ladybug Corner: next to the collection | ✓ |
-| `ladybug.jpg` | Hello Kitty & Ladybug Corner: next to the facts | not yet |
 | `lab-1.jpg` | Legally Blonde Labs | ✓ |
 | `study-desk.jpg` | Study Hall | ✓ |
 | `shopping-haul.jpg` | Sale Alert | ✓ |
-| `mind-project-1.jpg` | Mind Matters: screenshot from the Instagram video (wide, 16:9) | not yet |
-| `mind-project-2.jpg` | Mind Matters: screenshot from the Facebook video (wide, 16:9) | not yet |
+
+Not used any more: `kitty-collection.jpg` and `kitty-2.jpg` (the Hello Kitty &
+Ladybug page was removed; the ladybug name fact is a post-it on the cover now).
+Mind Matters shows the videos' own previews, so it needs no photos.
 
 The cover has no photo (it's a chrome background with stars), and the
 book cover in The Writer's Room is lettered with CSS, so neither needs a file.

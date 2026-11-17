@@ -31,6 +31,12 @@
   <!-- Hidden until you press Tab: lets keyboard users jump to the stories -->
   <a class="skip-link" href="#cover-stories">Skip to the cover stories</a>
 
+  <!-- On wide desktop screens the magazine lies open: the Contents page on
+       the left and the cover on the right (cover.css, section 14). On
+       phones and tablets only the cover shows. The cover comes first in
+       the HTML, so screen readers meet it first; CSS puts it on the right. -->
+  <div class="open-magazine">
+
   <!-- The whole cover is exactly one screen tall (see cover.css). -->
   <main class="cover">
 
@@ -99,12 +105,12 @@
          MAIN HEADLINE: torn paper laid over the photo
          ========================================================= -->
     <div class="headline-wrap drop-shadow">
-      <!-- The red starburst is the cover line for the puzzle page (p.11).
+      <!-- The red starburst is the cover line for the puzzle page (p.10).
            The <a> places it; the <span> inside has the star shape. -->
       <a class="headline-burst headline-burst--top" href="sudoku.html">
         <span class="sticker sticker--burst sticker--red">
           <span>Sudoku</span>
-          <span><span class="sr-only">, page </span><span aria-hidden="true">p.</span>11</span>
+          <span><span class="sr-only">, page </span><span aria-hidden="true">p.</span>10</span>
         </span>
       </a>
       <h2 class="main-headline torn-paper">
@@ -112,7 +118,7 @@
         <mark>writer, student and tutor</mark>,
         Cece needs a magazine to sort things out.
       </h2>
-      <span class="sticker sticker--burst sticker--chrome headline-burst headline-burst--bottom" aria-hidden="true"><span class="burst-big">10</span><span>stories</span><span>inside</span></span>
+      <span class="sticker sticker--burst sticker--chrome headline-burst headline-burst--bottom" aria-hidden="true"><span class="burst-big">9</span><span>stories</span><span>inside</span></span>
     </div>
 
     <!-- =========================================================
@@ -135,8 +141,9 @@
             <span class="envelope__text">
               <span class="kicker">The Writer's Room</span>
               <span class="cover-line__headline">Cece's debut book, a first look inside</span>
-            </span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>02</span>
+            </span><span class="sr-only">, page 02</span>
           </a>
+          <span class="page-num" aria-hidden="true">p.02</span>
           <span class="margin-note" aria-hidden="true">← finally!!</span>
         </li>
 
@@ -144,8 +151,9 @@
           <a class="cover-line cover-line--kitchen" href="kitchen.html">
             <span class="sticker sticker--burst sticker--red">Hot!</span>
             <span class="kicker">Cece's Kitchen</span>
-            <span class="cover-line__headline">The cheesecake that saved finals week</span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>03</span>
+            <span class="cover-line__headline">The cheesecake that saved finals week</span><span class="sr-only">, page 03</span>
           </a>
+          <span class="page-num" aria-hidden="true">p.03</span>
           <span class="margin-note" aria-hidden="true">(it really did)</span>
         </li>
 
@@ -153,8 +161,9 @@
           <img class="doodle doodle--cd spin" src="images/decor/cd.svg" alt="">
           <a class="cover-line cover-line--cinema" href="cinema.html">
             <span class="kicker">Movie Night</span>
-            <span class="cover-line__headline">200+ films and shows, sorted by mood</span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>04</span>
+            <span class="cover-line__headline">200+ films and shows, sorted by mood</span><span class="sr-only">, page 04</span>
           </a>
+          <span class="page-num" aria-hidden="true">p.04</span>
         </li>
 
         <li>
@@ -162,8 +171,9 @@
           <a class="cover-line cover-line--lab" href="lab.html">
             <span class="sticker sticker--chrome">New!</span>
             <span class="kicker">Legally Blonde Labs</span>
-            <span class="cover-line__headline">Tiny robots, big dreams</span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>05</span>
+            <span class="cover-line__headline">Tiny robots, big dreams</span><span class="sr-only">, page 05</span>
           </a>
+          <span class="page-num" aria-hidden="true">p.05</span>
         </li>
       </ul>
 
@@ -178,8 +188,9 @@
             <span class="pixel-window__body">
               <span class="kicker">Study Hall</span>
               <span class="cover-line__headline">How to survive Technion finals</span>
-            </span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>06</span>
+            </span><span class="sr-only">, page 06</span>
           </a>
+          <span class="page-num" aria-hidden="true">p.06</span>
           <span class="margin-note" aria-hidden="true">bookmark this!!</span>
         </li>
 
@@ -196,16 +207,19 @@
             <span class="cover-line__text">
               <span class="kicker">Cat of the Month</span>
               <span class="cover-line__headline">Meet this month's cover cat</span>
-            </span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>07</span>
+            </span><span class="sr-only">, page 07</span>
           </a>
+          <span class="page-num" aria-hidden="true">p.07</span>
         </li>
 
         <li>
+          <!-- A yellow post-it stuck on the cover (not a link): the story
+               behind Cece's name. -->
           <img class="doodle doodle--star" src="images/decor/star.svg" alt="">
-          <a class="cover-line cover-line--kitty" href="kitty.html">
-            <span class="kicker">Hello Kitty &amp; Ladybug Corner</span>
-            <span class="cover-line__headline">Ladybug facts that will change your life</span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>08</span>
-          </a>
+          <aside class="cover-postit" aria-label="A note from Cece">
+            <p class="cover-postit__title">fun fact ♡</p>
+            <p>In Maghar, a ladybug is called “Setna Sarah”, our lady Sarah. And Sarah is my real name!</p>
+          </aside>
         </li>
 
         <li>
@@ -223,14 +237,15 @@
                 <span class="ransom__word"><span>A</span><span>L</span><span>E</span><span>R</span><span>T</span></span>
               </span>
               <span class="cover-line__headline">Where Cece is shopping this week</span>
-            </span>  <span class="page-num"><span class="sr-only">page </span><span aria-hidden="true">p.</span>09</span>
+            </span><span class="sr-only">, page 08</span>
           </a>
+          <span class="page-num" aria-hidden="true">p.08</span>
         </li>
       </ul>
     </nav>
 
     <!-- =========================================================
-         BOTTOM STRIP: the 9th cover story + barcode.
+         BOTTOM STRIP: Mind Matters + barcode.
          Mind Matters runs as a calm banner along the bottom, like the
          "PLUS:" strip on a real magazine (a 9th box wouldn't fit on
          one screen, and this story deserves a quieter look anyway).
@@ -238,7 +253,7 @@
     <div class="cover__bottom">
       <a class="cover-banner" href="mind.html">
         <span class="kicker">Mind Matters</span>
-        <span class="cover-banner__headline">Cece's campaign: it's okay to talk about it</span>  <span class="page-num page-num--inline"><span class="sr-only">page </span><span aria-hidden="true">p.</span>10</span>
+        <span class="cover-banner__headline">Cece's campaign: it's okay to talk about it</span>  <span class="page-num page-num--inline"><span class="sr-only">page </span><span aria-hidden="true">p.</span>09</span>
           </a>
 
       <div class="barcode" role="img" aria-label="Barcode for Issue 01">
@@ -253,5 +268,107 @@
     <a class="page-corner page-corner--next" href="writing.html" rel="next" title="Turn the page" aria-hidden="true" tabindex="-1"></a>
 
   </main>
+
+  <!-- =========================================================
+       CONTENTS PAGE: the left-hand page of the open magazine.
+       Only shown on wide screens (cover.css, section 14); on phones
+       and tablets the cover lines already do this job.
+       ========================================================= -->
+  <nav class="contents-page" aria-label="Contents page">
+    <p class="contents-page__issue">Issue 01 · November 2026</p>
+    <h2 class="contents-page__title">Contents</h2>
+    <p class="contents-page__dek">Inside the Stacked Life Issue</p>
+
+    <ol class="contents-list">
+        <li>
+          <a href="writing.html">
+            <span class="contents-list__num"><span class="sr-only">page </span>02</span>
+            <span class="contents-list__text">
+              <span class="kicker">The Writer's Room</span>
+              <span class="contents-list__title">Cece's debut book, a first look inside</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="kitchen.html">
+            <span class="contents-list__num"><span class="sr-only">page </span>03</span>
+            <span class="contents-list__text">
+              <span class="kicker">Cece's Kitchen</span>
+              <span class="contents-list__title">The cheesecake that saved finals week</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="cinema.html">
+            <span class="contents-list__num"><span class="sr-only">page </span>04</span>
+            <span class="contents-list__text">
+              <span class="kicker">Movie Night</span>
+              <span class="contents-list__title">200+ films and shows, sorted by mood</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="lab.html">
+            <span class="contents-list__num"><span class="sr-only">page </span>05</span>
+            <span class="contents-list__text">
+              <span class="kicker">Legally Blonde Labs</span>
+              <span class="contents-list__title">Tiny robots, big dreams</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="notes.html">
+            <span class="contents-list__num"><span class="sr-only">page </span>06</span>
+            <span class="contents-list__text">
+              <span class="kicker">Study Hall</span>
+              <span class="contents-list__title">How to survive Technion finals</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="cats.html">
+            <span class="contents-list__num"><span class="sr-only">page </span>07</span>
+            <span class="contents-list__text">
+              <span class="kicker">Cat of the Month</span>
+              <span class="contents-list__title">Meet this month's cover cat</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="sales.html">
+            <span class="contents-list__num"><span class="sr-only">page </span>08</span>
+            <span class="contents-list__text">
+              <span class="kicker">Sale Alert</span>
+              <span class="contents-list__title">Where Cece is shopping this week</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="mind.html">
+            <span class="contents-list__num"><span class="sr-only">page </span>09</span>
+            <span class="contents-list__text">
+              <span class="kicker">Mind Matters</span>
+              <span class="contents-list__title">Cece's campaign: it's okay to talk about it</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="sudoku.html">
+            <span class="contents-list__num"><span class="sr-only">page </span>10</span>
+            <span class="contents-list__text">
+              <span class="kicker">The Puzzle Page</span>
+              <span class="contents-list__title">Sharpen your pencil: it's sudoku time</span>
+            </span>
+          </a>
+        </li>
+    </ol>
+
+    <p class="contents-page__foot"><span>CECE</span><span>the magazine for a stacked life</span></p>
+
+    <img class="doodle contents-page__doodle contents-page__doodle--a twinkle" src="images/decor/sparkle.svg" alt="">
+    <img class="doodle contents-page__doodle contents-page__doodle--b" src="images/decor/heart.svg" alt="">
+  </nav>
+
+  </div>
 </body>
 </html>

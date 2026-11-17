@@ -35,6 +35,7 @@
     11. Wider covers (600px+)
     12. Laptops: the cover as a printed magazine
     13. Very short screens
+    14. Wide desktop screens: the magazine lies open (Contents page)
    ================================================================= */
 
 
@@ -483,11 +484,26 @@
   border-radius: 999px;
 }
 
-/* In the Mind Matters banner: on phones it hangs off the corner like the
-   others (so it never needs a line of its own); from tablets up it sits
-   at the end of the line (section 11). */
+/* The tags sit NEXT TO their box in the HTML, not inside it: the boxes
+   are tilted, and a tilted box keeps everything inside it on its own
+   layer, so the box below would cover the tag. Out here, z-index: 6
+   puts every tag on top. The Writer's Room tag steps to the right,
+   past the kitchen's HOT! starburst. */
+.cover-lines--left > li:first-child > .page-num {
+  left: clamp(2.6rem, 7vh, 4rem);
+}
+
+/* In the Mind Matters banner: on phones it hangs off the bottom-RIGHT
+   corner (the banner's last line is short, so the right side is free,
+   and it never needs a line of its own); from tablets up it sits at the
+   end of the line (section 11). */
 .cover-banner {
   position: relative;
+}
+
+.cover-banner .page-num--inline {
+  left: auto;
+  right: 0.7rem;
 }
 
 /* The cover's folded corner (the "open the magazine" corner) only shows
@@ -806,19 +822,44 @@
   display: block;
 }
 
-/* ---- Hello Kitty & Ladybug Corner: ladybug-spotted border ----
-   Three background layers:
-   1. plain "paper" colour, only inside the border (padding-box)
-   2. black dots, across the whole box including the border
-   3. red, also across the whole box
-   The paper covers the middle, so the dots only show in the border. */
-.cover-line--kitty {
-  --tilt: -1.5deg;
-  border: clamp(5px, 1vh, 8px) solid transparent;
-  background:
-    linear-gradient(var(--paper), var(--paper)) padding-box,
-    radial-gradient(circle, #111111 0 2px, transparent 2.5px) 0 0 / 10px 10px border-box,
-    linear-gradient(var(--red), var(--red)) border-box;
+/* ---- The post-it: Cece's name fact, stuck on the cover ----
+   A yellow sticky note with a strip of pink tape on top. Post-its are
+   yellow at midnight too, so the colours stay the same in dark mode
+   (dark text on yellow: well over the 4.5:1 contrast needed). */
+.cover-postit {
+  position: relative;
+  padding: clamp(0.45rem, 1.1vh, 0.8rem) clamp(0.6rem, 2cqw, 0.95rem) clamp(0.4rem, 1vh, 0.7rem);
+  font-family: var(--font-hand);
+  font-size: clamp(0.82rem, 0.4rem + 1.05vh + 0.15cqw, 1.2rem);
+  line-height: 1.15;
+  color: #1F0A16;
+  /* a slightly darker yellow at the bottom, like real sticky paper */
+  background: linear-gradient(180deg, #FFF7A8 0%, #FFEE7A 100%);
+  box-shadow: 2px 5px 7px rgba(60, 40, 0, 0.25);
+  rotate: 1.8deg;
+  z-index: -1;                 /* tucked UNDER the box above it, so its page number stays visible */
+}
+
+/* the strip of tape holding it on */
+.cover-postit::before {
+  content: "";
+  position: absolute;
+  top: -0.45rem;
+  left: 50%;
+  width: 3.2rem;
+  height: 0.9rem;
+  background: var(--tape);
+  translate: -50% 0;
+  rotate: -4deg;
+}
+
+.cover-postit p {
+  margin: 0;
+}
+
+.cover-postit__title {
+  font-size: 1.1em;
+  color: #C2006B;              /* deep pink: 5.3:1 on the yellow */
 }
 
 /* ---- Sale Alert: the box IS a shopping bag ----
@@ -1224,5 +1265,219 @@
 
   .cover-banner__headline {
     font-size: 0.76rem;
+  }
+
+  /* the post-it: "fun fact ♡" on the same line as the fact, smaller writing,
+     and a little gap above so the page-number tag above stays clear */
+  .cover-postit {
+    margin-top: 0.3rem;
+    padding-block: 0.3rem 0.25rem;
+    font-size: 0.8rem;
+    line-height: 1.1;
+  }
+
+  .cover-postit p {
+    display: inline;
+  }
+
+  .cover-postit__title {
+    margin-right: 0.3em;
+  }
+}
+
+
+/* =================================================================
+   14. WIDE DESKTOP SCREENS: THE MAGAZINE LIES OPEN
+   When the screen is wide enough for two magazine pages side by side
+   (at least 8 wide for every 5 high), the Contents page appears on the
+   left and the cover on the right, touching at the spine.
+   flex-direction: row-reverse = the first thing in the HTML (the
+   cover) goes on the RIGHT.
+   ================================================================= */
+.contents-page {
+  display: none;                    /* phones, tablets, square screens */
+}
+
+@media (min-width: 960px) and (min-aspect-ratio: 8/5) {
+  .open-magazine {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 1rem;
+  }
+
+  /* the cover: same size as before, but no margin (the spread is centred) */
+  .open-magazine > .cover {
+    flex: none;
+    max-width: none;
+    margin: 0;
+  }
+
+  /* The Contents page: same size as the cover, with the spine shadow
+     on its RIGHT edge (where it meets the cover) */
+  .contents-page {
+    position: relative;
+    z-index: 0;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 2rem);
+    height: calc(100dvh - 2rem);
+    width: max(calc((100vh - 2rem) * 0.75), 31rem);
+    width: max(calc((100dvh - 2rem) * 0.75), 31rem);
+    padding: clamp(1rem, 3vh, 2.2rem) clamp(1.2rem, 3vh, 2.4rem);
+    background:
+      linear-gradient(90deg, transparent 0 calc(100% - 2.2rem), rgba(0, 0, 0, 0.07) 100%),   /* the page curving into the spine */
+      var(--paper);
+    border-radius: 10px 3px 3px 10px;
+    box-shadow:
+      inset -7px 0 10px -7px rgba(0, 0, 0, 0.35),  /* the spine, on the right */
+      0 2px 3px rgba(0, 0, 0, 0.18),
+      0 22px 45px var(--shadow);
+    overflow: hidden;
+  }
+
+  .contents-page__issue {
+    margin: 0;
+    font-family: var(--font-label);
+    font-size: clamp(0.6rem, 0.4rem + 0.5vh, 0.8rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .contents-page__title {
+    margin: 0.1em 0 0;
+    font-family: var(--font-masthead);
+    font-weight: normal;
+    font-size: clamp(2.4rem, 1rem + 6vh, 4.6rem);
+    line-height: 0.95;
+    color: var(--hot-pink);
+    text-shadow: 3px 3px 0 var(--bubblegum);
+  }
+
+  .contents-page__dek {
+    margin: 0.3em 0 0;
+    padding-bottom: clamp(0.4rem, 1.4vh, 0.9rem);
+    font-family: var(--font-hand);
+    font-size: clamp(0.95rem, 0.5rem + 1.3vh, 1.4rem);
+    color: var(--pink-text);
+    border-bottom: 2px dashed var(--hot-pink);
+  }
+
+  /* The list fills the rest of the page; space-between spreads the
+     entries out evenly, whatever the screen's height */
+  .contents-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: clamp(0.4rem, 1.5vh, 1rem) 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .contents-list a {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.6rem, 1.8vh, 1rem);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  /* the page number in a pink circle */
+  .contents-list__num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: clamp(1.9rem, 0.8rem + 3.4vh, 3rem);
+    aspect-ratio: 1;
+    font-family: var(--font-masthead);
+    font-size: clamp(0.8rem, 0.35rem + 1.4vh, 1.25rem);
+    color: #1F0A16;
+    background: var(--bubblegum);
+    border: 2px solid var(--hot-pink);
+    border-radius: 50%;
+    transition: rotate 0.2s ease, background 0.2s ease;
+  }
+
+  .contents-list .kicker {
+    display: block;
+    font-size: clamp(0.55rem, 0.35rem + 0.5vh, 0.75rem);
+    line-height: 1.2;
+  }
+
+  .contents-list__title {
+    display: block;
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: clamp(0.8rem, 0.35rem + 1.2vh, 1.2rem);
+    line-height: 1.15;
+  }
+
+  .contents-list a:hover .contents-list__title,
+  .contents-list a:focus-visible .contents-list__title {
+    text-decoration: underline;
+    text-decoration-color: var(--hot-pink);
+    text-underline-offset: 0.18em;
+  }
+
+  .contents-list a:hover .contents-list__num,
+  .contents-list a:focus-visible .contents-list__num {
+    background: var(--hot-pink);
+    rotate: -10deg;
+  }
+
+  .contents-list a:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 999px;
+  }
+
+  .contents-page__foot {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding-top: 0.4rem;
+    font-family: var(--font-label);
+    font-size: clamp(0.55rem, 0.35rem + 0.45vh, 0.72rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    border-top: 1px solid var(--hot-pink);
+  }
+
+  .contents-page__doodle {
+    position: absolute;
+    z-index: -1;
+  }
+
+  .contents-page__doodle--a {
+    top: clamp(1rem, 4vh, 2.4rem);
+    right: clamp(1.4rem, 5vh, 3rem);
+    --doodle-size: clamp(1.6rem, 5vh, 2.8rem);
+  }
+
+  .contents-page__doodle--b {
+    bottom: clamp(2rem, 7vh, 4rem);
+    right: clamp(1.6rem, 4vh, 2.6rem);
+    --doodle-size: clamp(1.4rem, 4vh, 2.4rem);
+    --doodle-tilt: 12deg;
+  }
+}
+
+/* Very short wide windows: the pages get taller (see section 12), so the
+   desk border around the open magazine gets thinner to match */
+@media (min-width: 960px) and (min-aspect-ratio: 8/5) and (max-height: 560px) {
+  .open-magazine {
+    padding: 0.5rem;
+  }
+
+  .contents-page {
+    height: calc(100vh - 1rem);
+    height: calc(100dvh - 1rem);
   }
 }

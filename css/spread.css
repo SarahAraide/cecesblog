@@ -28,6 +28,7 @@
     16. Video previews (Mind Matters)
     17. The puzzle page: sudoku
     18. Movie Night: mood buttons, search and ticket cards
+    19. Big screens: wider pages
    ================================================================= */
 
 
@@ -2191,4 +2192,78 @@
   background: var(--sudoku-wrong);
   border: 1px dashed var(--red);
   border-radius: 0.3rem;
+}
+
+
+/* =================================================================
+   19. BIG SCREENS: WIDER PAGES
+   On laptops and desktops the header, the page, the flip bar and the
+   footer all share ONE width (--page-width), so their edges line up,
+   and that width grows with the screen. On very big screens the
+   whole page also gets a little bigger (html font-size: every "rem"
+   size grows with it).
+   ================================================================= */
+:root {
+  --page-width: 1100px;
+}
+
+@media (min-width: 1000px) {
+  .site-header,
+  .spread,
+  .page-flip,
+  .site-footer {
+    width: min(var(--page-width), 100% - 4rem);
+  }
+}
+
+@media (min-width: 1300px) {
+  :root { --page-width: 1240px; }
+}
+
+@media (min-width: 1600px) {
+  :root { --page-width: 1440px; }
+  html { font-size: 106.25%; }          /* 17px instead of 16px */
+}
+
+@media (min-width: 2200px) {
+  :root { --page-width: 1680px; }
+  html { font-size: 118.75%; }          /* 19px */
+}
+
+/* Card rows that should never leave one card alone on a line:
+   the 4 research interests (Lab) and the 5 stores (Sale Alert) */
+@media (min-width: 700px) {
+  .card-grid--four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .card-grid--four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1300px) {
+  .card-grid--five {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  /* five across = narrower cards: keep "Go to the store →" on one line */
+  .card-grid--five .bubble-button {
+    padding-inline: 1em;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+}
+
+/* The Writer's Room: the book's details are much longer than its cover,
+   so on wider screens the cover stays in view while you scroll past
+   them ("sticky": it scrolls normally, then sticks 1.5rem from the top
+   until the end of its box) */
+@media (min-width: 760px) {
+  .two-col > .type-cover {
+    position: sticky;
+    top: 1.5rem;
+  }
 }

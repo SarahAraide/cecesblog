@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found · CECE</title>
+  <meta name="description" content="This page was torn out of the issue. Head back to the cover of CECE.">
+  <!-- Search engines shouldn't list the "page not found" page -->
+  <meta name="robots" content="noindex">
+
+  <!-- GitHub Pages shows this page for ANY address that doesn't exist,
+       even deep ones like /cecesblog/a/b/c. From there, relative paths
+       such as "css/style.css" would point to the wrong place, so this page
+       keeps its styles inside the file and uses full web addresses for
+       its links. -->
+
+  <!-- Light or Midnight: the same choice as the rest of the site
+       (saved by theme.js under "cece-theme"), or the device's setting -->
+  <script>
+    (function () {
+      var theme = null;
+      try { theme = localStorage.getItem('cece-theme'); } catch (e) { /* not allowed: fine */ }
+      if (!theme) {
+        theme = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fredoka:wght@400..700&family=Gochi+Hand&family=Nunito:wght@400..700&display=swap">
+  <link rel="icon" href="https://saraharaide.github.io/cecesblog/images/decor/ladybug.svg" type="image/svg+xml">
+
+  <style>
+    /* The same colours as the magazine (light, then Midnight Issue) */
+    :root {
+      --bg: #FFE4EF;
+      --paper: #FFFFFF;
+      --text: #1F0A16;
+      --text-soft: #6B3A55;
+      --hot-pink: #FF2E93;
+      --pink-text: #C2006B;
+      --bubblegum: #FF9ECF;
+      --tape: rgba(255, 158, 207, 0.7);
+      --grid-line: rgba(255, 46, 147, 0.09);
+      --shadow: rgba(122, 20, 72, 0.25);
+      --focus: #1F0A16;
+      color-scheme: light;
+    }
+
+    [data-theme="dark"] {
+      --bg: #170A18;
+      --paper: #2A1230;
+      --text: #FBE9F3;
+      --text-soft: #D9B3CA;
+      --hot-pink: #FF4FB8;
+      --pink-text: #FF7DC9;
+      --bubblegum: #8C2C6E;
+      --tape: rgba(255, 79, 184, 0.45);
+      --grid-line: rgba(255, 79, 184, 0.08);
+      --shadow: rgba(0, 0, 0, 0.55);
+      --focus: #FBE9F3;
+      color-scheme: dark;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* graph-paper desk, the page centred on it */
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0;
+      padding: 1.5rem 1rem;
+      font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    /* A torn-out magazine page: jagged top and bottom edges (clip-path),
+       a strip of tape, and a pink shadow that follows the torn shape
+       (a filter shadow, because clip-path cuts off normal shadows) */
+    .torn {
+      position: relative;
+      width: min(100%, 34rem);
+      filter: drop-shadow(6px 7px 0 var(--hot-pink));
+      rotate: -1.5deg;
+    }
+
+    .torn__page {
+      padding: 2.6rem clamp(1.3rem, 6vw, 2.6rem) 2.4rem;
+      text-align: center;
+      background: var(--paper);
+      clip-path: polygon(0% 3%, 6% 0%, 12% 2.5%, 19% 0.5%, 26% 3%, 33% 0%, 41% 2%, 48% 0.5%, 56% 3%,
+        63% 0%, 70% 2.5%, 77% 0.5%, 84% 3%, 91% 0%, 100% 2.5%, 100% 97%, 94% 100%, 87% 97.5%,
+        80% 99.5%, 72% 97%, 65% 100%, 58% 97.5%, 50% 99.5%, 43% 97%, 36% 100%, 28% 97.5%,
+        21% 99.5%, 14% 97%, 7% 100%, 0% 97.5%);
+    }
+
+    .torn::before {
+      content: "";
+      position: absolute;
+      top: -0.7rem;
+      left: 50%;
+      z-index: 1;
+      width: 6rem;
+      height: 1.5rem;
+      background: var(--tape);
+      translate: -50% 0;
+      rotate: 3deg;
+    }
+
+    .kicker {
+      margin: 0;
+      font-family: "Fredoka", "Segoe UI", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pink-text);
+    }
+
+    .big-404 {
+      margin: 0.1rem 0 0;
+      font-family: "Bagel Fat One", "Arial Black", sans-serif;
+      font-size: clamp(4.5rem, 22vw, 7rem);
+      line-height: 1;
+      color: var(--hot-pink);
+      text-shadow: 4px 4px 0 var(--bubblegum);
+    }
+
+    h1 {
+      margin: 0.4rem 0 0.6rem;
+      font-family: "Bagel Fat One", "Arial Black", sans-serif;
+      font-weight: normal;
+      font-size: clamp(1.6rem, 6vw, 2.2rem);
+      line-height: 1.15;
+    }
+
+    p {
+      margin: 0 auto 1.2rem;
+      max-width: 26rem;
+      color: var(--text-soft);
+    }
+
+    .note {
+      font-family: "Gochi Hand", "Comic Sans MS", cursive;
+      font-size: 1.3rem;
+      color: var(--pink-text);
+    }
+
+    /* the candy-pink button, like the rest of the magazine */
+    .button {
+      display: inline-block;
+      padding: 0.65em 1.4em;
+      font-family: "Fredoka", "Segoe UI", sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #1F0A16;
+      background:
+        radial-gradient(120% 90% at 30% 10%, rgba(255, 255, 255, 0.85) 0 18%, transparent 42%),
+        linear-gradient(180deg, #FFB8DC, #FF5FAE);
+      border: 2px solid #FFFFFF;
+      border-radius: 999px;
+      box-shadow: inset 0 -3px 6px rgba(160, 0, 80, 0.35), 0 3px 0 var(--shadow);
+    }
+
+    .button:hover { translate: 0 -2px; }
+
+    a:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .more {
+      margin: 1.4rem 0 0;
+      font-size: 0.95rem;
+    }
+
+    .more a {
+      color: var(--pink-text);
+      font-weight: 700;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .button:hover { translate: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="torn">
+    <div class="torn__page">
+      <p class="kicker">Error 404 · Page not found</p>
+      <p class="big-404" aria-hidden="true">404</p>
+      <h1>This page was torn out of the issue</h1>
+      <p>Someone must have kept it for their scrapbook. The address might have a typo, or the page has moved. The rest of the magazine is still here.</p>
+      <p class="note">(it happens to the best magazines ♡)</p>
+
+      <a class="button" href="https://saraharaide.github.io/cecesblog/">← Back to the cover</a>
+
+      <p class="more">Or flip straight to
+        <a href="https://saraharaide.github.io/cecesblog/cinema.html">Movie Night</a>,
+        <a href="https://saraharaide.github.io/cecesblog/notes.html">Study Hall</a> or
+        <a href="https://saraharaide.github.io/cecesblog/sudoku.html">the puzzle page</a>.</p>
+    </div>
+  </main>
+</body>
+</html>

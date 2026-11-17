@@ -2184,15 +2184,6 @@
   color: var(--pink-text);
 }
 
-/* No confirmed cast yet */
-.movie-card__todo {
-  padding: 0 0.35em;
-  font-family: var(--font-label);
-  font-size: 0.75rem;
-  background: var(--sudoku-wrong);
-  border: 1px dashed var(--red);
-  border-radius: 0.3rem;
-}
 
 
 /* =================================================================
@@ -2265,5 +2256,110 @@
   .two-col > .type-cover {
     position: sticky;
     top: 1.5rem;
+  }
+}
+
+/* A smaller badge that sits on the same line as a link
+   (Study Hall: "AI-assisted summary" next to each AI-written summary) */
+.badge--small {
+  padding: 0.1rem 0.55rem;
+  font-size: 0.62rem;
+  vertical-align: 0.1em;
+  box-shadow: none;
+}
+
+/* =================================================================
+   20. TURN THE PAGE: heading + "Back to the cover" in the flip bar
+   ================================================================= */
+/* "Turn the page" across the top of the bar, with a pink rule on each side */
+.page-flip__heading {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pink-text);
+}
+
+.page-flip__heading::before,
+.page-flip__heading::after {
+  content: "";
+  flex: 1;
+  border-top: 2px dashed var(--hot-pink);
+}
+
+/* the middle: page number on top, "Back to the cover" under it */
+.page-flip__middle {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+}
+
+.page-flip__cover {
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text);
+  text-decoration: none;
+  background: var(--paper);
+  border: 2px solid var(--hot-pink);
+  border-radius: 999px;
+}
+
+.page-flip__cover:hover,
+.page-flip__cover:focus-visible {
+  background: var(--bubblegum);
+}
+
+/* Phones: the two page links side by side, and the middle (page number
+   + Back to the cover) on its own row under them */
+@media (max-width: 599px) {
+  .page-flip {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .page-flip__middle {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+}
+
+/* =================================================================
+   21. MOVIE NIGHT: "BACK TO TOP" BUTTON
+   Fixed to the bottom of the screen while you scroll the long list.
+   On wider screens it sits left of the folded page corner.
+   ================================================================= */
+.back-to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 20;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.back-to-top[hidden] {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .back-to-top {
+    right: 4.5rem;
+  }
+}
+
+/* jumping back up glides instead of snapping, unless someone has asked
+   their device for less motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }

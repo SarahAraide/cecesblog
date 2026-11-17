@@ -8,7 +8,7 @@
    - type: Film, Series, Miniseries, Documentary, Documentary series
    - cast: the main actors (for animation, the original voice cast).
      The years and casts were checked with a web search in November
-     2026. An empty list [] shows "TODO" on the card: fill it in
+     2026. An empty list [] hides the cast line on that card: fill it in
      when you've checked who's in it.
    - castLabel (optional): what goes before the names instead of
      "Starring", e.g. "Presented by"
@@ -222,8 +222,8 @@ const MOVIES = [
   { title: "Friends", year: "1994–2004", type: "Series", moods: ["sitcom"], cast: ["Jennifer Aniston", "Courteney Cox", "Lisa Kudrow"] },
   { title: "Shameless", year: "2011–2021", type: "Series", moods: ["sitcom"], cast: ["William H. Macy", "Emmy Rossum", "Jeremy Allen White"] },
   { title: "Community", year: "2009–2015", type: "Series", moods: ["sitcom"], cast: ["Joel McHale", "Gillian Jacobs", "Danny Pudi"] },
-  { title: "Titan: The OceanGate Disaster", year: "2025", type: "Documentary", moods: ["docs"], cast: [] },
-  { title: "Black Holes: The Edge of All We Know", year: "2020", type: "Documentary", moods: ["docs"], cast: [] },
+  { title: "Titan: The OceanGate Disaster", year: "2025", type: "Documentary", moods: ["docs"], cast: ["Tony Nissen", "David Lochridge"], castLabel: "Featuring" },
+  { title: "Black Holes: The Edge of All We Know", year: "2020", type: "Documentary", moods: ["docs"], cast: ["Stephen Hawking", "Shep Doeleman", "Andrew Strominger"], castLabel: "Featuring" },
   { title: "Cunk on Earth", year: "2022", type: "Documentary series", moods: ["docs"], cast: ["Diane Morgan"], castLabel: "Presented by" },
   { title: "Cunk on Life", year: "2024", type: "Documentary", moods: ["docs"], cast: ["Diane Morgan"], castLabel: "Presented by" },
 ];

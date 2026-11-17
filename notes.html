@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- VERSION TAG: "?v=..." after each css/ and js/ file tells browsers to
+       download a fresh copy. After changing a CSS or JS file, change the
+       date in ALL of these links (on every page) so nobody sees an old mix. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Study Hall · CECE</title>
   <meta name="description" content="Cece's study notes for Mechanical Engineering courses at the Technion.">
+  <!-- Share preview: what shows when the link is posted on WhatsApp,
+       Instagram, X, Facebook... (Open Graph and Twitter card tags).
+       The image address must be a full web address, not a relative path. -->
+  <meta property="og:site_name" content="CECE">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Study Hall · CECE">
+  <meta property="og:description" content="Cece&#x27;s study notes for Mechanical Engineering courses at the Technion.">
+  <meta property="og:url" content="https://saraharaide.github.io/cecesblog/notes.html">
+  <meta property="og:image" content="https://saraharaide.github.io/cecesblog/images/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The cover of CECE, a pink chrome magazine with cover stories about writing, baking, movies, engineering and more">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Study Hall · CECE">
+  <meta name="twitter:description" content="Cece&#x27;s study notes for Mechanical Engineering courses at the Technion.">
+  <meta name="twitter:image" content="https://saraharaide.github.io/cecesblog/images/og-cover.jpg">
   <link rel="icon" href="images/decor/ladybug.svg" type="image/svg+xml">
 
   <!-- (Same <head> as every section page: see writing.html for the notes) -->
-  <script src="js/theme.js"></script>
+  <script src="js/theme.js?v=2026-11-17"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fredoka:wght@300..700&family=Gochi+Hand&family=Nunito:ital,wght@0,400..800;1,400..800&display=swap">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/spread.css">
-  <script src="js/main.js" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=2026-11-17">
+  <link rel="stylesheet" href="css/spread.css?v=2026-11-17">
+  <script src="js/main.js?v=2026-11-17" defer></script>
 </head>
 
 <body>
@@ -80,7 +99,9 @@
     <!-- =========================================================
          01 · COURSES: one index card per course (courses.md + study-files.md).
          - Courses with an "AI-assisted summary" badge link to a study summary
-           written with Claude; the PDFs are in notes/<course>/.
+           written with Claude; the PDFs are in notes/<course>/. Each of those
+           links also carries a small "AI-assisted summary" label of its own.
+           Cece's own notes have no label.
          - Your own notes say "PDF coming soon" until you export them: put each
            PDF at the path in the comment above it, then swap the line as shown.
          - "download" on a link makes the browser download the file.
@@ -213,7 +234,7 @@
             <div class="notebook__page notebook__page--right">
               <h4 class="kicker">Study summary</h4>
               <ul class="ladybug-list notes-list">
-                <li><a href="notes/calculus-2m1/calculus-2m1-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 56 KB</span></li>
+                <li><a href="notes/calculus-2m1/calculus-2m1-summary.pdf" download>Study summary</a> <span class="badge badge--ai badge--small">AI-assisted summary</span> <span class="file-info">PDF, 56 KB</span></li>
               </ul>
             </div>
           </div>
@@ -320,7 +341,7 @@
             <div class="notebook__page notebook__page--right">
               <h4 class="kicker">Study summary</h4>
               <ul class="ladybug-list notes-list">
-                <li><a href="notes/ordinary-differential-equations/ode-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 57 KB</span></li>
+                <li><a href="notes/ordinary-differential-equations/ode-summary.pdf" download>Study summary</a> <span class="badge badge--ai badge--small">AI-assisted summary</span> <span class="file-info">PDF, 57 KB</span></li>
               </ul>
             </div>
           </div>
@@ -346,7 +367,7 @@
             <div class="notebook__page notebook__page--right">
               <h4 class="kicker">Study summary</h4>
               <ul class="ladybug-list notes-list">
-                <li><a href="notes/partial-differential-equations/pde-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 55 KB</span></li>
+                <li><a href="notes/partial-differential-equations/pde-summary.pdf" download>Study summary</a> <span class="badge badge--ai badge--small">AI-assisted summary</span> <span class="file-info">PDF, 55 KB</span></li>
               </ul>
             </div>
           </div>
@@ -370,7 +391,7 @@
             <div class="notebook__page notebook__page--right">
               <h4 class="kicker">Study summary</h4>
               <ul class="ladybug-list notes-list">
-                <li><a href="notes/philosophical-tales/philosophical-tales-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 43 KB</span></li>
+                <li><a href="notes/philosophical-tales/philosophical-tales-summary.pdf" download>Study summary</a> <span class="badge badge--ai badge--small">AI-assisted summary</span> <span class="file-info">PDF, 43 KB</span></li>
               </ul>
             </div>
           </div>
@@ -396,7 +417,7 @@
             <div class="notebook__page notebook__page--right">
               <h4 class="kicker">Study summary</h4>
               <ul class="ladybug-list notes-list">
-                <li><a href="notes/physics-1m/physics-1m-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 56 KB</span></li>
+                <li><a href="notes/physics-1m/physics-1m-summary.pdf" download>Study summary</a> <span class="badge badge--ai badge--small">AI-assisted summary</span> <span class="file-info">PDF, 56 KB</span></li>
               </ul>
             </div>
           </div>
@@ -422,7 +443,7 @@
             <div class="notebook__page notebook__page--right">
               <h4 class="kicker">Study summary</h4>
               <ul class="ladybug-list notes-list">
-                <li><a href="notes/physics-2/physics-2-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 60 KB</span></li>
+                <li><a href="notes/physics-2/physics-2-summary.pdf" download>Study summary</a> <span class="badge badge--ai badge--small">AI-assisted summary</span> <span class="file-info">PDF, 60 KB</span></li>
               </ul>
             </div>
           </div>
@@ -475,7 +496,7 @@
             <div class="notebook__page notebook__page--right">
               <h4 class="kicker">Study summary</h4>
               <ul class="ladybug-list notes-list">
-                <li><a href="notes/probability-statistics/probability-statistics-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 68 KB</span></li>
+                <li><a href="notes/probability-statistics/probability-statistics-summary.pdf" download>Study summary</a> <span class="badge badge--ai badge--small">AI-assisted summary</span> <span class="file-info">PDF, 68 KB</span></li>
               </ul>
             </div>
           </div>
@@ -534,7 +555,7 @@
             <div class="notebook__page notebook__page--right">
               <h4 class="kicker">Study summary</h4>
               <ul class="ladybug-list notes-list">
-                <li><a href="notes/solid-mechanics-1/solid-mechanics-1-summary.pdf" download>Study summary</a> <span class="file-info">PDF, 59 KB</span></li>
+                <li><a href="notes/solid-mechanics-1/solid-mechanics-1-summary.pdf" download>Study summary</a> <span class="badge badge--ai badge--small">AI-assisted summary</span> <span class="file-info">PDF, 59 KB</span></li>
                 <!-- From Cece's Google Drive ("מכניקת מוצקים 1 – סיכום שרה עראידה"),
                      exported as a PDF: the whole course, lecture by lecture, with graphs -->
                 <li><a href="notes/solid-mechanics-1/solid-mechanics-1-summary-hebrew.pdf" download>Full summary with graphs (Hebrew)</a> <span class="file-info">PDF, 17 pages, 890 KB</span></li>
@@ -569,12 +590,16 @@
        corners at the bottom of the screen do the same for mouse users,
        so they're hidden from screen readers (the bar already says it).
        ========================================================= -->
-  <nav class="page-flip" aria-label="Flip through the magazine">
+  <nav class="page-flip" aria-labelledby="turn-heading">
+    <h2 class="page-flip__heading" id="turn-heading">Turn the page</h2>
     <a class="page-flip__link page-flip__link--prev" href="lab.html" rel="prev">
       <span class="page-flip__label"><span aria-hidden="true">←</span> Previous page</span>
       <span class="page-flip__title">Legally Blonde Labs</span>
     </a>
-    <p class="page-flip__folio">p.06 <span>of 10</span></p>
+    <div class="page-flip__middle">
+      <p class="page-flip__folio">p.06 <span>of 10</span></p>
+      <a class="page-flip__cover" href="index.html">Back to the cover</a>
+    </div>
     <a class="page-flip__link page-flip__link--next" href="cats.html" rel="next">
       <span class="page-flip__label">Next page <span aria-hidden="true">→</span></span>
       <span class="page-flip__title">Cat of the Month</span>

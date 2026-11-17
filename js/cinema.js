@@ -66,24 +66,25 @@
     const title = el('h3', 'movie-card__title', movie.title);
     const meta = el('p', 'movie-card__meta', `${movie.year} · ${movie.type}`);
 
-    const cast = el('p', 'movie-card__cast');
-    if (movie.castNote) {
-      // shows without a fixed cast (e.g. an anthology, or a film with no dialogue)
-      cast.appendChild(el('span', 'movie-card__cast-label', 'Cast: '));
-      cast.appendChild(document.createTextNode(movie.castNote));
-    } else if (movie.cast && movie.cast.length) {
-      // anime and animation list voice actors, so they say "Voices"
-      const animated = movie.moods.includes('anime') || movie.moods.includes('animated');
-      const label = movie.castLabel || (animated ? 'Voices' : 'Starring');
-      cast.appendChild(el('span', 'movie-card__cast-label', `${label} `));
-      cast.appendChild(document.createTextNode(movie.cast.join(', ')));
-    } else {
-      // no confirmed cast yet: say so honestly
-      cast.appendChild(el('span', 'movie-card__cast-label', 'Cast: '));
-      cast.appendChild(el('span', 'movie-card__todo', 'TODO'));
-    }
+    li.append(tags, title, meta);
 
-    li.append(tags, title, meta, cast);
+    // The cast line. A title with no confirmed cast simply has no cast
+    // line (cast: [] in movies.js), so nothing unfinished ever shows.
+    if (movie.castNote || (movie.cast && movie.cast.length)) {
+      const cast = el('p', 'movie-card__cast');
+      if (movie.castNote) {
+        // shows without a fixed cast (e.g. an anthology, or a film with no dialogue)
+        cast.appendChild(el('span', 'movie-card__cast-label', 'Cast: '));
+        cast.appendChild(document.createTextNode(movie.castNote));
+      } else {
+        // anime and animation list voice actors, so they say "Voices"
+        const animated = movie.moods.includes('anime') || movie.moods.includes('animated');
+        const label = movie.castLabel || (animated ? 'Voices' : 'Starring');
+        cast.appendChild(el('span', 'movie-card__cast-label', `${label} `));
+        cast.appendChild(document.createTextNode(movie.cast.join(', ')));
+      }
+      li.appendChild(cast);
+    }
 
     // everything the search box looks through, prepared once
     li.dataset.search = simplify([movie.title, movie.year, movie.type, ...(movie.cast || [])].join(' '));
@@ -152,4 +153,20 @@
   });
 
   update();
+
+
+  /* ---------- 4. The "Back to top" button ----------
+     Every time the page scrolls, check where the controls (search box and
+     buttons) are. Once their bottom edge has gone off the TOP of the
+     screen, the button appears; scroll back up and it hides again.
+     { passive: true } tells the browser this never blocks scrolling. */
+  const backToTop = document.querySelector('#back-to-top');
+  const controls = document.querySelector('.movie-controls');
+  if (backToTop && controls) {
+    const checkBackToTop = () => {
+      backToTop.hidden = controls.getBoundingClientRect().bottom > 0;
+    };
+    window.addEventListener('scroll', checkBackToTop, { passive: true });
+    checkBackToTop();
+  }
 })();

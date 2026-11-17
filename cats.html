@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- VERSION TAG: "?v=..." after each css/ and js/ file tells browsers to
+       download a fresh copy. After changing a CSS or JS file, change the
+       date in ALL of these links (on every page) so nobody sees an old mix. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cat of the Month · CECE</title>
   <meta name="description" content="Meet this month's cover cat: photos and stories.">
+  <!-- Share preview: what shows when the link is posted on WhatsApp,
+       Instagram, X, Facebook... (Open Graph and Twitter card tags).
+       The image address must be a full web address, not a relative path. -->
+  <meta property="og:site_name" content="CECE">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Cat of the Month · CECE">
+  <meta property="og:description" content="Meet this month&#x27;s cover cat: photos and stories.">
+  <meta property="og:url" content="https://saraharaide.github.io/cecesblog/cats.html">
+  <meta property="og:image" content="https://saraharaide.github.io/cecesblog/images/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The cover of CECE, a pink chrome magazine with cover stories about writing, baking, movies, engineering and more">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cat of the Month · CECE">
+  <meta name="twitter:description" content="Meet this month&#x27;s cover cat: photos and stories.">
+  <meta name="twitter:image" content="https://saraharaide.github.io/cecesblog/images/og-cover.jpg">
   <link rel="icon" href="images/decor/ladybug.svg" type="image/svg+xml">
 
   <!-- (Same <head> as every section page: see writing.html for the notes) -->
-  <script src="js/theme.js"></script>
+  <script src="js/theme.js?v=2026-11-17"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fredoka:wght@300..700&family=Gochi+Hand&family=Nunito:ital,wght@0,400..800;1,400..800&display=swap">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/spread.css">
-  <script src="js/main.js" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=2026-11-17">
+  <link rel="stylesheet" href="css/spread.css?v=2026-11-17">
+  <script src="js/main.js?v=2026-11-17" defer></script>
 </head>
 
 <body>
@@ -153,12 +172,16 @@
        corners at the bottom of the screen do the same for mouse users,
        so they're hidden from screen readers (the bar already says it).
        ========================================================= -->
-  <nav class="page-flip" aria-label="Flip through the magazine">
+  <nav class="page-flip" aria-labelledby="turn-heading">
+    <h2 class="page-flip__heading" id="turn-heading">Turn the page</h2>
     <a class="page-flip__link page-flip__link--prev" href="notes.html" rel="prev">
       <span class="page-flip__label"><span aria-hidden="true">←</span> Previous page</span>
       <span class="page-flip__title">Study Hall</span>
     </a>
-    <p class="page-flip__folio">p.07 <span>of 10</span></p>
+    <div class="page-flip__middle">
+      <p class="page-flip__folio">p.07 <span>of 10</span></p>
+      <a class="page-flip__cover" href="index.html">Back to the cover</a>
+    </div>
     <a class="page-flip__link page-flip__link--next" href="sales.html" rel="next">
       <span class="page-flip__label">Next page <span aria-hidden="true">→</span></span>
       <span class="page-flip__title">Sale Alert</span>

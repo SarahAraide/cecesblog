@@ -35,7 +35,7 @@
     11. Wider covers (600px+)
     12. Laptops: the cover as a printed magazine
     13. Very short screens
-    14. Wide desktop screens: the magazine lies open (Contents page)
+    14. The Contents page (below the cover; beside it on wide screens)
    ================================================================= */
 
 
@@ -1128,6 +1128,77 @@
 
 
 /* =================================================================
+   10b. PHONES (screens narrower than 600px): ONE COLUMN
+   This uses the SCREEN's width (@media), not the cover's: on a laptop
+   the cover is a magazine page that can also be under 600px wide, and
+   it keeps its two columns so it still fits on one screen.
+   These rules come AFTER each box's own look (section 8) on purpose:
+   when two rules are equally specific, the later one wins.
+   ================================================================= */
+@media (max-width: 599px) {
+  /* Phones: ONE column of cover stories (the left list, then the right
+     list), so every box gets the full width of the phone. The cover is
+     then a little taller than the screen, and you scroll down it. */
+  .cover-stories {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: calc(var(--cover-gap) + 0.6rem);
+  }
+
+  /* a bit more space between the boxes, for the page tags hanging below them */
+  .cover-lines {
+    gap: calc(var(--cover-gap) + 0.6rem);
+  }
+
+  /* HOT! moves to the kitchen box's top-RIGHT corner, away from the text
+     (the kicker no longer needs to step aside for it) */
+  .cover-line--kitchen .sticker--burst {
+    top: -1.25rem;
+    right: -0.4rem;
+    left: auto;
+    --burst-size: 2.5rem;
+  }
+
+  .cover-line--kitchen .kicker {
+    padding-left: 0;
+  }
+
+  /* ...so the Writer's Room tag can sit in the usual corner again */
+  .cover-lines--left > li:first-child > .page-num {
+    left: 0.7rem;
+  }
+
+  /* the shopping bag keeps the shape of a bag instead of stretching
+     across the whole phone (its page tag moves with it) */
+  .cover-lines--right > li:last-child {
+    width: min(100%, 17rem);
+    margin-inline: auto;
+  }
+
+  /* a little room at the bottom of each box, so the page tag hanging
+     off its corner never touches the last line of words */
+  .cover-line {
+    padding-bottom: 0.95rem;
+  }
+
+  /* "Midnight Edition" (dark mode) gets its own space UNDER the big
+     letters, instead of sitting on top of them */
+  [data-theme="dark"] .masthead {
+    padding-bottom: 1.9rem;           /* the sticker is tilted, so it needs a little extra */
+  }
+
+  .midnight-sticker {
+    bottom: 0.1rem;
+    right: 0.4rem;
+  }
+
+  /* the Mind Matters page tag hangs just below its banner, clear of the words */
+  .cover-banner .page-num--inline {
+    bottom: -0.85rem;
+  }
+}
+
+
+/* =================================================================
    11. WIDER COVERS (600px and wider: tablets, big magazine pages)
    ================================================================= */
 @container cover (min-width: 600px) {
@@ -1287,17 +1358,164 @@
 
 
 /* =================================================================
-   14. WIDE DESKTOP SCREENS: THE MAGAZINE LIES OPEN
-   When the screen is wide enough for two magazine pages side by side
-   (at least 8 wide for every 5 high), the Contents page appears on the
-   left and the cover on the right, touching at the spine.
-   flex-direction: row-reverse = the first thing in the HTML (the
-   cover) goes on the RIGHT.
+   14. THE CONTENTS PAGE
+   Phones, tablets and narrow windows: a magazine contents page in a
+   centred box BELOW the cover (scroll down to it).
+   Wide desktop screens (at least 8 wide for every 5 high): the
+   magazine lies open, with the Contents page on the left and the cover
+   on the right, touching at the spine.
    ================================================================= */
+
+/* ---- Everywhere: the look of the page ---- */
 .contents-page {
-  display: none;                    /* phones, tablets, square screens */
+  position: relative;
+  z-index: 0;                       /* own layer: the doodles stay behind the text */
+  width: min(100% - 2rem, 40rem);   /* a 1rem gutter on each side of a phone */
+  margin: 2rem auto 2.5rem;
+  padding: 1.5rem clamp(1.1rem, 4vw, 2.2rem) 1.1rem;
+  color: var(--text);
+  background: var(--paper);
+  border-radius: 1rem;
+  box-shadow: 6px 7px 0 var(--hot-pink);
 }
 
+.contents-page__issue {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.contents-page__title {
+  margin: 0.1em 0 0;
+  font-family: var(--font-masthead);
+  font-weight: normal;
+  font-size: clamp(2.6rem, 9vw, 3.6rem);
+  line-height: 0.95;
+  color: var(--hot-pink);           /* big decorative letters: 3:1 is enough, hot pink has 3.4:1 */
+  text-shadow: 3px 3px 0 var(--bubblegum);
+}
+
+.contents-page__dek {
+  margin: 0.35em 0 0;
+  padding-bottom: 0.7rem;
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  color: var(--pink-text);
+  border-bottom: 2px dashed var(--hot-pink);
+}
+
+.contents-list {
+  margin: 0.4rem 0 0.8rem;
+  padding: 0;
+  list-style: none;
+}
+
+/* a dotted rule between the entries, like a printed contents page */
+.contents-list li + li {
+  border-top: 2px dotted var(--bubblegum);
+}
+
+.contents-list a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* the page number: big pink numerals */
+.contents-list__num {
+  flex: none;
+  min-width: 2.4ch;
+  font-family: var(--font-masthead);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--hot-pink);
+  text-shadow: 2px 2px 0 var(--bubblegum);
+  transition: rotate 0.2s ease;
+}
+
+.contents-list__text {
+  min-width: 0;
+}
+
+/* the section name, in the kicker style */
+.contents-list .kicker {
+  display: block;
+  font-size: 0.72rem;
+  line-height: 1.3;
+}
+
+.contents-list__title {
+  display: block;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.contents-list a:hover .contents-list__title,
+.contents-list a:focus-visible .contents-list__title {
+  text-decoration: underline;
+  text-decoration-color: var(--hot-pink);
+  text-underline-offset: 0.18em;
+}
+
+.contents-list a:hover .contents-list__num,
+.contents-list a:focus-visible .contents-list__num {
+  rotate: -8deg;
+}
+
+.contents-list a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+/* the footer line: "CECE" on the left, the tagline on the right */
+.contents-page__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.2rem 1rem;
+  margin: 0;
+  padding-top: 0.5rem;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  border-top: 1px solid var(--hot-pink);
+}
+
+.contents-page__doodle {
+  position: absolute;
+  z-index: -1;
+}
+
+.contents-page__doodle--a {
+  top: 1.2rem;
+  right: 1.4rem;
+  --doodle-size: 2.4rem;
+}
+
+.contents-page__doodle--b {
+  bottom: 2.6rem;
+  right: 1.4rem;
+  --doodle-size: 2rem;
+  --doodle-tilt: 12deg;
+}
+
+
+/* ---- Wide desktop screens: the magazine lies open ----
+   flex-direction: row-reverse = the first thing in the HTML (the
+   cover) goes on the RIGHT, the Contents page on the left. Both pages
+   are the same size, and everything is sized from the screen height
+   (vh) so the open magazine is exactly one screen tall. */
 @media (min-width: 960px) and (min-aspect-ratio: 8/5) {
   .open-magazine {
     display: flex;
@@ -1316,11 +1534,9 @@
     margin: 0;
   }
 
-  /* The Contents page: same size as the cover, with the spine shadow
-     on its RIGHT edge (where it meets the cover) */
+  /* the Contents page becomes the left-hand page: the spine shadow is
+     on its RIGHT edge, where it meets the cover */
   .contents-page {
-    position: relative;
-    z-index: 0;
     flex: none;
     display: flex;
     flex-direction: column;
@@ -1328,131 +1544,71 @@
     height: calc(100dvh - 2rem);
     width: max(calc((100vh - 2rem) * 0.75), 31rem);
     width: max(calc((100dvh - 2rem) * 0.75), 31rem);
+    margin: 0;
     padding: clamp(1rem, 3vh, 2.2rem) clamp(1.2rem, 3vh, 2.4rem);
     background:
       linear-gradient(90deg, transparent 0 calc(100% - 2.2rem), rgba(0, 0, 0, 0.07) 100%),   /* the page curving into the spine */
       var(--paper);
     border-radius: 10px 3px 3px 10px;
     box-shadow:
-      inset -7px 0 10px -7px rgba(0, 0, 0, 0.35),  /* the spine, on the right */
+      inset -7px 0 10px -7px rgba(0, 0, 0, 0.35),
       0 2px 3px rgba(0, 0, 0, 0.18),
       0 22px 45px var(--shadow);
     overflow: hidden;
   }
 
   .contents-page__issue {
-    margin: 0;
-    font-family: var(--font-label);
     font-size: clamp(0.6rem, 0.4rem + 0.5vh, 0.8rem);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-soft);
   }
 
   .contents-page__title {
-    margin: 0.1em 0 0;
-    font-family: var(--font-masthead);
-    font-weight: normal;
     font-size: clamp(2.4rem, 1rem + 6vh, 4.6rem);
-    line-height: 0.95;
-    color: var(--hot-pink);
-    text-shadow: 3px 3px 0 var(--bubblegum);
   }
 
   .contents-page__dek {
-    margin: 0.3em 0 0;
     padding-bottom: clamp(0.4rem, 1.4vh, 0.9rem);
-    font-family: var(--font-hand);
     font-size: clamp(0.95rem, 0.5rem + 1.3vh, 1.4rem);
-    color: var(--pink-text);
-    border-bottom: 2px dashed var(--hot-pink);
   }
 
-  /* The list fills the rest of the page; space-between spreads the
+  /* the list fills the rest of the page; space-between spreads the
      entries out evenly, whatever the screen's height */
   .contents-list {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: clamp(0.4rem, 1.5vh, 1rem) 0;
-    padding: 0;
-    list-style: none;
+    margin: clamp(0.3rem, 1vh, 0.8rem) 0;
+  }
+
+  .contents-list li {
+    flex: 1;
+    display: flex;
+    align-items: center;
   }
 
   .contents-list a {
-    display: flex;
-    align-items: center;
+    flex: 1;
     gap: clamp(0.6rem, 1.8vh, 1rem);
-    color: var(--text);
-    text-decoration: none;
+    padding: 0;
   }
 
-  /* the page number in a pink circle */
   .contents-list__num {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: clamp(1.9rem, 0.8rem + 3.4vh, 3rem);
-    aspect-ratio: 1;
-    font-family: var(--font-masthead);
-    font-size: clamp(0.8rem, 0.35rem + 1.4vh, 1.25rem);
-    color: #1F0A16;
-    background: var(--bubblegum);
-    border: 2px solid var(--hot-pink);
-    border-radius: 50%;
-    transition: rotate 0.2s ease, background 0.2s ease;
+    font-size: clamp(1.2rem, 0.4rem + 2.6vh, 2.2rem);
   }
 
   .contents-list .kicker {
-    display: block;
     font-size: clamp(0.55rem, 0.35rem + 0.5vh, 0.75rem);
     line-height: 1.2;
   }
 
   .contents-list__title {
-    display: block;
-    font-family: var(--font-headline);
-    font-weight: 700;
     font-size: clamp(0.8rem, 0.35rem + 1.2vh, 1.2rem);
     line-height: 1.15;
   }
 
-  .contents-list a:hover .contents-list__title,
-  .contents-list a:focus-visible .contents-list__title {
-    text-decoration: underline;
-    text-decoration-color: var(--hot-pink);
-    text-underline-offset: 0.18em;
-  }
-
-  .contents-list a:hover .contents-list__num,
-  .contents-list a:focus-visible .contents-list__num {
-    background: var(--hot-pink);
-    rotate: -10deg;
-  }
-
-  .contents-list a:focus-visible {
-    outline: 3px solid var(--focus);
-    outline-offset: 3px;
-    border-radius: 999px;
-  }
-
   .contents-page__foot {
-    display: flex;
-    justify-content: space-between;
-    margin: 0;
     padding-top: 0.4rem;
-    font-family: var(--font-label);
     font-size: clamp(0.55rem, 0.35rem + 0.45vh, 0.72rem);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-soft);
-    border-top: 1px solid var(--hot-pink);
-  }
-
-  .contents-page__doodle {
-    position: absolute;
-    z-index: -1;
   }
 
   .contents-page__doodle--a {
@@ -1465,7 +1621,6 @@
     bottom: clamp(2rem, 7vh, 4rem);
     right: clamp(1.6rem, 4vh, 2.6rem);
     --doodle-size: clamp(1.4rem, 4vh, 2.4rem);
-    --doodle-tilt: 12deg;
   }
 }
 

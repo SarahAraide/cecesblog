@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- VERSION TAG: "?v=..." after each css/ and js/ file tells browsers to
+       download a fresh copy. After changing a CSS or JS file, change the
+       date in ALL of these links (on every page) so nobody sees an old mix. -->
   <meta charset="UTF-8">
   <!-- Makes the page fit phone screens instead of showing a tiny zoomed-out desktop page -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CECE · Issue 01 · The Stacked Life Issue</title>
   <meta name="description" content="CECE: a messy, Y2K pink magazine about the stacked life of a writer, student and tutor.">
+  <!-- Share preview: what shows when the link is posted on WhatsApp,
+       Instagram, X, Facebook... (Open Graph and Twitter card tags).
+       The image address must be a full web address, not a relative path. -->
+  <meta property="og:site_name" content="CECE">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CECE · Issue 01 · The Stacked Life Issue">
+  <meta property="og:description" content="CECE: a messy, Y2K pink magazine about the stacked life of a writer, student and tutor.">
+  <meta property="og:url" content="https://saraharaide.github.io/cecesblog/">
+  <meta property="og:image" content="https://saraharaide.github.io/cecesblog/images/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The cover of CECE, a pink chrome magazine with cover stories about writing, baking, movies, engineering and more">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CECE · Issue 01 · The Stacked Life Issue">
+  <meta name="twitter:description" content="CECE: a messy, Y2K pink magazine about the stacked life of a writer, student and tutor.">
+  <meta name="twitter:image" content="https://saraharaide.github.io/cecesblog/images/og-cover.jpg">
   <link rel="icon" href="images/decor/ladybug.svg" type="image/svg+xml">
 
   <!-- 1. theme.js comes FIRST and without "defer": it picks light or dark
           mode before the page is drawn, so there's no white flash. -->
-  <script src="js/theme.js"></script>
+  <script src="js/theme.js?v=2026-11-17"></script>
 
   <!-- 2. Bubbly fonts from Google Fonts: Bagel Fat One (masthead + big titles),
           Fredoka (headlines + labels), Gochi Hand (handwriting), Nunito (body text) -->
@@ -20,11 +39,11 @@
 
   <!-- 3. Our styles: the shared design system, then the cover's own layout.
           Relative paths (no "/" at the start) so it works on GitHub Pages. -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/cover.css">
+  <link rel="stylesheet" href="css/style.css?v=2026-11-17">
+  <link rel="stylesheet" href="css/cover.css?v=2026-11-17">
 
   <!-- 4. main.js: "defer" = download now, run once the HTML has been read -->
-  <script src="js/main.js" defer></script>
+  <script src="js/main.js?v=2026-11-17" defer></script>
 </head>
 
 <body>
@@ -270,9 +289,9 @@
   </main>
 
   <!-- =========================================================
-       CONTENTS PAGE: the left-hand page of the open magazine.
-       Only shown on wide screens (cover.css, section 14); on phones
-       and tablets the cover lines already do this job.
+       CONTENTS PAGE: below the cover on phones and tablets, and the
+       left-hand page of the open magazine on wide screens
+       (cover.css, section 14).
        ========================================================= -->
   <nav class="contents-page" aria-label="Contents page">
     <p class="contents-page__issue">Issue 01 · November 2026</p>
@@ -363,7 +382,7 @@
         </li>
     </ol>
 
-    <p class="contents-page__foot"><span>CECE</span><span>the magazine for a stacked life</span></p>
+    <p class="contents-page__foot"><span>CECE</span> <span>the magazine for a stacked life</span></p>
 
     <img class="doodle contents-page__doodle contents-page__doodle--a twinkle" src="images/decor/sparkle.svg" alt="">
     <img class="doodle contents-page__doodle contents-page__doodle--b" src="images/decor/heart.svg" alt="">
